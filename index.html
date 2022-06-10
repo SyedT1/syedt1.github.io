@@ -16,6 +16,12 @@
         font-size : 30px;
         color: crimson;
     }
+    .center {
+        display : block;
+        margin-left : auto;
+        margin-right : auto;
+        width : 50%;
+    }
 </style>
 <head>
     <meta charset="UTF-8">
@@ -26,19 +32,19 @@
 <body>
     <img src="https://energeticgeometry.com/wp-content/uploads/2019/12/Illustration-1-1024x835.jpg" alt="Fibonacci Spiral">
     <h1>About</h1>
-    <p class="make_it_boro"> I am Syed Mohaiminul Hoque. I am from the CSE Department of IUB Majoring in Computer Science. </p>
+    <p id = "goto_top" class="make_it_boro"> I am Syed Mohaiminul Hoque. I am from the CSE Department of IUB Majoring in Computer Science. </p>
     <p class="make_it_boro"> I have Immense interest in the following topics :
         <ul>
-            <li style="color :brown"><strong>Computer Vision</li></strong>
-              <img src="https://appen.com/wp-content/uploads/2019/04/SLIDER-Appen_image_annotation_05.jpg" alt="Alternative pic"><br><br><br>
-            <li style="color :blueviolet"><strong>Operating Systems</li></strong><br><br><br>
-              <img src="https://oracle-patches.com/images/2021/07/14/Linux_distr_large.jpg" alt="Alternative pic">
-            <li><strong>Natural Language Processing</strong></li>
-              <img src="https://static.javatpoint.com/tutorial/nlp/images/what-is-nlp.png" alt="Alternative pic"><br><br><br>
+            <li style="color :brown;text-align:center;font-size:40px;"><a href="https://en.wikipedia.org/wiki/Computer_vision"><strong>Computer Vision</a></strong></li>
+              <img src="https://appen.com/wp-content/uploads/2019/04/SLIDER-Appen_image_annotation_05.jpg" alt="Alternative pic" class="center"><br><br><br>
+            <li style="color :blueviolet;text-align:center;font-size:40px;"><a href="https://en.wikipedia.org/wiki/Operating_system"><strong>Operating Systems</strong></a></li><br><br><br>
+              <img src="https://oracle-patches.com/images/2021/07/14/Linux_distr_large.jpg" alt="Alternative pic" class="center">
+              <li style="color :brown;text-align:center;font-size:40px;"><a href="https://en.wikipedia.org/wiki/Natural_language_processing"><strong>Natural Language Processing</a></strong></li>
+              <img src="https://static.javatpoint.com/tutorial/nlp/images/what-is-nlp.png" alt="Alternative pic" class="center"><br><br><br>
         </ul>
     </p>
     <h1>Important Links</h1>
-       <ul>
+       <ul type="disc">
         <li><a class="make_it_boro" href="https://github.com/SyedT1">My Github Profile</a><br></li>
         <li><a class="make_it_boro" href="https://www.stopstalk.com/user/profile/TillDawn">Participation in Different Problem Solving Platforms</a></li>
        </ul>
@@ -48,7 +54,8 @@
     </p>
     <h1>My Projects</h1>
       <ul>
-          <li><strong>SaveNatureBD</strong>--Ongoing</li>
+          <li style="font-size:20px;"><strong>SaveNatureBD</strong>--Ongoing</li>
       </ul>
+      <a href="#goto_top" style="font-size:25px;">Go to the top of the page</a>
 </body>
 </html>
