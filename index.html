@@ -1,66 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-    li {
-        color:blue;
-        font-size:20px;
-    }
-    img {
-        width : 700px;
-        height : 700px,
-    }
-    .make_it_boro {
-        font-size: 25px;
-    }
-    .make_it_nice {
-        font-size : 30px;
-        color: crimson;
-    }
-    .center {
-        display : block;
-        margin-left : auto;
-        margin-right : auto;
-        width : 50%;
-    }
-</style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Myself</title>
+    <title>3DLoader</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald',sans;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #434750;
+        }
+        ul
+        {
+            position: relative;
+            transform: skewY(-15deg);
+
+        }
+        ul li 
+        {
+            position: relative;
+            list-style: none;
+            width: 300px;
+            background: #3e3f46;
+            padding: 30px;
+            z-index: var(--i);
+            transition: 0.5s;
+        }
+        ul li:hover{
+            background: #33a3ee;
+            transform: translateX(-50px);
+        }
+        ul li::before 
+        {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80px;
+            width: 80px;
+            height: 100%;
+            background: #2e3133;
+            transform-origin: right;
+            transform: skewY(45deg);
+            transition: 0.5s;
+        }
+        ul li:hover::before{
+            background: #1f5378;
+        }
+        ul li::after 
+        {
+            content: '';
+            position : absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: #35383e;
+            transform-origin: bottom;
+            transform: skewX(45deg);
+            transition: 0.5s;
+        }
+        ul li:hover::after{
+            background: #2982b9;
+        }
+        ul li a 
+        {
+            text-decoration: none;
+            color: #999;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+        }
+        ul li:hover a
+        {
+            color: #fff;
+        }
+        ul li:last-child::after{
+            box-shadow: -150px 180px 30px rgba(0,0,0,0.25);
+        }
+    </style>
 </head>
 <body>
-    <img src="https://energeticgeometry.com/wp-content/uploads/2019/12/Illustration-1-1024x835.jpg" alt="Fibonacci Spiral">
-    <h1>About</h1>
-    <p id = "goto_top" class="make_it_boro"> I am Syed Mohaiminul Hoque. I am from the CSE Department of IUB Majoring in Computer Science. </p>
-    <p class="make_it_boro"> I have Immense interest in the following topics :
-        <ul>
-            <li style="color :brown;text-align:center;font-size:40px;"><a href="https://en.wikipedia.org/wiki/Computer_vision"><strong>Computer Vision</a></strong></li>
-              <img src="https://appen.com/wp-content/uploads/2019/04/SLIDER-Appen_image_annotation_05.jpg" alt="Alternative pic" class="center"><br><br><br>
-            <li style="color :blueviolet;text-align:center;font-size:40px;"><a href="https://en.wikipedia.org/wiki/Operating_system"><strong>Operating Systems</strong></a></li><br><br><br>
-              <img src="https://oracle-patches.com/images/2021/07/14/Linux_distr_large.jpg" alt="Alternative pic" class="center">
-              <li style="color :brown;text-align:center;font-size:40px;"><a href="https://en.wikipedia.org/wiki/Natural_language_processing"><strong>Natural Language Processing</a></strong></li>
-              <img src="https://static.javatpoint.com/tutorial/nlp/images/what-is-nlp.png" alt="Alternative pic" class="center"><br><br><br>
-        </ul>
-    </p>
-    <h1>Important Links</h1>
-       <ul type="disc">
-        <li><a class="make_it_boro" href="https://github.com/SyedT1">My Github Profile</a><br></li>
-        <li><a class="make_it_boro" href="https://www.stopstalk.com/user/profile/TillDawn">Participation in Different Problem Solving Platforms</a></li>
-        <li><a class="make_it_boro" href="https://g.dev/syedtahsin">Google developer badges</a></li>
-        <li><a class="make_it_boro" href="https://www.cloudskillsboost.google/public_profiles/db5e753c-800d-45c4-a67f-511602b427f0">Google cloud badges</a></li>
-        <li><a class="make_it_boro" href="https://students.yourlearning.ibm.com/reports/individual/0964118REG">IBM SkillsBuild badges</a></li>
-        <li><a class="make_it_boro" href=" https://www.hackerrank.com/mrtetrisplays">HackerRank Badges and Certifications</a></li>
-       </ul>
-    <p class="make_it_nice">
-        One last thing and that is: I am just learning these. So I am not good at these.
-        I hope to contribute in this field in the near future with all that I'll be able to learn and experience.
-    </p>
-    <h1>My Projects</h1>
-      <ul>
-          <li style="font-size:20px;"><strong>SaveNatureBD</strong>--Ongoing</li>
-          <li><a style="font-size:20px;" href="pyramid.html">A Pyramid</a></li>
-      </ul>
-      <a href="#goto_top" style="font-size:25px;">Go to the top of the page</a>
+    <ul>
+        <li style="--i:5;font-size:30px;"><a href="#">WHOAMI?</a></li>
+        <li style="--i:4;font-size:30px;"><a href="#">My Interests</a></li>
+        <li style="--i:3;font-size:30px;"><a href="#">Academic Results</a></li>
+        <li style="--i:2;font-size:30px;"><a href="#">Badges and Certificates</a></li>
+        <li style="--i:1;font-size:30px;"><a href="#">My Projects</a></li>
+    </ul>
 </body>
 </html>
