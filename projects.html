@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Projects</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<style>
+/* Reset styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+/* Body styles */
+body {
+  font-family: sans-serif;
+}
+
+/* Video background styles */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background video {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Header styles */
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 36px;
+  margin-bottom: 50px;
+}
+
+/* Project styles */
+.project {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.project:hover {
+  transform: scale(1.05);
+}
+
+.project img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.project:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-details {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.project:hover .project-details {
+  opacity: 1;
+}
+
+.project-details h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.project-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.project-details a {
+  display: inline-block;
+  background-color: #fff;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.project-details a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Media queries */
+@media (max-width: 767px) {
+  .project {
+    width: 100%;
+  }
+}
+
+</style>
+<body style="background-color: aquamarine;">
+<video autoplay muted loop id="myVideo">
+  <source src="12.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+  <h1>My Projects</h1>
+  <div class="project">
+    <div class="project-overlay"></div>
+    <div class="project-details">
+      <h2>EVISA Management System Application</h2>
+      <p>My work: Both Frontend And Backend</p>
+      <p>Description: Users can apply for visa and get required help remotely without any Hassle.</p>
+      <p>Tech Stack: JAVAFX , Java</p>
+      <p>Technical Details: Used JavaFX for Event Listening and SceneBuilder Tool for Overall FrontEnd File Handling Using Object Stream,Byte Stream and Data Stream</p>
+      <a href="#">Link</a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1517999349371-c43520457b23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" alt="Java Project">
+  </div>
+  <div class="project">
+    <div class="project-overlay"></div>
+    <div class="project-details">
+      <h2>Air Quality Monitoring System</h2>
+      <p>My work: Both Frontend and Backend</p>
+      <p>Description of the Project:</p>
+      <p>Tech Stack: Python, Django Framework , HTML, CSS, Plotly</p>
+      <a href="#">Link</a>
+    </div>
+    <img src="https://cdn.britannica.com/84/158184-050-1D7ADEB5/balloon.jpg" alt="Django Project">
+  </div>
+  <div class="project">
+    <div class="project-overlay"></div>
+    <div class="project-details">
+      <h2>CrimeChitro</h2>
+      <p>My work: Both Frontend and Backend</p>
+      <p>Description of the Project: Mapping complaints at any location of the country. The person will be able to complain without any fear.</p>
+      <p>Tech Stack: JQuery, Javascript, PHP, HTML, CSS, Leaflet Js</p>
+      <a href="#">Link</a>
+    </div>
+    <img src="https://imgv2-2-f.scribdassets.com/img/document/246357912/original/eeb21f85bf/1679031612?v=1" alt="Laravel Project">
+  </div>
+  <div class="project">
+    <div class="project-overlay"></div>
+    <div class="project-details">
+      <h2>TaleTellers</h2>
+      <p>My work: Both Frontend and Backend</p>
+      <p>Description of the Project: A Platform where people can share their personal stories</p>
+      <p>Tech Stack: Nodejs, Reactjs/Nextjs</p>
+      <a href="#">Link</a>
+    </div>
+    <img src="https://ojaifilmfestival.com/wp-content/uploads/2019/09/Pen-and-Paper.jpg" alt="React Project">
+</div>
+</body>
+</html>
