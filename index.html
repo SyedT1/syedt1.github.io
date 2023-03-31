@@ -10,7 +10,13 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <style>
-
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
 .card {
         margin-bottom: 30px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -47,8 +53,29 @@
         font-weight: 400;
         margin-top: 10px;
     }
+    .whitebg {
+        background-color: white;
+    }
+    .colorchange{
+        animation: color-change 1s infinite;
+    }
+    .blurbg{
+        backdrop-filter: blur(5px);
+    }
+
+    @keyframes color-change {
+        0% { color: red; }
+        10% { color: blue; }
+        20% { color: green; }
+        40% {color:blueviolet;}
+        100% {color: red;}
+    }
 </style>
 <body>
+    <video autoplay muted loop id="myVideo">
+        <source src="fallvideo.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#">My Portfolio</a>
@@ -74,19 +101,25 @@
 	</nav>
 
 	<!-- About Me -->
-	<section id="about-me">
+	<!-- <section id="about-me">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					<img src="image.jpg" alt="Random Image">
-				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 whitebg">
 					<h2>About Me</h2>
-					<p>I am a problem solver with avid interest in problem solving. I have plenty of interests in the field of computer science. My primary focus is on building softwares and integrating them with Machine Learning models. I have a core belief that our future will be revolutionized by AI.</p>
+					<p><strong>I am a problem solver with avid interest in problem solving. I have plenty of interests in the field of computer science. My primary focus is on building softwares and integrating them with <span class="colorchange">Machine Learning models. </span>I have a core belief that our future will be revolutionized by AI.</strong></p>
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center blurbg">
+            <h2 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: black;">I am a Problem Solver</h2>
+            <p class="lead" style="font-size: 1.25rem; color: blue; line-height: 1.8;">With an avid interest in problem solving and a passion for computer science, I enjoy building software and integrating them with <span class="colorchange" >Machine Learning models.</span></p>
+            <p class="lead" style="font-size: 1.25rem; color: blue; line-height: 1.8;">I have a core belief that the future will be revolutionized by AI.</p>
+          </div>
+        </div>
+      </div>
 
 <!--Bootstrap JS-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
