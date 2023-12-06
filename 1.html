@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Experience</title>
+    <style>
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fce7e7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            background: url('your-background-image.jpg') center/cover;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease-in-out;
+            color: #fff; /* Font color changed to white */
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        h1, h2, p, .skills {
+            color: #fff; /* Font color changed to white */
+        }
+
+        .experience {
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        .project, .tutor {
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .project:hover, .tutor:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body style="background-color:aquamarine;" onload="fadeIn()">
+    <video autoplay muted loop id="myVideo">
+        <source src="vid.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    <div class="main-container">
+        <div class="container">
+            <h1>Syed Mohaiminul Hoque</h1>
+            <div class="experience">
+                <div class="project">
+                    <h2>Center for Computational & Data Sciences</h2>
+                    <p>Student Researcher | Aug 2022 - Present | 1 yr 5 mos</p>
+                    <ul>
+                        <li>Studying Natural Language Processing Methods to work on various problems</li>
+                        <li>Working with Research Assistants on active projects</li>
+                        <li>Learned how to develop NLP and ML models based on requirements</li>
+                    </ul>
+                    <p class="skills">Skills: Machine Learning, Natural Language Processing, Computer Vision, Python (Programming Language)</p>
+                </div>
+                <div class="tutor">
+                    <h2>Independent University, Bangladesh</h2>
+                    <p>Programming Tutor | Jul 2022 - Sep 2022 | 3 mos</p>
+                    <ul>
+                        <li>Taught Basics of Python Programming</li>
+                        <li>Discussed concepts related to Combinatorics and Number Theory</li>
+                        <li>Hosted sessions for Problem Solving</li>
+                        <li>Taught 45 students</li>
+                    </ul>
+                    <p class="skills">Skills: Python (Programming Language)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fadeIn() {
+            document.body.style.opacity = "1";
+            document.querySelectorAll('.project, .tutor').forEach(element => {
+                element.style.opacity = "1";
+            });
+        }
+    </script>
+</body>
+</html>
