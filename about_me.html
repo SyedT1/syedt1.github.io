@@ -27,6 +27,17 @@
       animation: fadeIn 2s forwards;
     }
 
+    .text-transition {
+      font-size: 1.25rem;
+      transition: font-size 1s ease-in-out, color 1s ease-in-out;
+    }
+
+    .thank-you {
+      font-size: 4rem;
+      opacity: 0;
+      transition: font-size 1s ease-in-out, opacity 1s ease-in-out;
+    }
+
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -38,7 +49,7 @@
   </style>
 </head>
 <body>
-  <div id="container">
+  <div id="container" class="text-transition">
     <script>
       const texts = [
         "I always wanted to create something that would let me interact with it.",
@@ -57,9 +68,15 @@
 
       function changeText() {
         if (currentIndex < texts.length) {
-          document.getElementById('container').innerHTML = texts[currentIndex];
-          document.getElementById('container').classList.add('fade-in');
+          const container = document.getElementById('container');
+          container.innerHTML = texts[currentIndex];
+          container.classList.add('fade-in');
+          container.classList.add('text-transition');
           currentIndex++;
+        } else {
+          const container = document.getElementById('container');
+          container.innerHTML = "Thank You";
+          container.classList.add('thank-you');
         }
       }
 
@@ -70,6 +87,16 @@
         const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
         document.getElementById('container').style.background = randomColor;
       }
+
+      document.addEventListener('transitionend', () => {
+        const container = document.getElementById('container');
+        if (container.classList.contains('thank-you')) {
+          container.classList.remove('thank-you');
+          container.style.fontSize = '2rem'; // Reset font size
+        } else {
+          container.classList.remove('fade-in');
+        }
+      });
     </script>
   </div>
 </body>
