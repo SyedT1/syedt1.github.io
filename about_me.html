@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+      color: #fff;
+      transition: background 2s ease-in-out;
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <script>
+      const texts = [
+        "I always wanted to create something that would let me interact with it.",
+        "So, that fantasy of mine grew more just before I got into the university for pursuing a Bachelor's in Computer Science.",
+        "Initially, I started to develop intuition through calculus and developed it further by solving problems in various platforms like Codeforces, Hackerrank, Toph, URI online judge, Hackerearth, Cses.fi, etc.",
+        "I used C++ as the only language at first. I learned the necessary algorithms and data structures for solving different kinds of problems.",
+        "Gradually, I shifted to other languages such as Java and Python as I discovered their respective beauties in the way they are used in the technologies we use in our everyday life.",
+        "I soon developed an interest in the Linux Operating system which brought me to the idea of free software and the power of the open source.",
+        "And I realized I had full control over my operating system as well (which is amazing). I plan to work on Kernel Development soon.",
+        "As I have said before, I have always fantasized about creating something that I could interact with.",
+        "That brought me to what I am doing currently. My current interest is in Computer Vision and Natural Language Processing.",
+        "I hope to learn a lot about these fields and contribute something to the community."
+      ];
+
+      let currentIndex = 0;
+
+      function changeText() {
+        if (currentIndex < texts.length) {
+          document.getElementById('container').innerHTML = texts[currentIndex];
+          document.getElementById('container').classList.add('fade-in');
+          currentIndex++;
+        }
+      }
+
+      setInterval(changeText, 3000); // Change text every 3 seconds
+      setInterval(changeBackground, 4000); // Change background every 4 seconds
+
+      function changeBackground() {
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+        document.getElementById('container').style.background = randomColor;
+      }
+    </script>
+  </div>
+</body>
+</html>
