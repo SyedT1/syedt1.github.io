@@ -21,7 +21,7 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "mypic.jpg"
   name             : "Syed Mohaiminul Hoque"
   pronouns         : "he/him"  
   bio              : "Quantum computing learner, neural network enthusiast, exploring Spring Boot and .NET - Yeah that's my life"
