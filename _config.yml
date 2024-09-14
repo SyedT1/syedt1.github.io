@@ -22,11 +22,11 @@ repository               : "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  name             : "Syed Mohaiminul Hoque"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
+  bio              : "Quantum computing learner, neural network enthusiast, exploring Spring Boot and .NET - Yeah that's my life"
+  location         : "Dhaka,Bangladesh"
+  employer         : ""
   uri              : # URL
   email            : "none@example.org" 
 
