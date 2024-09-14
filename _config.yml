@@ -10,7 +10,7 @@
 locale                   : "en-US"
 title                    : "Mohaimin's Portfolio"
 title_separator          : "-"
-name                     : &name "Your Name"
+name                     : &name "Syed Mohaiminul Hoque"
 description              : &description "personal description"
 url                      : https://syedt1.github.io/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -27,7 +27,7 @@ author:
   bio              : "Quantum computing learner, neural network enthusiast, exploring Spring Boot and .NET - Yeah that's my life"
   location         : "Dhaka,Bangladesh"
   employer         : "BRACIT Services"
-  uri              : # URL
+  uri              : "https://www.bracits.com/"
   email            : "syedmuhaimintahsin@gmail.com" 
 
   # Academic websites
