@@ -12,13 +12,19 @@ I'm a passionate **Software Engineer, Researcher, and Quantum Computing Enthusia
 
 ## 🏆 Interests & Expertise
 - **Quantum Computing & Quantum Machine Learning** ⚛️
-- **AI & Data Science** 🤖 (NLP, XGBoost, Graphology)
-- **Software Architecture & Design Patterns** 🏗️
-- **Backend Development (Spring Boot, ASP.NET Core, C#)** 🔥
-- **Full-Stack Development** 🌐 (JavaScript, React, Python, SQL)
-- **Software Quality Assurance (Selenium)** 🛠️
-- **Linux, System Programming & Networking** 🐧🌍
-- **Rust & Low-Level Programming** 🦀
+- **AI and Data Science**(Mainly LLM Architecture and Finetuning)
+  - Natural Language Processing (NLP) and transformer models
+  - Building datasets for model training
+  - AI model fine-tuning and evaluation
+  - Understanding the ethical implications of AI systems
+  - Exploring generative AI applications
+  - State-of-the-art LLM topics such as:
+    - Large-scale foundation models (e.g., GPT-4, Claude, LLaMA, Mistral)
+    - Retrieval-Augmented Generation (RAG)
+    - Efficient finetuning techniques (LoRA, QLoRA, PEFT)
+    - Multimodal models (text, image, audio integration)
+    - Alignment and reinforcement learning from human feedback (RLHF)
+    - Knowledge distillation and model compression
 
 ## 🎓 Learning & Certifications
 I'm constantly learning and growing in multiple domains. Some of my notable achievements:
@@ -68,7 +74,7 @@ I have gained hands-on experience in Quantum Computing through various programs:
 I aspire to build a **startup** that fosters **innovation, education, and collaboration**, providing free knowledge-sharing sessions and uniting curious minds to create impactful solutions.
 
 ## 📫 Let's Connect!
-- 💼 LinkedIn: [Your Profile](#)
+- 💼 LinkedIn: [My Profile](https://www.linkedin.com/in/syed-mohaiminul-hoque-3397721ba/)
 - 📝 Personal Homepage: [mohaimin-quantumnlp.alphaxiv.com](#)
 - 💬 Always open to discussions on Quantum Computing, AI, and Software Engineering!
 
