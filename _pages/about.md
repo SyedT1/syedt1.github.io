@@ -12,7 +12,7 @@ I'm a passionate **Software Engineer, Researcher, and Quantum Computing Enthusia
 
 ## 🏆 Interests & Expertise
 - **Quantum Computing & Quantum Machine Learning** ⚛️
-- **AI and Data Science** 🤖(Mainly LLM Architecture and Finetuning)
+- **AI and Data Science** (**Mainly LLM Architecture and Finetuning**)🤖
   - Natural Language Processing (NLP) and transformer models
   - Building datasets for model training
   - AI model fine-tuning and evaluation
