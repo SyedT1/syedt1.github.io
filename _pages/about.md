@@ -12,7 +12,7 @@ I'm a passionate **Software Engineer, Researcher, and Quantum Computing Enthusia
 
 ## 🏆 Interests & Expertise
 - **Quantum Computing & Quantum Machine Learning** ⚛️
-- **AI and Data Science**(Mainly LLM Architecture and Finetuning)
+- **AI and Data Science** 🤖(Mainly LLM Architecture and Finetuning)
   - Natural Language Processing (NLP) and transformer models
   - Building datasets for model training
   - AI model fine-tuning and evaluation
@@ -25,6 +25,12 @@ I'm a passionate **Software Engineer, Researcher, and Quantum Computing Enthusia
     - Multimodal models (text, image, audio integration)
     - Alignment and reinforcement learning from human feedback (RLHF)
     - Knowledge distillation and model compression
+- **Software Architecture & Design Patterns** 🏗️
+- **Backend Development (Spring Boot, ASP.NET Core, C#)** 🔥
+- **Full-Stack Development** 🌐 (JavaScript, React, Python, mySQL)
+- **Software Quality Assurance (Selenium)** 🛠️
+- **Linux, System Programming & Networking** 🐧🌍
+- **Rust & Low-Level Programming** 🦀
 
 ## 🎓 Learning & Certifications
 I'm constantly learning and growing in multiple domains. Some of my notable achievements:
