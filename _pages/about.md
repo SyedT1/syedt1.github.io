@@ -58,8 +58,7 @@ I have gained hands-on experience in Quantum Computing through various programs:
   - **Quantum Circuit Construction**: Created and manipulated Bell states, applied quantum operators (XX, ZI, ZZ), and optimized circuit performance using Qiskit’s tools.
   - **Quantum States and Circuits**: Developed and visualized entangled states like Singlet Bell and W-states, and executed circuits using `Sampler.run`.
   - **VQE and Qiskit 1.0**: Built parameterized ansatz circuits for variational algorithms and utilized `QiskitRuntimeService` for both local and remote job execution.
-
-**View the project here** *(Add project link)*
+  - [Project Link](https://dorahacks.io/buidl/20208)
 
 ## 📌 Projects & Goals
 - 🚀 **AI-Enabled File Chat Application** (Bengali text embedding, ChromaDB, SQLite & MySQL)
