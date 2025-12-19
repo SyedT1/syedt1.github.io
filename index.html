@@ -57,6 +57,63 @@ h2{margin-top:0}
 footer{text-align:center;padding:2rem;color:var(--muted)}
 
 @media(max-width:900px){.split{grid-template-columns:1fr}}
+.filters {
+  margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  margin: 0.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.2rem;
+}
+
+.cert {
+  background: #020617;
+  padding: 1.3rem;
+  border-radius: 14px;
+  border: 1px solid #1e293b;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.cert:hover {
+  transform: translateY(-4px);
+}
+
+.cert h4 {
+  margin: 0;
+  color: var(--accent);
+}
+
+.cert .meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.cert-details {
+  display: none;
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  color: #cbd5f5;
+}
+
 </style>
 </head>
 
@@ -166,22 +223,75 @@ Remote visa application system with object-stream persistence.
 <section class="panel">
 <h2>Experience</h2>
 
-<p class="accordion" onclick="toggle(this)">▶ Center for Computation & Data Sciences (IUB)</p>
-<div class="content">
-Research Assistant (Oct 2024 – Present): Quantum algorithms, QML, hybrid models, benchmarking.
+<div class="timeline">
+
+<div class="timeline-item">
+<h4>Research Assistant — Center for Computational & Data Sciences (IUB)</h4>
+<p class="muted">Oct 2024 – Present · Dhaka, Bangladesh · Hybrid</p>
+<p>
+Conducting research on quantum algorithms with emphasis on
+<strong>algorithmic design</strong>, <strong>complexity analysis</strong>,
+and <strong>benchmarking on quantum simulators</strong>.
+</p>
+<ul>
+<li>Designed and evaluated variational quantum algorithms on NISQ hardware</li>
+<li>Implemented VQC and Quantum Kernel Methods using Qiskit & PennyLane</li>
+<li>Explored hybrid quantum–classical frameworks for high-dimensional optimization and classification</li>
+</ul>
+<p>
+<a href="https://ccds.ai/people/interns-part-time-research-assistant/" target="_blank">
+CCDS Profile
+</a>
+</p>
 </div>
 
-<p class="accordion" onclick="toggle(this)">▶ Onnorokom Projukti Ltd.</p>
-<div class="content">
-Assistant Software Engineer (Mar 2025 – Aug 2025): Async microservices, RBAC, ViT integration.
+<div class="timeline-item">
+<h4>Assistant Software Engineer — OnnoRokom Projukti Ltd.</h4>
+<p class="muted">Mar 2025 – Sep 2025 · Dhaka, Bangladesh · On-site</p>
+<p>
+Worked on high-performance, async production systems with applied ML components.
+</p>
+<ul>
+<li>Built async web services using Python (BlackSheep), PostgreSQL, JWT & RBAC</li>
+<li>Integrated Vision Transformers (ViT) into modular ASGI pipelines</li>
+<li>Designed secure, scalable multi-user architectures</li>
+</ul>
 </div>
 
-<p class="accordion" onclick="toggle(this)">▶ BRAC IT</p>
-<div class="content">
-Intern Software Engineer: 10+ REST APIs, PostgreSQL optimization, Bootstrap UI.
+<div class="timeline-item">
+<h4>Software Engineer Intern — BRAC IT</h4>
+<p class="muted">Jun 2024 – Sep 2024 · Dhaka, Bangladesh · On-site</p>
+<ul>
+<li>Developed RESTful APIs using Groovy on Grails</li>
+<li>Implemented complex business logic and PostgreSQL-backed CRUD workflows</li>
+<li>Optimized database queries and backend–frontend integration</li>
+</ul>
 </div>
 
+<div class="timeline-item">
+<h4>Student Researcher — Center for Computational & Data Sciences (IUB)</h4>
+<p class="muted">Aug 2022 – Jan 2024 · Dhaka, Bangladesh · Hybrid</p>
+<ul>
+<li>Studied NLP methods for real-world Bangla language tasks</li>
+<li>Collaborated with senior researchers on active projects</li>
+<li>Developed ML and NLP models aligned with research requirements</li>
+<li>Total research projects completed: <strong>3</strong></li>
+</ul>
+</div>
+
+<div class="timeline-item">
+<h4>Programming Tutor — Independent University, Bangladesh</h4>
+<p class="muted">Jul 2022 – Sep 2022</p>
+<ul>
+<li>Taught Python programming fundamentals</li>
+<li>Covered combinatorics, number theory, and problem solving</li>
+<li>Instructed and mentored 45 students</li>
+</ul>
+</div>
+
+</div>
 </section>
+
 
 <section class="panel">
 <h2>Achievements</h2>
@@ -194,15 +304,65 @@ Intern Software Engineer: 10+ REST APIs, PostgreSQL optimization, Bootstrap UI.
 </section>
 
 <section class="panel">
-<h2>Education & Training</h2>
+<h2>Education & Formal Training</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h4>Bachelor of Science in Computer Science</h4>
+<p class="muted">Independent University, Bangladesh · Jan 2018 – Dec 2023</p>
 <ul>
-<li>B.Sc. CSE — Independent University Bangladesh (2018–2023)</li>
-<li>IBM Qiskit Summer School 2025</li>
-<li>Womanium Quantum + AI 2024</li>
-<li>QClass 24/25, QTitanium2, Pasqal</li>
-<li>Udacity AWS AI, DataTalks ML</li>
+<li>CGPA: <strong>3.5</strong></li>
+<li>Focus: Algorithms, Machine Learning, NLP, Quantum Computing</li>
 </ul>
+</div>
+
+<div class="timeline-item">
+<h4>Introduction to Quantum Computing</h4>
+<p class="muted">The Coding School · Sep 2023 – Apr 2024</p>
+<ul>
+<li>Grade: <strong>A (97%)</strong></li>
+<li>Quantum mechanics, Cirq, QKD, quantum algorithms</li>
+</ul>
+</div>
+
+<div class="timeline-item">
+<h4>Nanodegree — AI Programming with Python</h4>
+<p class="muted">Udacity · Jul 2023 – Nov 2023</p>
+<ul>
+<li>Deep learning, PyTorch, model evaluation, deployment basics</li>
+</ul>
+</div>
+
+<div class="timeline-item">
+<h4>QClass 24/25 — Quantum Computing & Applications</h4>
+<p class="muted">QWorld · Sep 2024</p>
+<ul>
+<li>Cirq, Qiskit, NumPy, applied quantum algorithms</li>
+<li>
+<a href="https://qworld.net/qclass24-25/" target="_blank">
+Program Link
+</a>
+</li>
+</ul>
+</div>
+
+</div>
 </section>
+<section class="panel">
+<h2>Workshops, Training & Certifications</h2>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterCerts('all')">All</button>
+  <button class="filter-btn" onclick="filterCerts('quantum')">Quantum</button>
+  <button class="filter-btn" onclick="filterCerts('ai')">AI / ML</button>
+  <button class="filter-btn" onclick="filterCerts('data')">Data</button>
+  <button class="filter-btn" onclick="filterCerts('prog')">Programming</button>
+</div>
+
+<div class="cert-grid" id="certGrid"></div>
+</section>
+
 
 <footer>
 © 2025 · Syed Mohaiminul Hoque · Quantum, ML & Software Research
@@ -225,6 +385,173 @@ function toggle(e){
   const c=e.querySelector?.(".content")||e.nextElementSibling;
   c.style.display=c.style.display==="block"?"none":"block";
 }
+const certs = [
+
+/* ================= QUANTUM ================= */
+{
+  title: "Qiskit Global Summer School 2025 – Quantum Excellence",
+  org: "IBM",
+  date: "Aug 2025",
+  tag: "quantum",
+  details: "Advanced quantum algorithms, hands-on labs using Qiskit, execution on real hardware."
+},
+{
+  title: "Madrid Qiskit Fall Fest 2025",
+  org: "IBM",
+  date: "Nov 2025",
+  tag: "quantum",
+  details: "Participation in Qiskit Fall Fest focused on quantum circuit design and optimization."
+},
+{
+  title: "Topological Quantum Computing (QTitanium2)",
+  org: "QTürkiye",
+  date: "Oct 2025",
+  tag: "quantum",
+  details: "Topological phases, fault tolerance, and quantum computing foundations."
+},
+{
+  title: "ADEQUATE – Advanced End-to-End Quantum Computing",
+  org: "QURECA",
+  date: "Jul 2025",
+  tag: "quantum",
+  details: "Full-stack quantum workflows, Qiskit, NISQ algorithms."
+},
+{
+  title: "Pasqal Quantum Computer Program",
+  org: "Pasqal",
+  date: "Dec 2024",
+  tag: "quantum",
+  details: "Neutral-atom quantum systems, QUBO, MIS, Pulser Studio, Ising Hamiltonians."
+},
+{
+  title: "Quantum Explorer 2023: Intermediate",
+  org: "IBM",
+  date: "Mar 2024",
+  tag: "quantum",
+  details: "Quantum error correction, optimization, and quantum ML."
+},
+{
+  title: "Quantum With String Diagrams",
+  org: "QWorld",
+  date: "Sep 2024",
+  tag: "quantum",
+  details: "Category theory, string diagrams, quantum entanglement."
+},
+{
+  title: "QCourse 501-2",
+  org: "QWorld",
+  date: "Jan 2025",
+  tag: "quantum",
+  details: "Dirac notation, Hilbert spaces, entanglement, QKD."
+},
+{
+  title: "Future Leaders in Quantum (FLIQ) Hackathon",
+  org: "Quantum Coalition",
+  date: "Jun 2025",
+  tag: "quantum",
+  details: "Quantum hackathon participation; applied Qiskit workflows."
+},
+{
+  title: "BlueQubit Quantum Hackathon – 3rd Place",
+  org: "BlueQubit",
+  date: "Apr 2025",
+  tag: "quantum",
+  details: "Solved quantum circuit challenges up to 44 qubits using Qiskit and BlueQubit."
+},
+
+/* ================= AI / ML ================= */
+{
+  title: "Large Language Model Agents MOOC",
+  org: "Berkeley RDI",
+  date: "Feb 2025",
+  tag: "ai",
+  details: "LLM agents, RAG, multi-agent systems, tool use, safety."
+},
+{
+  title: "AI Agents Fundamentals",
+  org: "Hugging Face",
+  date: "Feb 2025",
+  tag: "ai",
+  details: "Agent architectures, reasoning, planning, and tooling."
+},
+{
+  title: "Quantum Machine Learning Workshop",
+  org: "Fundacja Quantum AI",
+  date: "May 2025",
+  tag: "ai",
+  details: "Hybrid quantum-classical models, VQAs, barren plateaus, QNG."
+},
+{
+  title: "Global AI & Its Applications",
+  org: "WOMANIUM",
+  date: "Nov 2024",
+  tag: "ai",
+  details: "AI foundations, deep learning, applied ML."
+},
+
+/* ================= DATA ================= */
+{
+  title: "Data Analysis & Plotting with Pandas",
+  org: "Forschungszentrum Jülich",
+  date: "Nov 2024",
+  tag: "data",
+  details: "Hands-on data analysis using Pandas, NumPy, Matplotlib."
+},
+{
+  title: "Gurobi Optimization 202",
+  org: "Gurobi",
+  date: "Dec 2024",
+  tag: "data",
+  details: "Mixed-integer programming, nonlinear optimization, Python modeling."
+},
+
+/* ================= PROGRAMMING ================= */
+{
+  title: "Introduction to Programming Using Python",
+  org: "University of Helsinki",
+  date: "Jan 2024",
+  tag: "prog",
+  details: "Python fundamentals, problem solving, algorithms."
+},
+{
+  title: "HackerRank SQL (Intermediate)",
+  org: "HackerRank",
+  date: "Dec 2024",
+  tag: "prog",
+  details: "Advanced SQL querying and optimization."
+}
+
+];
+
+const grid = document.getElementById("certGrid");
+
+function renderCerts(filter) {
+  grid.innerHTML = "";
+  certs
+    .filter(c => filter === "all" || c.tag === filter)
+    .forEach(c => {
+      const div = document.createElement("div");
+      div.className = "cert";
+      div.innerHTML = `
+        <h4>${c.title}</h4>
+        <div class="meta">${c.org} · ${c.date}</div>
+        <div class="cert-details">${c.details}</div>
+      `;
+      div.onclick = () => {
+        const d = div.querySelector(".cert-details");
+        d.style.display = d.style.display === "block" ? "none" : "block";
+      };
+      grid.appendChild(div);
+    });
+}
+
+function filterCerts(tag) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+  renderCerts(tag);
+}
+
+renderCerts("all");
 </script>
 
 </body>
