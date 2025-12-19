@@ -3,281 +3,227 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Syed Mohaiminul Hoque | Quantum & ML Research</title>
+<title>Syed Mohaiminul Hoque | Quantum, ML & Software Research</title>
 
 <style>
 :root {
-  --bg: #020617;
-  --panel: #0f172a;
-  --accent: #38bdf8;
-  --accent2: #22c55e;
-  --text: #e5e7eb;
-  --muted: #94a3b8;
+  --bg:#020617; --panel:#0f172a; --accent:#38bdf8;
+  --accent2:#22c55e; --text:#e5e7eb; --muted:#94a3b8;
 }
 
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui,sans-serif;
+  background:radial-gradient(circle at top,#020617,#000);
+  color:var(--text);line-height:1.7
+}
+a{color:var(--accent);text-decoration:none}
+section{max-width:1200px;margin:auto;padding:3.5rem 1.5rem}
+h2{margin-top:0}
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #020617, #000);
-  color: var(--text);
-  line-height: 1.7;
+.panel{
+  background:linear-gradient(180deg,var(--panel),#020617);
+  border-radius:18px;padding:2rem;margin-bottom:2rem;
+  box-shadow:0 0 0 1px #1e293b inset
 }
 
-a { color: var(--accent); text-decoration: none; }
+.hero{text-align:center;min-height:90vh;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:3rem;margin-bottom:.3rem}
+.hero span{color:var(--accent)}
+.typewriter{color:var(--muted);min-height:1.4em}
 
-section {
-  max-width: 1100px;
-  margin: auto;
-  padding: 4rem 1.5rem;
+.hero-links a{
+  margin:.5rem;padding:.6rem 1.2rem;border:1px solid var(--accent);
+  border-radius:999px;display:inline-block;transition:.3s
 }
+.hero-links a:hover{background:var(--accent);color:#000}
 
-/* ---------- HERO ---------- */
-.hero {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
+.accordion{cursor:pointer;font-weight:600;color:var(--accent)}
+.content{display:none;margin-top:1rem;color:var(--muted)}
 
-.hero span {
-  color: var(--accent);
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.project{
+  background:#020617;padding:1.5rem;border-radius:16px;
+  transition:.3s;cursor:pointer
 }
+.project:hover{transform:translateY(-6px)}
 
-.typewriter {
-  font-size: 1.2rem;
-  color: var(--muted);
-  min-height: 1.5em;
-}
+.timeline{border-left:2px solid var(--accent);padding-left:1.5rem}
+.timeline-item{margin-bottom:2rem}
+.timeline-item h4{margin:0;color:var(--accent)}
 
-.hero-links a {
-  margin: 0.6rem;
-  padding: 0.6rem 1.1rem;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  transition: all 0.3s;
-}
+footer{text-align:center;padding:2rem;color:var(--muted)}
 
-.hero-links a:hover {
-  background: var(--accent);
-  color: #000;
-}
-
-/* ---------- PANELS ---------- */
-.panel {
-  background: linear-gradient(180deg, var(--panel), #020617);
-  border-radius: 18px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 0 1px #1e293b inset;
-}
-
-/* ---------- SPLIT ---------- */
-.split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.split h3 {
-  color: var(--accent2);
-}
-
-/* ---------- PROJECTS ---------- */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-  gap: 1.5rem;
-}
-
-.project {
-  background: #020617;
-  padding: 1.5rem;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.project:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-}
-
-.project-details {
-  display: none;
-  margin-top: 1rem;
-  color: var(--muted);
-}
-
-/* ---------- TIMELINE ---------- */
-.timeline {
-  border-left: 2px solid var(--accent);
-  padding-left: 1.5rem;
-}
-
-.timeline-item {
-  margin-bottom: 2rem;
-}
-
-.timeline-item h4 {
-  margin: 0;
-  color: var(--accent);
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--muted);
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
-  .split { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 2.2rem; }
-}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <h1>Syed <span>Mohaiminul Hoque</span></h1>
   <div class="typewriter" id="typewriter"></div>
-
   <div class="hero-links">
     <a href="mailto:syedmuhaimintahsin@gmail.com">Email</a>
     <a href="https://github.com/SyedT1" target="_blank">GitHub</a>
     <a href="https://scholar.google.com/citations?user=IvSh1HoAAAAJ&hl=en" target="_blank">Scholar</a>
     <a href="https://www.linkedin.com/in/syed-mohaiminul-hoque-3397721ba/" target="_blank">LinkedIn</a>
+    <a href="https://dorahacks.io/hacker/syedmohaiminul" target="_blank">DoraHacks</a>
   </div>
 </section>
 
-<!-- RESEARCH IDENTITY -->
 <section class="panel">
-  <h2>Research Identity</h2>
-  <p>
-    Over the past year, my work has focused on the intersection of <strong>quantum computing</strong>
-    and <strong>robust deep learning</strong>. I design variational quantum algorithms on real
-    NISQ hardware while simultaneously developing adversarially robust NLP systems for low-resource languages.
-  </p>
+<h2>Research Identity</h2>
+<p>
+Quantum Machine Learning and Deep Learning researcher working at the intersection of
+<strong>variational quantum algorithms</strong>, <strong>quantum transformers</strong>,
+and <strong>robust low-resource NLP</strong>. I design and benchmark quantum models on
+real NISQ hardware while simultaneously building adversarially robust deep learning systems.
+</p>
 </section>
 
-<!-- SPLIT -->
 <section class="split">
-  <div class="panel">
-    <h3>Quantum Computing</h3>
-    <ul>
-      <li>Variational Quantum Classifiers & Quantum Kernels</li>
-      <li>Custom QSVM feature maps</li>
-      <li>varQITE for NP-hard optimization (MaxCut)</li>
-      <li>Hybrid quantum–classical pipelines</li>
-      <li>Executed on IonQ & BlueQubit hardware</li>
-    </ul>
-  </div>
-
-  <div class="panel">
-    <h3>Deep Learning & NLP</h3>
-    <ul>
-      <li>BanglaBERT ensembles (PyTorch)</li>
-      <li>Adversarial training & robustness</li>
-      <li>Hate speech detection (BLP-2025)</li>
-      <li>Low-resource NLP datasets & evaluation</li>
-    </ul>
-  </div>
+<div class="panel">
+<h3>Quantum Computing</h3>
+<ul>
+<li>VQC, QSVM, Quantum Kernels, qNPE</li>
+<li>varQITE, VQE for combinatorial optimization</li>
+<li>IonQ & BlueQubit hardware execution</li>
+<li>Quantum GNNs & QKD (BB84)</li>
+</ul>
+</div>
+<div class="panel">
+<h3>Deep Learning & Software</h3>
+<ul>
+<li>BanglaBERT ensembles, adversarial training</li>
+<li>PyTorch, Django, Laravel, JavaFX</li>
+<li>Microservices, RBAC, async backends</li>
+<li>800+ CP problems (Codeforces Pupil)</li>
+</ul>
+</div>
 </section>
 
-<!-- TIMELINE -->
 <section class="panel">
-  <h2>Current Research Focus</h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <h4>2025 – Present</h4>
-      <p>
-        Development and extension of <strong>Quixer: A Quantum Transformer Model</strong>
-        (arXiv:2406.04305), investigating variational quantum attention, quantum embeddings,
-        and quantum feed-forward layers for robustness and generalization.
-      </p>
-    </div>
-  </div>
+<h2>Current Focus</h2>
+<div class="timeline">
+<div class="timeline-item">
+<h4>2025 – Present</h4>
+<p>
+Extending <strong>Quixer: A Quantum Transformer Model</strong> (arXiv:2406.04305) —
+investigating quantum attention, quantum embeddings, and quantum feed-forward layers
+for robustness, OOD generalization, and transfer learning.
+</p>
+</div>
+</div>
 </section>
 
-<!-- PROJECTS -->
 <section>
-  <h2>Selected Projects (click to expand)</h2>
-  <div class="projects">
+<h2>Projects (click to expand)</h2>
+<div class="projects">
 
-    <div class="project" onclick="toggle(this)">
-      <h3>varQITE for MaxCut (IonQ)</h3>
-      <p>3rd Place – FLIQ 2025</p>
-      <div class="project-details">
-        Designed optimized ansätze and Hamiltonians for NP-hard MaxCut using
-        Variational Quantum Imaginary Time Evolution on IonQ hardware.
-        <br/><a href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025" target="_blank">GitHub</a>
-      </div>
-    </div>
+<div class="project" onclick="toggle(this)">
+<h3>varQITE for MaxCut (IonQ)</h3>
+<p>3rd Place — FLIQ 2025 (Individual)</p>
+<div class="content">
+Designed optimized ansätze & Hamiltonians for NP-hard MaxCut using
+Variational Quantum Imaginary Time Evolution on IonQ hardware.
+<br><a href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025">GitHub</a>
+</div>
+</div>
 
-    <div class="project" onclick="toggle(this)">
-      <h3>Quantum Neighborhood Preserving Embedding</h3>
-      <p>Quantum dimensionality reduction</p>
-      <div class="project-details">
-        Preserves local manifold structure using swap-test KNN, QSVD,
-        and variational eigensolvers.
-        <br/><a href="https://github.com/SyedT1/implementing-dimensional-reductionality-for-qnpe" target="_blank">GitHub</a>
-      </div>
-    </div>
+<div class="project" onclick="toggle(this)">
+<h3>BLP-2025 Hate Speech Detection</h3>
+<p>3rd & 6th Place</p>
+<div class="content">
+PyTorch-based BanglaBERT ensembles with adversarial training.
+Accepted at AACL-IJCNLP 2025 BLP Workshop.
+</div>
+</div>
 
-    <div class="project" onclick="toggle(this)">
-      <h3>BLP-2025 Hate Speech Detection</h3>
-      <p>3rd & 6th place</p>
-      <div class="project-details">
-        PyTorch-based BanglaBERT ensembles with adversarial training.
-        Appearing at AACL-IJCNLP 2025 BLP Workshop.
-      </div>
-    </div>
+<div class="project" onclick="toggle(this)">
+<h3>BaTEClaCor (EMNLP)</h3>
+<p>Bangla Error Correction Dataset</p>
+<div class="content">
+10k Bangla comments, BanglaBERT (79.1%) & BanglaT5 (ROUGE-L 0.8459).
+<br><a href="https://github.com/SyedT1/BaTEClaCor">GitHub</a>
+</div>
+</div>
 
-  </div>
+<div class="project" onclick="toggle(this)">
+<h3>EVISA Management System</h3>
+<p>JavaFX Full-Stack</p>
+<div class="content">
+Remote visa application system with object-stream persistence.
+<br><a href="https://github.com/SyedT1/OOP/tree/main/EVISA%20Management">GitHub</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="panel">
+<h2>Experience</h2>
+
+<p class="accordion" onclick="toggle(this)">▶ Center for Computation & Data Sciences (IUB)</p>
+<div class="content">
+Research Assistant (Oct 2024 – Present): Quantum algorithms, QML, hybrid models, benchmarking.
+</div>
+
+<p class="accordion" onclick="toggle(this)">▶ Onnorokom Projukti Ltd.</p>
+<div class="content">
+Assistant Software Engineer (Mar 2025 – Aug 2025): Async microservices, RBAC, ViT integration.
+</div>
+
+<p class="accordion" onclick="toggle(this)">▶ BRAC IT</p>
+<div class="content">
+Intern Software Engineer: 10+ REST APIs, PostgreSQL optimization, Bootstrap UI.
+</div>
+
+</section>
+
+<section class="panel">
+<h2>Achievements</h2>
+<ul>
+<li>3rd — BlueQubit Quantum Hackathon 2025</li>
+<li>3rd — IonQ FLIQ 2025 Science Track</li>
+<li>Dean’s List Scholarship ×3 + others ×2</li>
+<li>Champion — IUB TechFest Web Applications</li>
+</ul>
+</section>
+
+<section class="panel">
+<h2>Education & Training</h2>
+<ul>
+<li>B.Sc. CSE — Independent University Bangladesh (2018–2023)</li>
+<li>IBM Qiskit Summer School 2025</li>
+<li>Womanium Quantum + AI 2024</li>
+<li>QClass 24/25, QTitanium2, Pasqal</li>
+<li>Udacity AWS AI, DataTalks ML</li>
+</ul>
 </section>
 
 <footer>
-  © 2025 · Quantum & Machine Learning Research
+© 2025 · Syed Mohaiminul Hoque · Quantum, ML & Software Research
 </footer>
 
 <script>
-const texts = [
-  "Quantum Machine Learning Researcher",
-  "Variational Quantum Algorithms on Real Hardware",
-  "Robust Deep Learning for Low-Resource NLP",
-  "Quantum Transformers & NISQ Systems"
+const texts=[
+"Quantum Machine Learning Researcher",
+"Quantum Transformers on NISQ Hardware",
+"Robust NLP for Low-Resource Languages",
+"Variational Algorithms & Hybrid Models"
 ];
+let i=0,j=0,f=true;const el=document.getElementById("typewriter");
+setInterval(()=>{
+  if(f){el.textContent=texts[i].slice(0,++j);if(j===texts[i].length)f=false;}
+  else{el.textContent=texts[i].slice(0,--j);if(j===0){f=true;i=(i+1)%texts.length;}}
+},80);
 
-let i = 0, j = 0, forward = true;
-const el = document.getElementById("typewriter");
-
-setInterval(() => {
-  if (forward) {
-    el.textContent = texts[i].slice(0, ++j);
-    if (j === texts[i].length) forward = false;
-  } else {
-    el.textContent = texts[i].slice(0, --j);
-    if (j === 0) {
-      forward = true;
-      i = (i + 1) % texts.length;
-    }
-  }
-}, 80);
-
-function toggle(card) {
-  const d = card.querySelector(".project-details");
-  d.style.display = d.style.display === "block" ? "none" : "block";
+function toggle(e){
+  const c=e.querySelector?.(".content")||e.nextElementSibling;
+  c.style.display=c.style.display==="block"?"none":"block";
 }
 </script>
 
