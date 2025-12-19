@@ -1,129 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Syed Mohaiminul Hoque | Quantum ML Researcher</title>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Syed Mohaiminul Hoque | Quantum & ML Research</title>
+
+<style>
+:root {
+  --bg: #020617;
+  --panel: #0f172a;
+  --accent: #38bdf8;
+  --accent2: #22c55e;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #020617, #000);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+a { color: var(--accent); text-decoration: none; }
+
+section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 4rem 1.5rem;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero span {
+  color: var(--accent);
+}
+
+.typewriter {
+  font-size: 1.2rem;
+  color: var(--muted);
+  min-height: 1.5em;
+}
+
+.hero-links a {
+  margin: 0.6rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  transition: all 0.3s;
+}
+
+.hero-links a:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+/* ---------- PANELS ---------- */
+.panel {
+  background: linear-gradient(180deg, var(--panel), #020617);
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 0 1px #1e293b inset;
+}
+
+/* ---------- SPLIT ---------- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.split h3 {
+  color: var(--accent2);
+}
+
+/* ---------- PROJECTS ---------- */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 1.5rem;
+}
+
+.project {
+  background: #020617;
+  padding: 1.5rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.project-details {
+  display: none;
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+/* ---------- TIMELINE ---------- */
+.timeline {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+}
+
+.timeline-item {
+  margin-bottom: 2rem;
+}
+
+.timeline-item h4 {
+  margin: 0;
+  color: var(--accent);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.2rem; }
+}
+</style>
 </head>
+
 <body>
 
-<header>
-  <h1>Syed Mohaiminul Hoque</h1>
-  <p class="subtitle">Quantum Machine Learning & Deep Learning Researcher</p>
-  <div class="links">
+<!-- HERO -->
+<section class="hero">
+  <h1>Syed <span>Mohaiminul Hoque</span></h1>
+  <div class="typewriter" id="typewriter"></div>
+
+  <div class="hero-links">
     <a href="mailto:syedmuhaimintahsin@gmail.com">Email</a>
     <a href="https://github.com/SyedT1" target="_blank">GitHub</a>
     <a href="https://scholar.google.com/citations?user=IvSh1HoAAAAJ&hl=en" target="_blank">Scholar</a>
     <a href="https://www.linkedin.com/in/syed-mohaiminul-hoque-3397721ba/" target="_blank">LinkedIn</a>
   </div>
-</header>
+</section>
 
-<section>
-  <h2>Summary</h2>
+<!-- RESEARCH IDENTITY -->
+<section class="panel">
+  <h2>Research Identity</h2>
   <p>
-    Quantum computing researcher specializing in variational algorithms (VQE, varQITE),
-    quantum machine learning (QSVM, qNPE), and hybrid quantum–classical models.
-    Experienced in low-resource NLP, deep learning, and adversarial robustness.
+    Over the past year, my work has focused on the intersection of <strong>quantum computing</strong>
+    and <strong>robust deep learning</strong>. I design variational quantum algorithms on real
+    NISQ hardware while simultaneously developing adversarially robust NLP systems for low-resource languages.
   </p>
 </section>
 
-<section>
-  <h2>Education</h2>
-  <div class="card">
-    <strong>B.Sc. in Computer Science & Engineering</strong><br/>
-    Independent University, Bangladesh (2018–2023)
-  </div>
-</section>
-
-<section>
-  <h2>Experience</h2>
-
-  <div class="card">
-    <strong>Research Assistant – Quantum Computing</strong><br/>
-    Center for Computation and Data Sciences (CCDS), IUB<br/>
-    <em>Oct 2024 – Present</em>
+<!-- SPLIT -->
+<section class="split">
+  <div class="panel">
+    <h3>Quantum Computing</h3>
     <ul>
-      <li>Designed and benchmarked quantum algorithms</li>
-      <li>Implemented VQCs, quantum kernels, and hybrid models</li>
-      <li>Worked with Qiskit & PennyLane</li>
+      <li>Variational Quantum Classifiers & Quantum Kernels</li>
+      <li>Custom QSVM feature maps</li>
+      <li>varQITE for NP-hard optimization (MaxCut)</li>
+      <li>Hybrid quantum–classical pipelines</li>
+      <li>Executed on IonQ & BlueQubit hardware</li>
     </ul>
   </div>
 
-  <div class="card">
-    <strong>Quantum Computing Researcher</strong><br/>
-    Quantum Africa (Remote)<br/>
-    <em>Sept 2025 – Present</em>
+  <div class="panel">
+    <h3>Deep Learning & NLP</h3>
     <ul>
-      <li>Quantum hybrid models & variational methods</li>
-      <li>Quantum GNNs for Drug–Target Interaction</li>
-      <li>QKD protocols (BB84) analysis</li>
+      <li>BanglaBERT ensembles (PyTorch)</li>
+      <li>Adversarial training & robustness</li>
+      <li>Hate speech detection (BLP-2025)</li>
+      <li>Low-resource NLP datasets & evaluation</li>
     </ul>
   </div>
 </section>
 
-<section>
-  <h2>Selected Quantum Projects</h2>
-
-  <div class="card">
-    <strong>MaxCut Optimization via varQITE</strong><br/>
-    <a href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025" target="_blank">GitHub</a>
-    <p>3rd Place – IonQ VQI FLIQ 2025</p>
-  </div>
-
-  <div class="card">
-    <strong>Quantum Neighborhood Preserving Embedding (qNPE)</strong><br/>
-    <a href="https://github.com/SyedT1/implementing-dimensional-reductionality-for-qnpe" target="_blank">GitHub</a>
-  </div>
-
-  <div class="card">
-    <strong>Custom Quantum Feature Maps for QSVM</strong><br/>
-    <a href="https://github.com/SyedT1/QSVM_T4" target="_blank">GitHub</a>
-  </div>
-
-  <div class="card">
-    <strong>Quantum Galton Box – Quantum Walk Simulator</strong><br/>
-    <a href="https://github.com/SyedT1/Quantum-Walks-and-Monte-Carlo-WISERv1" target="_blank">GitHub</a>
+<!-- TIMELINE -->
+<section class="panel">
+  <h2>Current Research Focus</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h4>2025 – Present</h4>
+      <p>
+        Development and extension of <strong>Quixer: A Quantum Transformer Model</strong>
+        (arXiv:2406.04305), investigating variational quantum attention, quantum embeddings,
+        and quantum feed-forward layers for robustness and generalization.
+      </p>
+    </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section>
-  <h2>Publications</h2>
+  <h2>Selected Projects (click to expand)</h2>
+  <div class="projects">
 
-  <ul>
-    <li>
-      <strong>Gradient Masters at BLP-2025 Task 1</strong> – AACL-IJCNLP 2025 Workshop
-    </li>
-    <li>
-      <strong>BaTEClaCor</strong> – EMNLP 2023 BLP Workshop
-      (<a href="https://github.com/SyedT1/BaTEClaCor" target="_blank">Code</a>)
-    </li>
-    <li>
-      <strong>Smart Floor Cleaning Robot</strong> – IEEE TENSYMP
-    </li>
-  </ul>
-</section>
+    <div class="project" onclick="toggle(this)">
+      <h3>varQITE for MaxCut (IonQ)</h3>
+      <p>3rd Place – FLIQ 2025</p>
+      <div class="project-details">
+        Designed optimized ansätze and Hamiltonians for NP-hard MaxCut using
+        Variational Quantum Imaginary Time Evolution on IonQ hardware.
+        <br/><a href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025" target="_blank">GitHub</a>
+      </div>
+    </div>
 
-<section>
-  <h2>Achievements</h2>
-  <ul>
-    <li>3rd Place – BlueQubit Quantum Hackathon 2025</li>
-    <li>3rd Place – FLIQ 2025 Science Track (Individual)</li>
-    <li>Multiple Dean’s List & Merit Scholarships</li>
-  </ul>
-</section>
+    <div class="project" onclick="toggle(this)">
+      <h3>Quantum Neighborhood Preserving Embedding</h3>
+      <p>Quantum dimensionality reduction</p>
+      <div class="project-details">
+        Preserves local manifold structure using swap-test KNN, QSVD,
+        and variational eigensolvers.
+        <br/><a href="https://github.com/SyedT1/implementing-dimensional-reductionality-for-qnpe" target="_blank">GitHub</a>
+      </div>
+    </div>
 
-<section>
-  <h2>Skills</h2>
-  <p>
-    PyTorch, Qiskit, PennyLane, Cirq, QuTiP, Transformers, Competitive Programming
-  </p>
+    <div class="project" onclick="toggle(this)">
+      <h3>BLP-2025 Hate Speech Detection</h3>
+      <p>3rd & 6th place</p>
+      <div class="project-details">
+        PyTorch-based BanglaBERT ensembles with adversarial training.
+        Appearing at AACL-IJCNLP 2025 BLP Workshop.
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Syed Mohaiminul Hoque</p>
+  © 2025 · Quantum & Machine Learning Research
 </footer>
 
-<script src="script.js"></script>
+<script>
+const texts = [
+  "Quantum Machine Learning Researcher",
+  "Variational Quantum Algorithms on Real Hardware",
+  "Robust Deep Learning for Low-Resource NLP",
+  "Quantum Transformers & NISQ Systems"
+];
+
+let i = 0, j = 0, forward = true;
+const el = document.getElementById("typewriter");
+
+setInterval(() => {
+  if (forward) {
+    el.textContent = texts[i].slice(0, ++j);
+    if (j === texts[i].length) forward = false;
+  } else {
+    el.textContent = texts[i].slice(0, --j);
+    if (j === 0) {
+      forward = true;
+      i = (i + 1) % texts.length;
+    }
+  }
+}, 80);
+
+function toggle(card) {
+  const d = card.querySelector(".project-details");
+  d.style.display = d.style.display === "block" ? "none" : "block";
+}
+</script>
+
 </body>
 </html>
