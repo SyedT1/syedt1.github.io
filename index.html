@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Syed Mohaiminul Hoque — AI Engineer & Quantum Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#04080f;
+  --bg1:#07101c;
+  --bg2:#0b1826;
+  --sur:#0f2035;
+  --bdr:#152b42;
+  --bdr2:#1f3f5e;
+  --teal:#00d4c8;
+  --lime:#a3e635;
+  --amber:#f59e0b;
+  --rose:#f43f5e;
+  --text:#e2eef7;
+  --sub:#7a9ab8;
+  --dim:#2a4460;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* canvas */
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+
+/* grid lines */
+.grid-lines{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--bdr) 1px,transparent 1px),linear-gradient(90deg,var(--bdr) 1px,transparent 1px);
+  background-size:80px 80px;opacity:.35}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:60px;
+  background:rgba(4,8,15,.92);
+  border-bottom:1px solid var(--bdr);
+  backdrop-filter:blur(24px);
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.4rem;letter-spacing:.12em;
+  color:var(--teal);
+}
+.logo sup{font-size:.55rem;color:var(--lime);vertical-align:super;margin-left:1px;font-family:'JetBrains Mono',monospace}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--sub);
+  text-decoration:none;transition:color .2s;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-links a:hover{color:var(--teal)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-pill{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  letter-spacing:.1em;padding:.28rem .8rem;
+  border:1px solid var(--lime);color:var(--lime);border-radius:1px;
+  display:flex;align-items:center;gap:.45rem;
+}
+.nav-pill::before{content:'';width:5px;height:5px;background:var(--lime);border-radius:50%;animation:pulse-lime 2s ease infinite}
+@keyframes pulse-lime{0%,100%{box-shadow:0 0 0 0 rgba(163,230,53,.5)}50%{box-shadow:0 0 0 5px rgba(163,230,53,0)}}
+
+/* HERO */
+#hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 3rem;
+  max-width:1240px;margin:0 auto;
+  padding-top:60px;
+}
+.hero-index{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:var(--teal);letter-spacing:.2em;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.hero-index::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--teal),transparent)}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,10vw,9.5rem);
+  line-height:.92;letter-spacing:.03em;
+  margin-bottom:2rem;
+}
+.hero-title .t1{color:var(--text);display:block}
+.hero-title .t2{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--teal);
+  display:block;
+}
+.hero-title .t3{color:var(--teal);display:block}
+.hero-sub{
+  font-family:'DM Sans',sans-serif;font-size:1rem;
+  font-weight:300;color:var(--sub);
+  max-width:560px;line-height:1.75;
+  margin-bottom:2.5rem;
+}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.btn{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.72rem 1.6rem;border:1px solid;text-decoration:none;
+  transition:all .25s;display:inline-block;
+}
+.btn-primary{background:var(--teal);border-color:var(--teal);color:var(--bg);font-weight:600}
+.btn-primary:hover{background:transparent;color:var(--teal);box-shadow:0 0 30px rgba(0,212,200,.25)}
+.btn-outline{background:transparent;border-color:var(--bdr2);color:var(--sub)}
+.btn-outline:hover{border-color:var(--lime);color:var(--lime)}
+.hero-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.htag{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  letter-spacing:.08em;padding:.22rem .6rem;
+  border:1px solid var(--bdr2);color:var(--sub);border-radius:1px;
+}
+.htag.lit{border-color:rgba(0,212,200,.3);color:var(--teal)}
+
+/* scroll indicator */
+.scroll-hint{
+  position:absolute;bottom:2.5rem;left:3rem;
+  display:flex;align-items:center;gap:.7rem;
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  color:var(--dim);letter-spacing:.15em;text-transform:uppercase;
+}
+.scroll-line{width:40px;height:1px;background:var(--dim)}
+
+/* SECTIONS */
+.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 3rem}
+section{padding:7rem 0}
+
+.sec-label{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:3.5rem;
+}
+.sec-num{
+  font-family:'Bebas Neue',sans-serif;font-size:5rem;
+  color:var(--bdr2);line-height:1;
+  -webkit-text-stroke:1px var(--bdr2);
+}
+.sec-info{}
+.sec-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  color:var(--teal);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:.3rem;
+}
+.sec-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  letter-spacing:.05em;line-height:1;
+}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start}
+.about-text p{
+  font-size:.95rem;font-weight:300;color:var(--sub);
+  line-height:1.85;margin-bottom:1.2rem;
+}
+.about-text p strong{color:var(--text);font-weight:500}
+.about-links{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.alink{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.1em;color:var(--sub);text-decoration:none;
+  border-bottom:1px solid var(--bdr2);padding-bottom:2px;
+  transition:all .2s;text-transform:uppercase;
+}
+.alink:hover{color:var(--teal);border-color:var(--teal)}
+.about-right{}
+.stat-stack{display:flex;flex-direction:column;gap:1.5rem}
+.stat-item{
+  border-left:2px solid var(--bdr2);padding-left:1.2rem;
+  transition:border-color .2s;
+}
+.stat-item:hover{border-color:var(--teal)}
+.stat-val{
+  font-family:'Bebas Neue',sans-serif;font-size:2.8rem;
+  color:var(--teal);line-height:1;
+}
+.stat-desc{font-size:.8rem;color:var(--sub);font-weight:300;margin-top:.15rem}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--bdr)}
+.skill-block{
+  background:var(--bg);padding:2rem 2.2rem;
+  transition:background .2s;
+}
+.skill-block:hover{background:var(--bg1)}
+.sb-icon{font-size:1.4rem;margin-bottom:.8rem}
+.sb-name{
+  font-family:'Bebas Neue',sans-serif;font-size:1.3rem;
+  letter-spacing:.05em;margin-bottom:.6rem;color:var(--text);
+}
+.sb-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.sk{
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  padding:.2rem .5rem;border-radius:1px;border:1px solid;
+}
+.sk.t{border-color:rgba(0,212,200,.2);color:var(--teal);background:rgba(0,212,200,.04)}
+.sk.l{border-color:rgba(163,230,53,.2);color:var(--lime);background:rgba(163,230,53,.04)}
+.sk.a{border-color:rgba(245,158,11,.2);color:var(--amber);background:rgba(245,158,11,.04)}
+.sk.r{border-color:rgba(244,63,94,.2);color:var(--rose);background:rgba(244,63,94,.04)}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column}
+.exp-item{
+  display:grid;grid-template-columns:180px 1fr;
+  border-top:1px solid var(--bdr);
+  padding:2.5rem 0;gap:3rem;
+  transition:background .2s;
+  cursor:default;
+}
+.exp-item:hover .exp-main{transform:translateX(6px)}
+.exp-meta{}
+.exp-date{
+  font-family:'JetBrains Mono',monospace;font-size:.63rem;
+  color:var(--teal);letter-spacing:.08em;margin-bottom:.4rem;
+}
+.exp-type{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--sub);letter-spacing:.08em}
+.exp-main{transition:transform .25s}
+.exp-co{font-size:1.15rem;font-weight:500;margin-bottom:.15rem;color:var(--text)}
+.exp-role{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  color:var(--teal);margin-bottom:.9rem;letter-spacing:.05em;
+}
+.exp-li{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.exp-li li{font-size:.85rem;font-weight:300;color:var(--sub);line-height:1.6;display:flex;gap:.7rem}
+.exp-li li::before{content:'—';color:var(--lime);flex-shrink:0}
+.exp-item:last-child{border-bottom:1px solid var(--bdr)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr)}
+.proj-card{
+  background:var(--bg);padding:2rem;
+  position:relative;overflow:hidden;
+  transition:background .25s;
+  display:flex;flex-direction:column;
+}
+.proj-card:hover{background:var(--bg1)}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--teal),var(--lime));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s;
+}
+.proj-card:hover::before{transform:scaleX(1)}
+.proj-idx{
+  font-family:'Bebas Neue',sans-serif;font-size:3.5rem;
+  color:var(--bdr2);line-height:1;margin-bottom:.5rem;
+}
+.proj-name{font-size:.95rem;font-weight:500;margin-bottom:.5rem;color:var(--text)}
+.proj-desc{font-size:.8rem;font-weight:300;color:var(--sub);line-height:1.7;flex:1;margin-bottom:1.2rem}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.2rem}
+.ptag{
+  font-family:'JetBrains Mono',monospace;font-size:.55rem;
+  color:var(--sub);border:1px solid var(--bdr);
+  padding:.15rem .42rem;border-radius:1px;
+}
+.proj-link{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  color:var(--teal);text-decoration:none;letter-spacing:.08em;
+  align-self:flex-start;
+  border-bottom:1px solid transparent;
+  transition:border-color .2s;
+}
+.proj-link:hover{border-color:var(--teal)}
+
+/* PUBLICATIONS */
+.pub-list{display:flex;flex-direction:column;gap:1px;background:var(--bdr)}
+.pub-card{
+  background:var(--bg);
+  display:grid;grid-template-columns:auto 1fr;gap:0;
+  transition:background .2s;
+}
+.pub-card:hover{background:var(--bg1)}
+.pub-side{
+  writing-mode:vertical-rl;
+  font-family:'Bebas Neue',monospace;font-size:.85rem;
+  letter-spacing:.12em;color:var(--amber);
+  background:rgba(245,158,11,.05);
+  border-right:1px solid var(--bdr);
+  padding:1.5rem .8rem;
+  display:flex;align-items:center;justify-content:center;
+  min-width:48px;
+}
+.pub-body{padding:2rem 2.2rem}
+.pub-title{font-size:1rem;font-weight:500;color:var(--text);margin-bottom:.5rem}
+.pub-desc{font-size:.82rem;font-weight:300;color:var(--sub);line-height:1.75}
+.pub-link{
+  display:inline-block;margin-top:.8rem;
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  color:var(--teal);text-decoration:none;letter-spacing:.1em;
+  border-bottom:1px solid transparent;transition:border-color .2s;
+}
+.pub-link:hover{border-color:var(--teal)}
+
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr)}
+.ach-card{
+  background:var(--bg);padding:1.6rem;
+  transition:background .2s;
+}
+.ach-card:hover{background:var(--bg1)}
+.ach-icon{font-size:1.5rem;margin-bottom:.7rem}
+.ach-title{font-size:.88rem;font-weight:500;margin-bottom:.25rem;color:var(--text)}
+.ach-sub{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--sub);line-height:1.6}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr);margin-top:2rem}
+.cert-card{
+  background:var(--bg);padding:1.4rem 1.6rem;
+  display:flex;align-items:center;gap:.8rem;
+  transition:background .2s;
+}
+.cert-card:hover{background:var(--bg1)}
+.cert-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0}
+.cert-name{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--sub);letter-spacing:.05em}
+
+/* CONTACT */
+#contact{padding:7rem 0}
+.contact-inner{
+  border:1px solid var(--bdr2);padding:4rem;
+  background:var(--bg1);
+  display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;
+  position:relative;overflow:hidden;
+}
+.contact-inner::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(0,212,200,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.contact-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  letter-spacing:.05em;line-height:1.1;margin-bottom:.8rem;
+}
+.contact-sub{font-size:.9rem;font-weight:300;color:var(--sub);line-height:1.75}
+.contact-sub a{color:var(--teal);text-decoration:none}
+.contact-links{display:flex;flex-direction:column;gap:.8rem;min-width:220px}
+.clink{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  letter-spacing:.1em;padding:.7rem 1.2rem;
+  text-decoration:none;border:1px solid var(--bdr2);
+  color:var(--sub);text-transform:uppercase;
+  transition:all .2s;display:flex;align-items:center;gap:.6rem;
+}
+.clink:hover{border-color:var(--teal);color:var(--teal)}
+.clink-icon{font-size:.9rem}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--bdr);
+  padding:2rem 3rem;
+  max-width:1240px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-left{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:.08em}
+.footer-left span{color:var(--teal)}
+.footer-right{display:flex;gap:1.5rem}
+.footer-right a{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--dim);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.footer-right a:hover{color:var(--teal)}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.fi.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+  .ach-grid{grid-template-columns:repeat(2,1fr)}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  #hero,.wrap{padding-left:1.5rem;padding-right:1.5rem}
+  .exp-item{grid-template-columns:1fr;gap:1rem}
+  .proj-grid{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr;padding:2rem}
+  .ach-grid{grid-template-columns:1fr 1fr}
+  footer{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+<div class="grid-lines"></div>
+
+<nav>
+  <div class="logo">SMH<sup>.dev</sup></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-pill">Available for work</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-index">PORTFOLIO — 2026</div>
+  <h1 class="hero-title">
+    <span class="t1">SYED</span>
+    <span class="t2">MOHAIMINUL</span>
+    <span class="t3">HOQUE</span>
+  </h1>
+  <p class="hero-sub">
+    <strong>AI Engineer &amp; Quantum Researcher</strong> based in Dhaka, Bangladesh.<br>
+    Building at the intersection of quantum computing, machine learning, and full-stack engineering.
+    Research Intern at CCDS, IUB.
+  </p>
+  <div>
+    <div class="hero-row">
+      <a class="btn btn-primary" href="mailto:syedmuhaimintahsin@gmail.com">Get in Touch</a>
+      <a class="btn btn-outline" href="https://github.com/SyedT1" target="_blank">GitHub ↗</a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/syed-mohaiminul-hoque-3397721ba/" target="_blank">LinkedIn ↗</a>
+    </div>
+    <div class="hero-tags">
+      <span class="htag lit">🏆 3rd BlueQubit 2025</span>
+      <span class="htag lit">🥉 FLIQ Hackathon 2025</span>
+      <span class="htag">EMNLP Published</span>
+      <span class="htag">IEEE Published</span>
+      <span class="htag">Dean's List ×3</span>
+      <span class="htag">97% Quantum Computing</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span class="scroll-line"></span>Scroll to explore
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="wrap">
+<section id="about" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">01</div>
+    <div class="sec-info">
+      <div class="sec-tag">About</div>
+      <div class="sec-title">WHO I AM</div>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Computer Science graduate</strong> from Independent University Bangladesh (2018–2023), currently a <strong>Research Intern at the Center for Computation and Data Sciences (CCDS), IUB</strong>. My work sits at the collision point of quantum algorithms and practical machine learning.</p>
+      <p>On the quantum side, I design and benchmark <strong>Variational Quantum Classifiers and Quantum Kernel Methods</strong> using Qiskit and PennyLane, exploring hybrid quantum-classical frameworks for high-dimensional classification problems. On the engineering side, I build production-grade async microservices with <strong>Python ASGI frameworks, PostgreSQL, and CI/CD pipelines</strong>.</p>
+      <p>I've co-authored papers at <strong>EMNLP</strong> (Bangla NLP) and <strong>IEEE TENSYMP</strong>, placed 3rd at the BlueQubit and FLIQ quantum hackathons in 2025, and hold a <strong>97% score</strong> from The Coding School's Quantum Computing course. I've also solved <strong>800+ competitive programming problems</strong> across Codeforces, AtCoder, and BeeCrowd.</p>
+      <p>I believe quantum computing and AI together will reshape the infrastructure of civilization — and I intend to help build that future.</p>
+      <div class="about-links">
+        <a class="alink" href="https://scholar.google.com/citations?user=IvSh1HoAAAAJ&hl" target="_blank">Google Scholar</a>
+        <a class="alink" href="https://dorahacks.io/hacker/syedmohaiminul" target="_blank">DoraHacks</a>
+        <a class="alink" href="https://syedt1.github.io/" target="_blank">Portfolio</a>
+        <a class="alink" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">BaTEClaCor Repo</a>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="stat-stack">
+        <div class="stat-item">
+          <div class="stat-val">800+</div>
+          <div class="stat-desc">Competitive programming problems solved</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">3+</div>
+          <div class="stat-desc">Years of active ML/NLP research</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">2</div>
+          <div class="stat-desc">Peer-reviewed publications (EMNLP, IEEE)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">5×</div>
+          <div class="stat-desc">Academic scholarships awarded at IUB</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">40%</div>
+          <div class="stat-desc">API response time reduction at BRAC IT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">02</div>
+    <div class="sec-info">
+      <div class="sec-tag">Skills</div>
+      <div class="sec-title">WHAT I KNOW</div>
+    </div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="sb-icon">⚛️</div>
+      <div class="sb-name">Quantum Computing</div>
+      <div class="sb-tags">
+        <span class="sk t">Qiskit</span><span class="sk t">PennyLane</span>
+        <span class="sk t">VQC</span><span class="sk t">Quantum Kernel</span>
+        <span class="sk t">Hybrid QC</span><span class="sk t">Variational Algorithms</span>
+        <span class="sk t">Quantum Simulators</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-icon">🧠</div>
+      <div class="sb-name">AI / ML / NLP</div>
+      <div class="sb-tags">
+        <span class="sk l">PyTorch</span><span class="sk l">Vision Transformers</span>
+        <span class="sk l">BanglaBERT</span><span class="sk l">BanglaT5</span>
+        <span class="sk l">RAG</span><span class="sk l">LLMs</span>
+        <span class="sk l">Ollama</span><span class="sk l">Chroma DB</span><span class="sk l">HuggingFace</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-icon">🔧</div>
+      <div class="sb-name">Backend Engineering</div>
+      <div class="sb-tags">
+        <span class="sk a">Python</span><span class="sk a">Django</span>
+        <span class="sk a">BlackSheep ASGI</span><span class="sk a">Groovy/Grails</span>
+        <span class="sk a">PHP/Laravel</span><span class="sk a">Java</span>
+        <span class="sk a">REST APIs</span><span class="sk a">PostgreSQL</span><span class="sk a">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-icon">⚡</div>
+      <div class="sb-name">DevOps &amp; Frontend</div>
+      <div class="sb-tags">
+        <span class="sk r">CI/CD</span><span class="sk r">JWT Auth</span>
+        <span class="sk r">RBAC</span><span class="sk r">Microservices</span>
+        <span class="sk r">JavaScript</span><span class="sk r">Bootstrap</span>
+        <span class="sk r">Leaflet.js</span><span class="sk r">Plotly</span><span class="sk r">JavaFX</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">03</div>
+    <div class="sec-info">
+      <div class="sec-tag">Experience</div>
+      <div class="sec-title">WHERE I'VE WORKED</div>
+    </div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">OCT 2024 — NOW</div>
+        <div class="exp-type">Research · Full-time</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Center for Computation &amp; Data Sciences, IUB</div>
+        <div class="exp-role">Research Intern — Quantum Computing</div>
+        <ul class="exp-li">
+          <li>Designing quantum algorithms with complexity analysis &amp; performance benchmarking on simulators</li>
+          <li>Implementing Variational Quantum Classifiers &amp; Quantum Kernel Methods using Qiskit and PennyLane</li>
+          <li>Investigating hybrid quantum-classical frameworks for optimization and high-dimensional classification</li>
+          <li>Developing prototype simulations to validate theoretical models in Python quantum frameworks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">MAR — AUG 2025</div>
+        <div class="exp-type">Engineering · Full-time</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Onnorokom Projukti Limited</div>
+        <div class="exp-role">Assistant Software Engineer</div>
+        <ul class="exp-li">
+          <li>Built scalable async web services with BlackSheep (Python), PostgreSQL &amp; JWT-authenticated microservices in a CI/CD pipeline</li>
+          <li>Designed middleware-driven Role-Based Access Control (RBAC) for secure multi-user access</li>
+          <li>Integrated Vision Transformers (ViT) for advanced visual data processing within ASGI-compliant architecture</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">JUN — SEP 2024</div>
+        <div class="exp-type">Engineering · Internship</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">BRAC IT</div>
+        <div class="exp-role">Intern Software Engineer</div>
+        <ul class="exp-li">
+          <li>Developed and optimized 10+ RESTful APIs with Groovy on Grails — reducing response time by 40%</li>
+          <li>Implemented complex business logic &amp; CRUD with PostgreSQL, focusing on query optimization &amp; schema efficiency</li>
+          <li>Built responsive UI features with Bootstrap aligned to backend services</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">AUG 2022 — NOW</div>
+        <div class="exp-type">Research · Part-time</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Center for Computation &amp; Data Sciences, IUB</div>
+        <div class="exp-role">Student Researcher — NLP &amp; ML</div>
+        <ul class="exp-li">
+          <li>Studying NLP methods across 3 active research projects with senior research assistants</li>
+          <li>Co-authored EMNLP BLP 2023 paper on Bangla text error classification &amp; correction</li>
+          <li>Developed ML/NLP models from specification through training to evaluation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">JUL — SEP 2022</div>
+        <div class="exp-type">Education · Part-time</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Independent University Bangladesh</div>
+        <div class="exp-role">Student-On-Duty (Teaching)</div>
+        <ul class="exp-li">
+          <li>Taught Python programming fundamentals, Combinatorics, and Number Theory to 45 students</li>
+          <li>Hosted problem-solving sessions focused on competitive programming techniques</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">04</div>
+    <div class="sec-info">
+      <div class="sec-tag">Projects</div>
+      <div class="sec-title">THINGS I'VE BUILT</div>
+    </div>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-idx">01</div>
+      <div class="proj-name">RAG Application with Ollama</div>
+      <div class="proj-desc">Django-based chatbot using Chroma DB for vector semantic search. Leverages Ollama API for text embeddings and Stanza for NLP preprocessing. Full frontend and backend.</div>
+      <div class="proj-stack">
+        <span class="ptag">Python</span><span class="ptag">Django</span><span class="ptag">PyTorch</span>
+        <span class="ptag">Chroma DB</span><span class="ptag">Ollama</span><span class="ptag">Stanza</span><span class="ptag">MySQL</span>
+      </div>
+      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-idx">02</div>
+      <div class="proj-name">CrimeChitro</div>
+      <div class="proj-desc">Anonymous crime reporting platform with interactive map-based location pinning. Citizens report incidents without visiting police stations — built for freedom of expression and accessibility.</div>
+      <div class="proj-stack">
+        <span class="ptag">PHP</span><span class="ptag">Laravel</span><span class="ptag">jQuery</span>
+        <span class="ptag">Leaflet.js</span><span class="ptag">JavaScript</span><span class="ptag">MySQL</span>
+      </div>
+      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-idx">03</div>
+      <div class="proj-name">Air Quality Monitor — Dhaka</div>
+      <div class="proj-desc">Year-wise visualisation of air quality across different regions of Dhaka. Interactive Plotly dashboards served by a Django backend with data filtering by region and year.</div>
+      <div class="proj-stack">
+        <span class="ptag">Python</span><span class="ptag">Django</span><span class="ptag">Plotly</span>
+        <span class="ptag">HTML</span><span class="ptag">CSS</span>
+      </div>
+      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-idx">04</div>
+      <div class="proj-name">EVISA Management System</div>
+      <div class="proj-desc">Full-stack Java desktop application for remote visa applications. Users apply and get help without visiting offices. Built with JavaFX and SceneBuilder; uses object, byte, and data stream file handling.</div>
+      <div class="proj-stack">
+        <span class="ptag">Java</span><span class="ptag">JavaFX</span><span class="ptag">SceneBuilder</span>
+      </div>
+      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-idx">05</div>
+      <div class="proj-name">BaTEClaCor Dataset &amp; Models</div>
+      <div class="proj-desc">10,000-sample Bangla social media error corpus with fine-tuned BanglaBERT classifier (79.1% accuracy) and BanglaT5 text correction model achieving Rouge-L of 0.8459. Published at EMNLP.</div>
+      <div class="proj-stack">
+        <span class="ptag">Python</span><span class="ptag">BanglaBERT</span><span class="ptag">BanglaT5</span>
+        <span class="ptag">HuggingFace</span><span class="ptag">PyTorch</span>
+      </div>
+      <a class="proj-link" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">View on GitHub ↗</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-idx">06</div>
+      <div class="proj-name">Smart Floor Cleaning Robot</div>
+      <div class="proj-desc">Autonomous cleaning robot with Wi-Fi remote control, integrated mini vacuum cleaner, and motor-based mop system. Features embedded systems programming with wireless control. Published at IEEE TENSYMP.</div>
+      <div class="proj-stack">
+        <span class="ptag">Embedded C</span><span class="ptag">Wi-Fi</span><span class="ptag">Robotics</span><span class="ptag">IEEE</span>
+      </div>
+      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">05</div>
+    <div class="sec-info">
+      <div class="sec-tag">Research</div>
+      <div class="sec-title">PUBLICATIONS</div>
+    </div>
+  </div>
+  <div class="pub-list">
+    <div class="pub-card">
+      <div class="pub-side">EMNLP BLP '23</div>
+      <div class="pub-body">
+        <div class="pub-title">BaTEClaCor: A Novel Dataset for Bangla Text Error Classification and Correction</div>
+        <div class="pub-desc">Introduced a curated dataset of 10,000 authentic Bangla comments from social media for error classification and correction. Benchmarked BanglaBERT achieving 79.1% binary and 74.1% multiclass accuracy. BanglaT5 achieved the best text correction performance with a Rouge-L score of 0.8459. The work contributes to preserving Bangla language authenticity in digital discourse and advances NLP for low-resource languages.</div>
+        <a class="pub-link" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">Dataset &amp; Code ↗</a>
+      </div>
+    </div>
+    <div class="pub-card">
+      <div class="pub-side">IEEE TENSYMP</div>
+      <div class="pub-body">
+        <div class="pub-title">Smart Floor Cleaning Robot</div>
+        <div class="pub-desc">Developed and implemented an autonomous Smart Floor Cleaning Robot utilising modern embedded systems and wireless technology. Features Wi-Fi based remote control, a mini vacuum cleaner unit, and a motor-driven mop for efficient automated floor maintenance. Demonstrates real-world integration of embedded C programming with IoT-style wireless control architecture.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">06</div>
+    <div class="sec-info">
+      <div class="sec-tag">Achievements</div>
+      <div class="sec-title">WINS &amp; AWARDS</div>
+    </div>
+  </div>
+  <div class="ach-grid">
+    <div class="ach-card"><div class="ach-icon">🥉</div><div class="ach-title">3rd — BlueQubit Hackathon 2025</div><div class="ach-sub">Quantum computing hackathon, team entry</div></div>
+    <div class="ach-card"><div class="ach-icon">🥉</div><div class="ach-title">3rd — FLIQ Hackathon Science 2025</div><div class="ach-sub">Individual, quantum science track</div></div>
+    <div class="ach-card"><div class="ach-icon">🏆</div><div class="ach-title">Champion — IUB TechFest 2022</div><div class="ach-sub">Web Applications category, Autumn</div></div>
+    <div class="ach-card"><div class="ach-icon">🎖️</div><div class="ach-title">4th — IUB Programming Contest</div><div class="ach-sub">2022 Autumn intra-university competition</div></div>
+    <div class="ach-card"><div class="ach-icon">📚</div><div class="ach-title">Dean's List ×3 + Scholarships ×2</div><div class="ach-sub">5 total academic awards at IUB</div></div>
+    <div class="ach-card"><div class="ach-icon">🎓</div><div class="ach-title">97% — Quantum Computing</div><div class="ach-sub">The Coding School, Sep 2023–Apr 2024</div></div>
+    <div class="ach-card"><div class="ach-icon">☁️</div><div class="ach-title">Oracle Cloud AI Certified</div><div class="ach-sub">OCI 2024 AI Foundations Associate</div></div>
+    <div class="ach-card"><div class="ach-icon">⚛️</div><div class="ach-title">Womanium Quantum + AI</div><div class="ach-sub">3-month industry quantum program, 2024</div></div>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">ML Specialization — Coursera</div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">AWS AI Nanodegree — Udacity</div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">AI Fundamentals — DataCamp</div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">Python (Basic) — HackerRank</div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">Java (Basic) — HackerRank</div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">QClass 24/25 — Quantum Program</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">07</div>
+    <div class="sec-info">
+      <div class="sec-tag">Contact</div>
+      <div class="sec-title">LET'S TALK</div>
+    </div>
+  </div>
+  <div class="contact-inner">
+    <div>
+      <div class="contact-title">Open to research collabs,<br>engineering roles &amp; hackathons.</div>
+      <p class="contact-sub">
+        Whether you're looking for a quantum ML researcher, a full-stack engineer, or someone who thrives at the edge of both — reach out.<br><br>
+        Email: <a href="mailto:syedmuhaimintahsin@gmail.com">syedmuhaimintahsin@gmail.com</a>
+      </p>
+    </div>
+    <div class="contact-links">
+      <a class="clink" href="mailto:syedmuhaimintahsin@gmail.com"><span class="clink-icon">✉️</span> Email me</a>
+      <a class="clink" href="https://www.linkedin.com/in/syed-mohaiminul-hoque-3397721ba/" target="_blank"><span class="clink-icon">💼</span> LinkedIn</a>
+      <a class="clink" href="https://github.com/SyedT1" target="_blank"><span class="clink-icon">⌨️</span> GitHub</a>
+      <a class="clink" href="https://scholar.google.com/citations?user=IvSh1HoAAAAJ&hl" target="_blank"><span class="clink-icon">📄</span> Google Scholar</a>
+      <a class="clink" href="https://dorahacks.io/hacker/syedmohaiminul" target="_blank"><span class="clink-icon">🚀</span> DoraHacks</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 <span>Syed Mohaiminul Hoque</span> — Dhaka, Bangladesh</div>
+  <div class="footer-right">
+    <a href="https://github.com/SyedT1" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/syed-mohaiminul-hoque-3397721ba/" target="_blank">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=IvSh1HoAAAAJ&hl" target="_blank">Scholar</a>
+    <a href="mailto:syedmuhaimintahsin@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+/* ── STARFIELD / PARTICLE CANVAS ── */
+(function(){
+  const c=document.getElementById('cv'),ctx=c.getContext('2d');
+  let W,H,particles=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  resize();addEventListener('resize',resize);
+  for(let i=0;i<120;i++){
+    particles.push({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+      r:Math.random()*1.5+.3,
+      a:Math.random()*.6+.1
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<particles.length;i++){
+      const p=particles[i];
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.globalAlpha=p.a;
+      ctx.fillStyle='#00d4c8';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+      for(let j=i+1;j<particles.length;j++){
+        const q=particles[j];
+        const dx=p.x-q.x,dy=p.y-q.y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.globalAlpha=(1-dist/120)*.08;
+          ctx.strokeStyle='#00d4c8';ctx.lineWidth=.5;
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── SCROLL FADE IN ── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');}});
+},{threshold:0.1});
+document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+
+/* ── STAGGER CHILDREN ── */
+document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.skill-block').forEach((el,i)=>{
+  el.style.transitionDelay=(i%4)*.07+'s';
+});
+</script>
+</body>
+</html>
