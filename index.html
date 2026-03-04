@@ -221,7 +221,21 @@ section{padding:7rem 0}
 .exp-li li{font-size:.85rem;font-weight:300;color:var(--sub);line-height:1.6;display:flex;gap:.7rem}
 .exp-li li::before{content:'—';color:var(--lime);flex-shrink:0}
 
-
+/* QUANTUM PROJECTS */
+.qproj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--bdr)}
+.qproj-card{background:var(--bg);padding:2rem 2.2rem;position:relative;overflow:hidden;transition:background .25s}
+.qproj-card:hover{background:var(--bg1)}
+.qproj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--violet),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.qproj-card:hover::before{transform:scaleX(1)}
+.qp-award{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--amber);border:1px solid rgba(245,158,11,.3);padding:.18rem .5rem;margin-bottom:.8rem}
+.qp-idx{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--bdr2);line-height:1;margin-bottom:.4rem}
+.qp-name{font-size:.98rem;font-weight:500;margin-bottom:.5rem;color:var(--text)}
+.qp-desc{font-size:.82rem;font-weight:300;color:var(--sub);line-height:1.75;margin-bottom:1rem}
+.qp-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
+.qtag{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--sub);border:1px solid var(--bdr);padding:.15rem .42rem}
+.qp-link{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--teal);text-decoration:none;letter-spacing:.08em;border-bottom:1px solid transparent;transition:border-color .2s}
+.qp-link:hover{border-color:var(--teal)}
+  
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr)}
 .proj-card{
@@ -309,7 +323,13 @@ section{padding:7rem 0}
 .cert-card:hover{background:var(--bg1)}
 .cert-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0}
 .cert-name{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--sub);letter-spacing:.05em}
-
+/* COMMUNITY */
+.comm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr)}
+.comm-card{background:var(--bg);padding:1.6rem;transition:background .2s;display:flex;gap:1rem;align-items:flex-start}
+.comm-card:hover{background:var(--bg1)}
+.comm-icon{font-size:1.3rem;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--bg2);flex-shrink:0}
+.comm-title{font-size:.88rem;font-weight:500;margin-bottom:.25rem;color:var(--text)}
+.comm-sub{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--sub);line-height:1.6}
 /* CONTACT */
 #contact{padding:7rem 0}
 .contact-inner{
@@ -708,11 +728,52 @@ footer{
     </div>
   </div>
 </section>
+<section id="qprojects" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">05</div>
+    <div class="sec-info"><div class="sec-tag">Quantum Computing Projects</div><div class="sec-title">SELECTED QUANTUM WORK</div></div>
+  </div>
+  <div class="qproj-grid">
 
+    <div class="qproj-card">
+      <div class="qp-award">🥉 3rd Place — FLIQ 2025 Science Track, Individual</div>
+      <div class="qp-idx">Q1</div>
+      <div class="qp-name">MaxCut Optimization via varQITE — IonQ VQI FLIQ 2025</div>
+      <div class="qp-desc">Designed optimal ansätze and Hamiltonians for the NP-hard MaxCut problem using Variational Quantum Imaginary Time Evolution (varQITE) running on real IonQ hardware. Competed individually in the FLIQ 2025 Science Track, placing 3rd.</div>
+      <div class="qp-tags"><span class="qtag">varQITE</span><span class="qtag">IonQ Hardware</span><span class="qtag">MaxCut</span><span class="qtag">Hamiltonian Design</span><span class="qtag">Qiskit</span></div>
+      <a class="qp-link" href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025" target="_blank">github.com/SyedT1/IonQ-VQI-FLIQ-2025 ↗</a>
+    </div>
+
+    <div class="qproj-card">
+      <div class="qp-idx">Q2</div>
+      <div class="qp-name">Quantum Neighborhood Preserving Embedding (qNPE)</div>
+      <div class="qp-desc">Quantum dimensionality reduction that preserves local manifold structure. Uses swap-test K-NN for neighborhood estimation, a variational eigensolver for spectral decomposition, and QSVD for the final embedding projection.</div>
+      <div class="qp-tags"><span class="qtag">qNPE</span><span class="qtag">QSVD</span><span class="qtag">Swap-Test K-NN</span><span class="qtag">Variational Eigensolver</span><span class="qtag">Dimensionality Reduction</span></div>
+      <a class="qp-link" href="https://github.com/SyedT1/implementing-dimensional-reductionality-for-qnpe" target="_blank">github.com/SyedT1/…qnpe ↗</a>
+    </div>
+
+    <div class="qproj-card">
+      <div class="qp-idx">Q3</div>
+      <div class="qp-name">Custom Quantum Feature Maps for QSVM</div>
+      <div class="qp-desc">Designed two novel feature maps — Alternating Entanglement (AEFM) and Strongly Entangling with Hadamard (SEFM-H) — to enhance QSVM kernel-based classification, benchmarked on the Iris dataset with improved separability in quantum feature space.</div>
+      <div class="qp-tags"><span class="qtag">QSVM</span><span class="qtag">AEFM</span><span class="qtag">SEFM-H</span><span class="qtag">Feature Maps</span><span class="qtag">Quantum Classification</span></div>
+      <a class="qp-link" href="https://github.com/SyedT1/QSVM_T4" target="_blank">github.com/SyedT1/QSVM_T4 ↗</a>
+    </div>
+
+    <div class="qproj-card">
+      <div class="qp-idx">Q4</div>
+      <div class="qp-name">Quantum Galton Box — Multi-layer Random Walk Simulator</div>
+      <div class="qp-desc">Generalized quantum circuit generating Gaussian distributions via superposition of quantum trajectories, implementing the Carney &amp; Varcoe (2022) quantum walk model. Demonstrates how quantum superposition naturally recovers classical statistical distributions.</div>
+      <div class="qp-tags"><span class="qtag">Quantum Walks</span><span class="qtag">Monte Carlo</span><span class="qtag">Superposition</span><span class="qtag">Gaussian Distribution</span><span class="qtag">PennyLane</span></div>
+      <a class="qp-link" href="https://github.com/SyedT1/Quantum-Walks-and-Monte-Carlo-WISERv1" target="_blank">github.com/SyedT1/…WISERv1 ↗</a>
+    </div>
+
+  </div>
+</section>
 <!-- RESEARCH -->
 <section id="research" class="fi">
   <div class="sec-label">
-    <div class="sec-num">05</div>
+    <div class="sec-num">06</div>
     <div class="sec-info">
       <div class="sec-tag">Research</div>
       <div class="sec-title">PUBLICATIONS</div>
@@ -748,7 +809,7 @@ footer{
 <!-- ACHIEVEMENTS -->
 <section id="achievements" class="fi">
   <div class="sec-label">
-    <div class="sec-num">06</div>
+    <div class="sec-num">07</div>
     <div class="sec-info">
       <div class="sec-tag">Achievements</div>
       <div class="sec-title">WINS &amp; AWARDS</div>
@@ -773,11 +834,40 @@ footer{
     <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">QClass 24/25 — Quantum Program</div></div>
   </div>
 </section>
-
+<!-- 08 COMMUNITY -->
+<section id="community" class="fi">
+  <div class="sec-label">
+    <div class="sec-num">08</div>
+    <div class="sec-info"><div class="sec-tag">Teaching &amp; Community</div><div class="sec-title">GIVING BACK</div></div>
+  </div>
+  <div class="comm-grid">
+    <div class="comm-card">
+      <div class="comm-icon">🏫</div>
+      <div>
+        <div class="comm-title">Quantum High School Organization</div>
+        <div class="comm-sub">Advisor since May 2024. Coordinating quantum computing workshops, curriculum, and content management for high school students in Bangladesh.</div>
+      </div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🎓</div>
+      <div>
+        <div class="comm-title">Neumentora</div>
+        <div class="comm-sub">Quantum Computing Instructor since June 2024. Teaching quantum fundamentals and practical circuit design to aspiring researchers.</div>
+      </div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🌍</div>
+      <div>
+        <div class="comm-title">Quantum Africa</div>
+        <div class="comm-sub">Active researcher contributing to quantum education and research infrastructure across Africa. Working on hybrid models, QGNNs, and QKD protocols.</div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- CONTACT -->
 <section id="contact" class="fi">
   <div class="sec-label">
-    <div class="sec-num">07</div>
+    <div class="sec-num">09</div>
     <div class="sec-info">
       <div class="sec-tag">Contact</div>
       <div class="sec-title">LET'S TALK</div>
