@@ -208,30 +208,19 @@ section{padding:7rem 0}
 
 /* EXPERIENCE */
 .exp-list{display:flex;flex-direction:column}
-.exp-item{
-  display:grid;grid-template-columns:180px 1fr;
-  border-top:1px solid var(--bdr);
-  padding:2.5rem 0;gap:3rem;
-  transition:background .2s;
-  cursor:default;
-}
+.exp-item{display:grid;grid-template-columns:210px 1fr;border-top:1px solid var(--bdr);padding:2.5rem 0;gap:3rem;cursor:default}
+.exp-item:last-child{border-bottom:1px solid var(--bdr)}
 .exp-item:hover .exp-main{transform:translateX(6px)}
-.exp-meta{}
-.exp-date{
-  font-family:'JetBrains Mono',monospace;font-size:.63rem;
-  color:var(--teal);letter-spacing:.08em;margin-bottom:.4rem;
-}
+.exp-date{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--teal);letter-spacing:.08em;margin-bottom:.4rem}
+.exp-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--lime);border:1px solid rgba(163,230,53,.3);padding:.15rem .45rem;margin-bottom:.4rem;letter-spacing:.07em}
 .exp-type{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--sub);letter-spacing:.08em}
 .exp-main{transition:transform .25s}
 .exp-co{font-size:1.15rem;font-weight:500;margin-bottom:.15rem;color:var(--text)}
-.exp-role{
-  font-family:'JetBrains Mono',monospace;font-size:.7rem;
-  color:var(--teal);margin-bottom:.9rem;letter-spacing:.05em;
-}
+.exp-role{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--teal);margin-bottom:.9rem;letter-spacing:.05em}
 .exp-li{list-style:none;display:flex;flex-direction:column;gap:.4rem}
 .exp-li li{font-size:.85rem;font-weight:300;color:var(--sub);line-height:1.6;display:flex;gap:.7rem}
 .exp-li li::before{content:'—';color:var(--lime);flex-shrink:0}
-.exp-item:last-child{border-bottom:1px solid var(--bdr)}
+
 
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr)}
@@ -554,20 +543,36 @@ footer{
       <div class="sec-title">WHERE I'VE WORKED</div>
     </div>
   </div>
-  <div class="exp-list">
-    <div class="exp-item">
+   <div class="exp-item">
       <div class="exp-meta">
-        <div class="exp-date">OCT 2024 — NOW</div>
-        <div class="exp-type">Research · Full-time</div>
+        <div class="exp-badge">● ACTIVE</div>
+        <div class="exp-date">SEPT 2025 — PRESENT</div>
+        <div class="exp-type">Research · Remote</div>
       </div>
       <div class="exp-main">
-        <div class="exp-co">Center for Computation &amp; Data Sciences, IUB</div>
-        <div class="exp-role">Research Intern — Quantum Computing</div>
+        <div class="exp-co">Quantum Africa</div>
+        <div class="exp-role">Quantum Computing Researcher</div>
         <ul class="exp-li">
-          <li>Designing quantum algorithms with complexity analysis &amp; performance benchmarking on simulators</li>
-          <li>Implementing Variational Quantum Classifiers &amp; Quantum Kernel Methods using Qiskit and PennyLane</li>
-          <li>Investigating hybrid quantum-classical frameworks for optimization and high-dimensional classification</li>
-          <li>Developing prototype simulations to validate theoretical models in Python quantum frameworks</li>
+          <li>Authoring papers on Quantum Hybrid Models and advanced variational methods</li>
+          <li>Investigating Quantum Graph Neural Networks (QGNNs) for Drug-Target Interaction (DTI) prediction</li>
+          <li>Researching and implementing Quantum Key Distribution protocols (BB84) with security and performance analysis</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-badge">● ACTIVE</div>
+        <div class="exp-date">OCT 2024 — PRESENT</div>
+        <div class="exp-type">Research · On-site</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-co">Center for Computation &amp; Data Sciences (CCDS), IUB</div>
+        <div class="exp-role">Research Assistant — Quantum Computing</div>
+        <ul class="exp-li">
+          <li>Research on quantum algorithms: design, benchmarking, and complexity analysis</li>
+          <li>Implemented Variational Quantum Classifiers, Quantum Kernel Methods, and hybrid models using Qiskit &amp; PennyLane</li>
+          <li>Developed prototype quantum circuits for optimization and classification tasks</li>
         </ul>
       </div>
     </div>
