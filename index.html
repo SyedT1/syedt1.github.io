@@ -955,5 +955,142 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
   el.style.transitionDelay=(i%4)*.07+'s';
 });
 </script>
+
+<!-- ── CHAT WIDGET ── -->
+<style>
+#chat-fab{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:52px;height:52px;background:#00d4c8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;box-shadow:0 0 20px rgba(0,212,200,.35);}
+#chat-fab:hover{background:#00bfb5;transform:scale(1.07);}
+#chat-fab svg{width:24px;height:24px;fill:#04080f;}
+#chat-panel{position:fixed;bottom:5.5rem;right:2rem;z-index:9999;width:360px;max-height:520px;background:#07101c;border:1px solid #152b42;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .22s ease,transform .22s ease;}
+#chat-panel.open{opacity:1;pointer-events:all;transform:translateY(0);}
+#chat-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;border-bottom:1px solid #152b42;background:#0b1826;}
+#chat-header-left{display:flex;align-items:center;gap:.6rem;}
+.chat-dot{width:8px;height:8px;background:#00d4c8;border-radius:50%;animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(0,212,200,.5);}50%{box-shadow:0 0 0 5px rgba(0,212,200,0);}}
+.chat-header-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;color:#e2eef7;text-transform:uppercase;}
+.chat-header-sub{font-family:'DM Sans',sans-serif;font-size:.65rem;color:#7a9ab8;}
+#chat-close{background:none;border:none;cursor:pointer;color:#7a9ab8;padding:0;line-height:1;font-size:1.1rem;transition:color .15s;}
+#chat-close:hover{color:#e2eef7;}
+#chat-messages{flex:1;overflow-y:auto;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.65rem;scrollbar-width:thin;scrollbar-color:#152b42 transparent;}
+#chat-messages::-webkit-scrollbar{width:4px;}
+#chat-messages::-webkit-scrollbar-track{background:transparent;}
+#chat-messages::-webkit-scrollbar-thumb{background:#152b42;}
+.chat-msg{max-width:88%;font-family:'DM Sans',sans-serif;font-size:.8rem;line-height:1.55;padding:.55rem .75rem;border:1px solid transparent;}
+.chat-msg.user{align-self:flex-end;background:#0f2035;border-color:#1f3f5e;color:#e2eef7;}
+.chat-msg.bot{align-self:flex-start;background:#091624;border-color:#152b42;color:#c8dff0;}
+.chat-msg.bot.typing{color:#7a9ab8;font-style:italic;}
+#chat-footer{padding:.65rem .75rem;border-top:1px solid #152b42;display:flex;gap:.5rem;background:#0b1826;}
+#chat-input{flex:1;background:#04080f;border:1px solid #152b42;color:#e2eef7;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:.5rem .7rem;outline:none;resize:none;height:36px;transition:border-color .15s;}
+#chat-input:focus{border-color:#00d4c8;}
+#chat-input::placeholder{color:#2a4460;}
+#chat-send{background:#00d4c8;border:none;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
+#chat-send:hover{background:#00bfb5;}
+#chat-send:disabled{background:#152b42;cursor:default;}
+#chat-send svg{width:16px;height:16px;fill:#04080f;}
+#chat-suggested{padding:.5rem .75rem;display:flex;flex-wrap:wrap;gap:.4rem;border-bottom:1px solid #152b42;}
+.sug-chip{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#7a9ab8;border:1px solid #152b42;padding:.25rem .55rem;cursor:pointer;letter-spacing:.04em;transition:border-color .15s,color .15s;background:none;}
+.sug-chip:hover{border-color:#00d4c8;color:#00d4c8;}
+@media(max-width:480px){#chat-panel{width:calc(100vw - 2rem);right:1rem;}#chat-fab{right:1rem;bottom:1.5rem;}}
+</style>
+
+<button id="chat-fab" title="Chat with Syed's AI Agent" aria-label="Open chat">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+</button>
+
+<div id="chat-panel" role="dialog" aria-label="Chat with Syed's AI">
+  <div id="chat-header">
+    <div id="chat-header-left">
+      <div class="chat-dot"></div>
+      <div>
+        <div class="chat-header-title">Syed's AI Agent</div>
+        <div class="chat-header-sub">Ask me anything about Syed</div>
+      </div>
+    </div>
+    <button id="chat-close" aria-label="Close chat">&#x2715;</button>
+  </div>
+  <div id="chat-suggested">
+    <button class="sug-chip" data-q="What is Syed's experience with quantum computing?">Quantum experience</button>
+    <button class="sug-chip" data-q="What tech stack does Syed work with?">Tech stack</button>
+    <button class="sug-chip" data-q="Tell me about Syed's publications.">Publications</button>
+    <button class="sug-chip" data-q="Is Syed open to new opportunities?">Availability</button>
+  </div>
+  <div id="chat-messages" aria-live="polite">
+    <div class="chat-msg bot">Hi! I'm Syed's AI agent. Ask me about his skills, experience, research, or projects — happy to give technical details.</div>
+  </div>
+  <div id="chat-footer">
+    <textarea id="chat-input" placeholder="Ask about skills, projects, research..." rows="1" aria-label="Type your message"></textarea>
+    <button id="chat-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const fab=document.getElementById('chat-fab');
+  const panel=document.getElementById('chat-panel');
+  const closeBtn=document.getElementById('chat-close');
+  const input=document.getElementById('chat-input');
+  const sendBtn=document.getElementById('chat-send');
+  const msgs=document.getElementById('chat-messages');
+  const chips=document.querySelectorAll('.sug-chip');
+  const history=[];
+
+  function togglePanel(){panel.classList.toggle('open');}
+  fab.addEventListener('click',togglePanel);
+  closeBtn.addEventListener('click',()=>panel.classList.remove('open'));
+
+  function addMsg(text,role){
+    const d=document.createElement('div');
+    d.className='chat-msg '+role;
+    d.textContent=text;
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+    return d;
+  }
+
+  async function send(text){
+    if(!text.trim())return;
+    const sugBox=document.getElementById('chat-suggested');
+    if(sugBox)sugBox.remove();
+    addMsg(text,'user');
+    history.push({role:'user',content:text});
+    input.value='';
+    input.style.height='36px';
+    sendBtn.disabled=true;
+
+    const typing=addMsg('Thinking…','bot typing');
+
+    try{
+      const res=await fetch('/api/chat',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({messages:history})
+      });
+      const data=await res.json();
+      const reply=data.reply||'Sorry, I could not get a response.';
+      typing.remove();
+      addMsg(reply,'bot');
+      history.push({role:'assistant',content:reply});
+    }catch(e){
+      typing.remove();
+      addMsg('Connection error. Please try again.','bot');
+    }finally{
+      sendBtn.disabled=false;
+      input.focus();
+    }
+  }
+
+  sendBtn.addEventListener('click',()=>send(input.value));
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(input.value);}
+  });
+  input.addEventListener('input',function(){
+    this.style.height='36px';
+    this.style.height=Math.min(this.scrollHeight,80)+'px';
+  });
+  chips.forEach(c=>c.addEventListener('click',()=>send(c.dataset.q)));
+})();
+</script>
 </body>
 </html>
