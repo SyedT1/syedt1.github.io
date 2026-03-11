@@ -990,6 +990,15 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
 #chat-suggested{padding:.5rem .75rem;display:flex;flex-wrap:wrap;gap:.4rem;border-bottom:1px solid #152b42;}
 .sug-chip{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#7a9ab8;border:1px solid #152b42;padding:.25rem .55rem;cursor:pointer;letter-spacing:.04em;transition:border-color .15s,color .15s;background:none;}
 .sug-chip:hover{border-color:#00d4c8;color:#00d4c8;}
+.chat-msg.bot strong{color:#00d4c8;font-weight:600;}
+.chat-msg.bot ul,.chat-msg.bot ol{margin:.35rem 0;padding-left:1.1rem;}
+.chat-msg.bot li{margin-bottom:.2rem;}
+.chat-msg.bot table{width:100%;border-collapse:collapse;margin:.4rem 0;font-size:.72rem;}
+.chat-msg.bot th,.chat-msg.bot td{border:1px solid #152b42;padding:.3rem .45rem;text-align:left;}
+.chat-msg.bot th{background:#0f2035;color:#00d4c8;font-weight:600;}
+.chat-msg.bot code{background:#0f2035;padding:.1rem .3rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;}
+.chat-msg.bot p{margin:.3rem 0;}
+.chat-msg.bot br{display:block;margin:.15rem 0;}
 @media(max-width:480px){#chat-panel{width:calc(100vw - 2rem);right:1rem;}#chat-fab{right:1rem;bottom:1.5rem;}}
 </style>
 
@@ -1040,10 +1049,48 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
   fab.addEventListener('click',togglePanel);
   closeBtn.addEventListener('click',()=>panel.classList.remove('open'));
 
+  function renderMd(t){
+    // tables
+    t=t.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm,function(_,hdr,body){
+      var ths=hdr.split('|').map(c=>'<th>'+c.trim()+'</th>').join('');
+      var rows=body.trim().split('\n').map(r=>{
+        var tds=r.replace(/^\||\|$/g,'').split('|').map(c=>'<td>'+c.trim()+'</td>').join('');
+        return '<tr>'+tds+'</tr>';
+      }).join('');
+      return '<table><tr>'+ths+'</tr>'+rows+'</table>';
+    });
+    // bold
+    t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    // italic
+    t=t.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g,'<em>$1</em>');
+    // inline code
+    t=t.replace(/`([^`]+)`/g,'<code>$1</code>');
+    // unordered lists
+    t=t.replace(/((?:^[\t ]*[-•][\t ].+\n?)+)/gm,function(_,block){
+      var items=block.trim().split('\n').map(l=>'<li>'+l.replace(/^[\t ]*[-•][\t ]/,'')+'</li>').join('');
+      return '<ul>'+items+'</ul>';
+    });
+    // ordered lists
+    t=t.replace(/((?:^\d+\.\s.+\n?)+)/gm,function(_,block){
+      var items=block.trim().split('\n').map(l=>'<li>'+l.replace(/^\d+\.\s/,'')+'</li>').join('');
+      return '<ol>'+items+'</ol>';
+    });
+    // line breaks (but not inside tags)
+    t=t.replace(/\n/g,'<br>');
+    // clean up excessive breaks around block elements
+    t=t.replace(/<br>\s*(<\/?(?:ul|ol|li|table|tr|th|td|p))/g,'$1');
+    t=t.replace(/(<\/(?:ul|ol|table|p)>)\s*<br>/g,'$1');
+    return t;
+  }
+
   function addMsg(text,role){
     const d=document.createElement('div');
     d.className='chat-msg '+role;
-    d.textContent=text;
+    if(role.indexOf('bot')!==-1 && role.indexOf('typing')===-1){
+      d.innerHTML=renderMd(text);
+    }else{
+      d.textContent=text;
+    }
     msgs.appendChild(d);
     msgs.scrollTop=msgs.scrollHeight;
     return d;
