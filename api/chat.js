@@ -96,7 +96,7 @@ ML Specialization (Coursera), AWS AI Nanodegree (Udacity), AI Fundamentals (Data
 
 Keep answers concise but technically precise. When asked about availability or next steps, mention that recruiters can reach Syed at syedmuhaimintahsin@gmail.com or via LinkedIn.`;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
