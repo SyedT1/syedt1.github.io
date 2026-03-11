@@ -115,43 +115,39 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid request body' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'API key not configured' });
   }
 
-  const contents = messages.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }]
-  }));
-
-  const payload = {
-    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-    contents,
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 1024,
-    }
-  };
+  const chatMessages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...messages.map(m => ({ role: m.role, content: m.content }))
+  ];
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }
-    );
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'openai/gpt-oss-20b',
+        messages: chatMessages,
+        temperature: 0.7,
+        max_tokens: 1024,
+      })
+    });
 
     if (!response.ok) {
       const err = await response.text();
-      console.error('Gemini API error:', err);
+      console.error('Groq API error:', err);
       return res.status(502).json({ error: 'Upstream API error', detail: err });
     }
 
     const data = await response.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No response generated.';
+    const reply = data?.choices?.[0]?.message?.content ?? 'No response generated.';
     return res.status(200).json({ reply });
   } catch (err) {
     console.error('Handler error:', err);
