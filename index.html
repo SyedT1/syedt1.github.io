@@ -1068,6 +1068,11 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
         body:JSON.stringify({messages:history})
       });
       const data=await res.json();
+      if(data.error){
+        typing.remove();
+        addMsg('Error: '+(data.detail||data.error),'bot');
+        return;
+      }
       const reply=data.reply||'Sorry, I could not get a response.';
       typing.remove();
       addMsg(reply,'bot');
