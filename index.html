@@ -29,6 +29,31 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;ove
 /* canvas */
 #cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1}
 
+/* Solar System Button */
+#solar-system-btn{
+  position:fixed;bottom:2rem;right:2rem;z-index:200;
+  width:56px;height:56px;
+  background:linear-gradient(135deg,var(--teal),var(--lime));
+  border:2px solid var(--teal);
+  color:var(--bg);
+  border-radius:50%;
+  font-size:1.5rem;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s ease;
+  box-shadow:0 0 20px rgba(0,212,200,.3);
+  font-weight:bold;
+}
+#solar-system-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(0,212,200,.5);
+}
+#solar-system-btn.active{
+  background:linear-gradient(135deg,var(--lime),var(--amber));
+  border-color:var(--lime);
+  box-shadow:0 0 30px rgba(163,230,53,.5);
+}
+
 /* grid lines */
 .grid-lines{position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:linear-gradient(var(--bdr) 1px,transparent 1px),linear-gradient(90deg,var(--bdr) 1px,transparent 1px);
@@ -967,7 +992,7 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
   }
   
   // Add sound to all buttons
-  const btnSelectors=['.btn','.alink','.clink','.sug-chip','.nav-links a','#chat-fab','#chat-close','#chat-send'];
+  const btnSelectors=['.btn','.alink','.clink','.sug-chip','.nav-links a','#solar-system-btn','#chat-fab','#chat-close','#chat-send'];
   btnSelectors.forEach(sel=>{
     document.querySelectorAll(sel).forEach(el=>{
       el.addEventListener('click',playRandomMelody);
@@ -1040,6 +1065,8 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
 .chat-msg.bot br{display:block;margin:.15rem 0;}
 @media(max-width:480px){#chat-panel{width:calc(100vw - 2rem);right:1rem;}#chat-fab{right:1rem;bottom:1.5rem;}}
 </style>
+
+<button id="solar-system-btn" title="Toggle Solar System" aria-label="Toggle Solar System Animation">▶</button>
 
 <button id="chat-fab" title="Chat with Syed's AI Agent" aria-label="Open chat">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
