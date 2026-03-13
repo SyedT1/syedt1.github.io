@@ -27,7 +27,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
 /* canvas */
-#cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1}
 
 /* grid lines */
 .grid-lines{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -902,47 +902,22 @@ footer{
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ── STARFIELD / PARTICLE CANVAS ── */
-(function(){
-  const c=document.getElementById('cv'),ctx=c.getContext('2d');
-  let W,H,particles=[];
-  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
-  resize();addEventListener('resize',resize);
-  for(let i=0;i<120;i++){
-    particles.push({
-      x:Math.random()*W,y:Math.random()*H,
-      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-      r:Math.random()*1.5+.3,
-      a:Math.random()*.6+.1
-    });
+// Wait for THREE to load
+(function waitForTHREE() {
+  if (typeof THREE === 'undefined') {
+    setTimeout(waitForTHREE, 50);
+    return;
   }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(let i=0;i<particles.length;i++){
-      const p=particles[i];
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-      ctx.globalAlpha=p.a;
-      ctx.fillStyle='#00d4c8';
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-      for(let j=i+1;j<particles.length;j++){
-        const q=particles[j];
-        const dx=p.x-q.x,dy=p.y-q.y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<120){
-          ctx.globalAlpha=(1-dist/120)*.08;
-          ctx.strokeStyle='#00d4c8';ctx.lineWidth=.5;
-          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha=1;
-    requestAnimationFrame(draw);
-  }
-  draw();
+  // THREE is loaded, safe to load rocket animation
+  const script = document.createElement('script');
+  script.src = '/rocket-animation.js';
+  document.body.appendChild(script);
 })();
+</script>
+
+<script>
 
 /* ── SCROLL FADE IN ── */
 const io=new IntersectionObserver(entries=>{
