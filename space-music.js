@@ -1,4 +1,4 @@
-// Retro Space Music Synthesizer
+// Super Mario Bros Theme Synthesizer
 class RetroSpaceMusic {
   constructor() {
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -34,47 +34,54 @@ class RetroSpaceMusic {
     if (!this.isPlaying) return;
 
     const now = this.audioContext.currentTime;
-    const tempo = 0.35;
+    const tempo = 0.15;
 
-    // Lush, melodious space symphony with rich harmonies
+    // Classic Super Mario Bros Theme - Main Theme
     const melody = [
-      { freq: 246.94, duration: tempo }, // B3 - opening
-      { freq: 293.66, duration: tempo }, // D4
-      { freq: 349.23, duration: tempo * 1.5 }, // F4 - sustained
-      { freq: 392, duration: tempo }, // G4 - rise
-      { freq: 440, duration: tempo }, // A4 - peak
-      { freq: 493.88, duration: tempo * 2 }, // B4 - beautiful hold
-      { freq: 440, duration: tempo }, // A4 - descent
-      { freq: 392, duration: tempo }, // G4 
-      { freq: 349.23, duration: tempo * 1.5 }, // F4
+      // Main iconic opening: E-E-E-C-E-G
+      { freq: 329.63, duration: tempo }, // E4
+      { freq: 329.63, duration: tempo }, // E4
+      { freq: 329.63, duration: tempo }, // E4
+      { freq: 261.63, duration: tempo }, // C4
+      { freq: 329.63, duration: tempo }, // E4
+      { freq: 392, duration: tempo * 2 }, // G4 - held
+      
+      // Second part: G3-C4 continuing
+      { freq: 196, duration: tempo * 2 }, // G3
+      
+      // Ascending section
+      { freq: 261.63, duration: tempo }, // C4
+      { freq: 329.63, duration: tempo }, // E4
+      { freq: 392, duration: tempo }, // G4
+      { freq: 523.25, duration: tempo * 2 }, // C5 - climax
+      
+      // Descending
+      { freq: 392, duration: tempo }, // G4
+      { freq: 349.23, duration: tempo }, // F4
       { freq: 329.63, duration: tempo }, // E4
       { freq: 293.66, duration: tempo }, // D4
-      { freq: 261.63, duration: tempo * 2 }, // C4 - resolve
-      { freq: 392, duration: tempo }, // G4 - second phrase
-      { freq: 440, duration: tempo }, // A4
-      { freq: 493.88, duration: tempo }, // B4
-      { freq: 523.25, duration: tempo * 2 }, // C5 - climax
-      { freq: 493.88, duration: tempo }, // B4 - drift
-      { freq: 440, duration: tempo }, // A4
+      { freq: 261.63, duration: tempo }, // C4
+      
+      // Bridge section
+      { freq: 329.63, duration: tempo }, // E4
       { freq: 392, duration: tempo }, // G4
-      { freq: 349.23, duration: tempo * 1.5 }, // F4 - close
+      { freq: 523.25, duration: tempo }, // C5
+      { freq: 587.33, duration: tempo * 2 }, // D5
+      
+      // Another descent
+      { freq: 523.25, duration: tempo }, // C5
+      { freq: 493.88, duration: tempo }, // B4
+      { freq: 466.16, duration: tempo }, // A#4
+      { freq: 440, duration: tempo }, // A4
+      { freq: 392, duration: tempo * 2 }, // G4
     ];
 
     let currentTime = now;
-    melody.forEach((note, idx) => {
-      // Main melody - rich sine wave
-      this.playNote(note.freq, note.duration, currentTime, 'sine');
-      
-      // Lush trio harmonies
-      if (idx % 3 === 0) {
-        this.playNote(note.freq * 0.5, note.duration, currentTime, 'sine'); // Deep bass harmony
-        this.playNote(note.freq * 1.25, note.duration * 0.9, currentTime, 'sine'); // Mid harmony
-      } else if (idx % 3 === 1) {
-        this.playNote(note.freq * 0.75, note.duration, currentTime, 'sine'); // Mid-low harmony
-        this.playNote(note.freq * 1.5, note.duration * 0.85, currentTime, 'sine'); // High harmony
-      } else {
-        this.playNote(note.freq * 1.25, note.duration, currentTime, 'sine'); // Active harmony
-      }
+    melody.forEach((note) => {
+      // Main melody with square wave for chiptune effect
+      this.playNote(note.freq, note.duration, currentTime, 'square');
+      // Simple harmony an octave below
+      this.playNote(note.freq * 0.5, note.duration * 0.8, currentTime, 'triangle');
       currentTime += note.duration;
     });
 
@@ -90,13 +97,13 @@ class RetroSpaceMusic {
     this.isPlaying = true;
     this.masterGain.gain.value = 0.1;
     this.playMelody();
-    console.log('🎵 Melodious retro music started');
+    console.log('� Super Mario Bros! 🎵');
   }
 
   stop() {
     this.isPlaying = false;
     this.masterGain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.5);
-    console.log('🎵 Retro music stopped');
+    console.log('🎮 Game Over!');
   }
 
   toggleMusic() {

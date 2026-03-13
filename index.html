@@ -44,15 +44,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;ove
   box-shadow:0 0 20px rgba(0,212,200,.3);
   font-weight:bold;
 }
-#solar-system-btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 30px rgba(0,212,200,.5);
-}
-#solar-system-btn.active{
-  background:linear-gradient(135deg,var(--lime),var(--amber));
-  border-color:var(--lime);
-  box-shadow:0 0 30px rgba(163,230,53,.5);
-}
+#solar-system-btn:hover{transform:scale(1.1);box-shadow:0 0 30px rgba(0,212,200,.5);}
+#solar-system-btn.active{background:linear-gradient(135deg,var(--lime),var(--amber));border-color:var(--lime);box-shadow:0 0 30px rgba(163,230,53,.5);}
 
 /* grid lines */
 .grid-lines{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -68,174 +61,248 @@ nav{
   border-bottom:1px solid var(--bdr);
   backdrop-filter:blur(24px);
 }
-.logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.4rem;letter-spacing:.12em;
-  color:var(--teal);
-}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.12em;color:var(--teal);}
 .logo sup{font-size:.55rem;color:var(--lime);vertical-align:super;margin-left:1px;font-family:'JetBrains Mono',monospace}
 .nav-links{display:flex;gap:2.2rem;list-style:none}
-.nav-links a{
-  font-family:'JetBrains Mono',monospace;font-size:.65rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--sub);
-  text-decoration:none;transition:color .2s;position:relative;
-}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);text-decoration:none;transition:color .2s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .25s}
 .nav-links a:hover{color:var(--teal)}
 .nav-links a:hover::after{transform:scaleX(1)}
-.nav-pill{
-  font-family:'JetBrains Mono',monospace;font-size:.6rem;
-  letter-spacing:.1em;padding:.28rem .8rem;
-  border:1px solid var(--lime);color:var(--lime);border-radius:1px;
-  display:flex;align-items:center;gap:.45rem;
-}
+.nav-pill{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:.28rem .8rem;border:1px solid var(--lime);color:var(--lime);border-radius:1px;display:flex;align-items:center;gap:.45rem;}
 .nav-pill::before{content:'';width:5px;height:5px;background:var(--lime);border-radius:50%;animation:pulse-lime 2s ease infinite}
-#music-toggle{
-  font-family:'JetBrains Mono',monospace;font-size:.7rem;
-  letter-spacing:.1em;padding:.28rem .6rem;
-  border:1px solid var(--teal);color:var(--teal);border-radius:1px;
-  background:none;cursor:pointer;
-  display:flex;align-items:center;gap:.35rem;
-  transition:all .2s;
-}
+#music-toggle{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;padding:.28rem .6rem;border:1px solid var(--teal);color:var(--teal);border-radius:1px;background:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;transition:all .2s;}
 #music-toggle:hover{border-color:var(--lime);color:var(--lime)}
 #music-toggle.playing::before{content:'';width:4px;height:4px;background:var(--teal);border-radius:50%;animation:pulse-lime 1s ease infinite}
 @keyframes pulse-lime{0%,100%{box-shadow:0 0 0 0 rgba(163,230,53,.5)}50%{box-shadow:0 0 0 5px rgba(163,230,53,0)}}
 
-/* HERO */
-#hero{
-  position:relative;z-index:1;
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:0 3rem;
-  max-width:1240px;margin:0 auto;
-  padding-top:60px;
+/* ── GAME BUTTON ─────────────────────────────────────────────────────── */
+#game-btn{
+  position:fixed;top:50%;right:2rem;transform:translateY(-50%);z-index:9998;
+  width:56px;height:56px;
+  background:linear-gradient(135deg,var(--lime),var(--amber));
+  border:2px solid var(--lime);
+  color:var(--bg);font-size:1.5rem;
+  border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s ease;
+  box-shadow:0 0 20px rgba(163,230,53,.3);
 }
-.hero-index{
-  font-family:'JetBrains Mono',monospace;font-size:.65rem;
-  color:var(--teal);letter-spacing:.2em;
-  margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:.8rem;
+#game-btn:hover{transform:translateY(-50%) scale(1.1);box-shadow:0 0 30px rgba(163,230,53,.5);}
+
+/* ── GAME MODAL ──────────────────────────────────────────────────────── */
+.game-modal{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1rem;
 }
-.hero-index::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--teal),transparent)}
-.hero-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(4rem,10vw,9.5rem);
-  line-height:.92;letter-spacing:.03em;
-  margin-bottom:2rem;
+.game-modal.hidden{display:none;}
+
+.game-modal-content{
+  position:relative;
+  width:min(900px, 100%);
+  background:#020810;
+  border:1px solid rgba(0,245,255,.25);
+  box-shadow:0 0 60px rgba(0,245,255,.12);
+  display:flex;flex-direction:column;
+  max-height:calc(100vh - 2rem);
+  overflow:hidden;
 }
-.hero-title .t1{color:var(--text);display:block}
-.hero-title .t2{
-  color:transparent;
-  -webkit-text-stroke:1.5px var(--teal);
+
+/* modal title bar */
+.game-modal-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.6rem 1rem;
+  background:rgba(0,245,255,.05);
+  border-bottom:1px solid rgba(0,245,255,.15);
+  flex-shrink:0;
+}
+.game-modal-bar h2{
+  font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;
+  color:#00f5ff;text-shadow:0 0 12px rgba(0,245,255,.4);
+}
+.game-modal-bar-right{display:flex;gap:.6rem;align-items:center;}
+#game-toggle{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;
+  padding:.28rem .8rem;border:1px solid rgba(0,245,255,.3);color:#00f5ff;
+  background:none;cursor:pointer;transition:all .2s;
+}
+#game-toggle:hover{border-color:#00f5ff;background:rgba(0,245,255,.08);}
+.game-close{
+  background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);
+  font-size:1rem;cursor:pointer;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.game-close:hover{border-color:#ff0040;color:#ff0040;}
+
+/* canvas wrapper — 16:9 */
+.game-canvas-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  flex-shrink:0;
+  background:#020810;
+  overflow:hidden;
+}
+#game-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
   display:block;
 }
-.hero-title .t3{color:var(--teal);display:block}
-.hero-sub{
-  font-family:'DM Sans',sans-serif;font-size:1rem;
-  font-weight:300;color:var(--sub);
-  max-width:560px;line-height:1.75;
-  margin-bottom:2.5rem;
+
+/* ── ACE VECTOR in-canvas HUD (overlays the canvas) ─────────────────── */
+#av-hud{
+  position:absolute;inset:0;
+  pointer-events:none;
+  z-index:5;
+  font-family:'Share Tech Mono',monospace;
 }
+
+/* top-left: score + wave */
+#av-tl{
+  position:absolute;top:10px;left:10px;
+  background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);
+  border-top:2px solid #00f5ff;border-left:2px solid #00f5ff;
+  padding:8px 12px;min-width:130px;
+}
+/* top-right: time + kills */
+#av-tr{
+  position:absolute;top:10px;right:10px;
+  background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);
+  border-top:2px solid #ff6a00;border-right:2px solid #ff6a00;
+  padding:8px 12px;min-width:130px;text-align:right;
+}
+.av-lbl{font-size:8px;letter-spacing:3px;color:rgba(0,245,255,.5);text-transform:uppercase;margin-bottom:2px;}
+.av-val{font-family:'Bebas Neue',monospace;font-size:18px;font-weight:900;letter-spacing:2px;color:#00f5ff;line-height:1;}
+.av-val.orange{color:#ff6a00;}
+
+/* crosshair */
+#av-crosshair{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;}
+.av-ch-h,.av-ch-v{position:absolute;background:#00f5ff;top:50%;left:50%;}
+.av-ch-h{width:10px;height:1px;margin-left:-5px;margin-top:-.5px;box-shadow:0 0 4px #00f5ff;}
+.av-ch-v{width:1px;height:10px;margin-top:-5px;margin-left:-.5px;box-shadow:0 0 4px #00f5ff;}
+.av-ch-dot{position:absolute;top:50%;left:50%;width:2px;height:2px;background:#00f5ff;transform:translate(-50%,-50%);border-radius:50%;}
+
+/* speed/alt side gauges */
+#av-spd-wrap{position:absolute;top:50%;left:8px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;}
+#av-alt-wrap{position:absolute;top:50%;right:8px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;}
+.av-gauge-lbl{font-size:7px;letter-spacing:2px;color:rgba(0,245,255,.45);text-transform:uppercase;}
+.av-gauge-num{font-family:'Bebas Neue',monospace;font-size:13px;color:#00f5ff;}
+.av-gauge-bar{width:4px;height:60px;background:rgba(255,255,255,.07);border:1px solid rgba(0,245,255,.15);position:relative;overflow:hidden;}
+.av-gauge-fill{position:absolute;bottom:0;width:100%;transition:height .1s;}
+#av-spdfill{background:linear-gradient(0deg,#00f5ff,#0066ff);}
+#av-altfill{background:linear-gradient(0deg,#ff6a00,#ffaa00);}
+
+/* health / shield bars — bottom-left */
+#av-bars{position:absolute;bottom:10px;left:10px;width:200px;}
+.av-bar-row{margin-bottom:6px;}
+.av-bar-lbl{font-size:7px;letter-spacing:2px;color:rgba(0,245,255,.45);text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:3px;}
+.av-bar-outer{height:6px;background:rgba(255,255,255,.06);border:1px solid rgba(0,245,255,.15);overflow:hidden;}
+.av-bar-inner{height:100%;transition:width .2s,background .3s;}
+#av-hfill{background:linear-gradient(90deg,#00ff88,#00f5ff);}
+#av-sfill{background:linear-gradient(90deg,#00aaff,#8844ff);}
+
+/* radar — bottom-centre */
+#av-radar-wrap{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;}
+#av-radar{border-radius:50%;border:1px solid rgba(0,245,255,.25);box-shadow:0 0 8px rgba(0,245,255,.08);}
+.av-radar-lbl{font-size:7px;letter-spacing:2px;color:rgba(0,245,255,.3);}
+
+/* kill feed — upper right area (below tr box) */
+#av-killfeed{position:absolute;top:80px;right:10px;text-align:right;}
+.av-kill-entry{font-family:'Bebas Neue',monospace;font-size:10px;color:#ff6a00;animation:av-fadeKill 2s forwards;margin-bottom:3px;text-shadow:0 0 6px #ff6a00;}
+@keyframes av-fadeKill{0%{opacity:1;transform:translateX(0)}70%{opacity:1}100%{opacity:0;transform:translateX(16px)}}
+
+/* damage flash */
+#av-flash{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 50%,rgba(255,0,64,.4) 100%);pointer-events:none;opacity:0;transition:opacity .1s;z-index:6;}
+
+/* controls hint — bottom right */
+#av-hint{position:absolute;bottom:10px;right:10px;font-size:9px;color:rgba(0,245,255,.3);line-height:1.7;text-align:right;}
+
+/* ── In-game overlay (start / game-over) ────────────────────────────── */
+#av-overlay{
+  position:absolute;inset:0;z-index:20;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(2,8,16,.9);backdrop-filter:blur(8px);
+  transition:opacity .4s;
+}
+#av-overlay.av-hidden{display:none;}
+
+.av-screen{text-align:center;}
+.av-screen-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28px,6vw,56px);
+  font-weight:900;letter-spacing:4px;line-height:1;margin-bottom:6px;
+}
+.av-t1{color:#00f5ff;text-shadow:0 0 20px rgba(0,245,255,.4);}
+.av-t2{color:#ff6a00;text-shadow:0 0 20px rgba(255,106,0,.4);}
+.av-screen-sub{font-size:10px;letter-spacing:4px;color:rgba(0,245,255,.3);margin-bottom:28px;}
+.av-ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;margin-bottom:24px;font-size:10px;}
+.av-ctrl-row{display:flex;justify-content:space-between;gap:10px;}
+.av-ctrl-key{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.2);padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#00f5ff;}
+.av-ctrl-desc{color:rgba(255,255,255,.4);font-size:9px;}
+.av-start-btn{
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:4px;
+  padding:10px 36px;background:transparent;border:2px solid #00f5ff;
+  color:#00f5ff;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;
+}
+.av-start-btn::before{content:'';position:absolute;inset:0;background:#00f5ff;transform:translateX(-100%);transition:transform .3s;z-index:-1;}
+.av-start-btn:hover{color:#020810;box-shadow:0 0 20px rgba(0,245,255,.3);}
+.av-start-btn:hover::before{transform:translateX(0);}
+.av-go-score{font-family:'Bebas Neue',sans-serif;font-size:42px;color:#ff6a00;text-shadow:0 0 16px #ff6a00;margin-bottom:6px;}
+.av-go-kills{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.35);margin-bottom:28px;}
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 3rem;max-width:1240px;margin:0 auto;padding-top:60px;}
+.hero-index{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--teal);letter-spacing:.2em;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;}
+.hero-index::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--teal),transparent)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9.5rem);line-height:.92;letter-spacing:.03em;margin-bottom:2rem;}
+.hero-title .t1{color:var(--text);display:block}
+.hero-title .t2{color:transparent;-webkit-text-stroke:1.5px var(--teal);display:block;}
+.hero-title .t3{color:var(--teal);display:block}
+.hero-sub{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:300;color:var(--sub);max-width:560px;line-height:1.75;margin-bottom:2.5rem;}
 .hero-sub strong{color:var(--text);font-weight:500}
 .hero-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.btn{
-  font-family:'JetBrains Mono',monospace;font-size:.68rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  padding:.72rem 1.6rem;border:1px solid;text-decoration:none;
-  transition:all .25s;display:inline-block;
-}
+.btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.72rem 1.6rem;border:1px solid;text-decoration:none;transition:all .25s;display:inline-block;}
 .btn-primary{background:var(--teal);border-color:var(--teal);color:var(--bg);font-weight:600}
 .btn-primary:hover{background:transparent;color:var(--teal);box-shadow:0 0 30px rgba(0,212,200,.25)}
 .btn-outline{background:transparent;border-color:var(--bdr2);color:var(--sub)}
 .btn-outline:hover{border-color:var(--lime);color:var(--lime)}
 .hero-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
-.htag{
-  font-family:'JetBrains Mono',monospace;font-size:.6rem;
-  letter-spacing:.08em;padding:.22rem .6rem;
-  border:1px solid var(--bdr2);color:var(--sub);border-radius:1px;
-}
+.htag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;padding:.22rem .6rem;border:1px solid var(--bdr2);color:var(--sub);border-radius:1px;}
 .htag.lit{border-color:rgba(0,212,200,.3);color:var(--teal)}
-
-/* scroll indicator */
-.scroll-hint{
-  position:absolute;bottom:2.5rem;left:3rem;
-  display:flex;align-items:center;gap:.7rem;
-  font-family:'JetBrains Mono',monospace;font-size:.6rem;
-  color:var(--dim);letter-spacing:.15em;text-transform:uppercase;
-}
+.scroll-hint{position:absolute;bottom:2.5rem;left:3rem;display:flex;align-items:center;gap:.7rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;}
 .scroll-line{width:40px;height:1px;background:var(--dim)}
 
-/* SECTIONS */
+/* ── SECTIONS ─────────────────────────────────────────────────────────── */
 .wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 3rem}
 section{padding:7rem 0}
-
-.sec-label{
-  display:flex;align-items:center;gap:1rem;
-  margin-bottom:3.5rem;
-}
-.sec-num{
-  font-family:'Bebas Neue',sans-serif;font-size:5rem;
-  color:var(--bdr2);line-height:1;
-  -webkit-text-stroke:1px var(--bdr2);
-}
+.sec-label{display:flex;align-items:center;gap:1rem;margin-bottom:3.5rem;}
+.sec-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--bdr2);line-height:1;-webkit-text-stroke:1px var(--bdr2);}
 .sec-info{}
-.sec-tag{
-  font-family:'JetBrains Mono',monospace;font-size:.62rem;
-  color:var(--teal);letter-spacing:.2em;text-transform:uppercase;
-  margin-bottom:.3rem;
-}
-.sec-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2rem,4vw,3.5rem);
-  letter-spacing:.05em;line-height:1;
-}
+.sec-tag{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.3rem;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.05em;line-height:1;}
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start}
-.about-text p{
-  font-size:.95rem;font-weight:300;color:var(--sub);
-  line-height:1.85;margin-bottom:1.2rem;
-}
+.about-text p{font-size:.95rem;font-weight:300;color:var(--sub);line-height:1.85;margin-bottom:1.2rem;}
 .about-text p strong{color:var(--text);font-weight:500}
 .about-links{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
-.alink{
-  font-family:'JetBrains Mono',monospace;font-size:.62rem;
-  letter-spacing:.1em;color:var(--sub);text-decoration:none;
-  border-bottom:1px solid var(--bdr2);padding-bottom:2px;
-  transition:all .2s;text-transform:uppercase;
-}
+.alink{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--bdr2);padding-bottom:2px;transition:all .2s;text-transform:uppercase;}
 .alink:hover{color:var(--teal);border-color:var(--teal)}
-.about-right{}
 .stat-stack{display:flex;flex-direction:column;gap:1.5rem}
-.stat-item{
-  border-left:2px solid var(--bdr2);padding-left:1.2rem;
-  transition:border-color .2s;
-}
+.stat-item{border-left:2px solid var(--bdr2);padding-left:1.2rem;transition:border-color .2s;}
 .stat-item:hover{border-color:var(--teal)}
-.stat-val{
-  font-family:'Bebas Neue',sans-serif;font-size:2.8rem;
-  color:var(--teal);line-height:1;
-}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--teal);line-height:1;}
 .stat-desc{font-size:.8rem;color:var(--sub);font-weight:300;margin-top:.15rem}
 
 /* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--bdr)}
-.skill-block{
-  background:var(--bg);padding:2rem 2.2rem;
-  transition:background .2s;
-}
+.skill-block{background:var(--bg);padding:2rem 2.2rem;transition:background .2s;}
 .skill-block:hover{background:var(--bg1)}
 .sb-icon{font-size:1.4rem;margin-bottom:.8rem}
-.sb-name{
-  font-family:'Bebas Neue',sans-serif;font-size:1.3rem;
-  letter-spacing:.05em;margin-bottom:.6rem;color:var(--text);
-}
+.sb-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.05em;margin-bottom:.6rem;color:var(--text);}
 .sb-tags{display:flex;flex-wrap:wrap;gap:.4rem}
-.sk{
-  font-family:'JetBrains Mono',monospace;font-size:.58rem;
-  padding:.2rem .5rem;border-radius:1px;border:1px solid;
-}
+.sk{font-family:'JetBrains Mono',monospace;font-size:.58rem;padding:.2rem .5rem;border-radius:1px;border:1px solid;}
 .sk.t{border-color:rgba(0,212,200,.2);color:var(--teal);background:rgba(0,212,200,.04)}
 .sk.l{border-color:rgba(163,230,53,.2);color:var(--lime);background:rgba(163,230,53,.04)}
 .sk.a{border-color:rgba(245,158,11,.2);color:var(--amber);background:rgba(245,158,11,.04)}
@@ -270,94 +337,46 @@ section{padding:7rem 0}
 .qtag{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--sub);border:1px solid var(--bdr);padding:.15rem .42rem}
 .qp-link{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--teal);text-decoration:none;letter-spacing:.08em;border-bottom:1px solid transparent;transition:border-color .2s}
 .qp-link:hover{border-color:var(--teal)}
-  
+
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr)}
-.proj-card{
-  background:var(--bg);padding:2rem;
-  position:relative;overflow:hidden;
-  transition:background .25s;
-  display:flex;flex-direction:column;
-}
+.proj-card{background:var(--bg);padding:2rem;position:relative;overflow:hidden;transition:background .25s;display:flex;flex-direction:column;}
 .proj-card:hover{background:var(--bg1)}
-.proj-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--teal),var(--lime));
-  transform:scaleX(0);transform-origin:left;transition:transform .35s;
-}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
 .proj-card:hover::before{transform:scaleX(1)}
-.proj-idx{
-  font-family:'Bebas Neue',sans-serif;font-size:3.5rem;
-  color:var(--bdr2);line-height:1;margin-bottom:.5rem;
-}
+.proj-idx{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--bdr2);line-height:1;margin-bottom:.5rem;}
 .proj-name{font-size:.95rem;font-weight:500;margin-bottom:.5rem;color:var(--text)}
 .proj-desc{font-size:.8rem;font-weight:300;color:var(--sub);line-height:1.7;flex:1;margin-bottom:1.2rem}
 .proj-stack{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.2rem}
-.ptag{
-  font-family:'JetBrains Mono',monospace;font-size:.55rem;
-  color:var(--sub);border:1px solid var(--bdr);
-  padding:.15rem .42rem;border-radius:1px;
-}
-.proj-link{
-  font-family:'JetBrains Mono',monospace;font-size:.62rem;
-  color:var(--teal);text-decoration:none;letter-spacing:.08em;
-  align-self:flex-start;
-  border-bottom:1px solid transparent;
-  transition:border-color .2s;
-}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--sub);border:1px solid var(--bdr);padding:.15rem .42rem;border-radius:1px;}
+.proj-link{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--teal);text-decoration:none;letter-spacing:.08em;align-self:flex-start;border-bottom:1px solid transparent;transition:border-color .2s;}
 .proj-link:hover{border-color:var(--teal)}
 
 /* PUBLICATIONS */
 .pub-list{display:flex;flex-direction:column;gap:1px;background:var(--bdr)}
-.pub-card{
-  background:var(--bg);
-  display:grid;grid-template-columns:auto 1fr;gap:0;
-  transition:background .2s;
-}
+.pub-card{background:var(--bg);display:grid;grid-template-columns:auto 1fr;gap:0;transition:background .2s;}
 .pub-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--violet);border:1px solid rgba(167,139,250,.3);padding:.15rem .45rem;margin-bottom:.5rem;letter-spacing:.07em}
 .pub-card:hover{background:var(--bg1)}
-.pub-side{
-  writing-mode:vertical-rl;
-  font-family:'Bebas Neue',monospace;font-size:.85rem;
-  letter-spacing:.12em;color:var(--amber);
-  background:rgba(245,158,11,.05);
-  border-right:1px solid var(--bdr);
-  padding:1.5rem .8rem;
-  display:flex;align-items:center;justify-content:center;
-  min-width:48px;
-}
+.pub-side{writing-mode:vertical-rl;font-family:'Bebas Neue',monospace;font-size:.85rem;letter-spacing:.12em;color:var(--amber);background:rgba(245,158,11,.05);border-right:1px solid var(--bdr);padding:1.5rem .8rem;display:flex;align-items:center;justify-content:center;min-width:48px;}
 .pub-body{padding:2rem 2.2rem}
 .pub-title{font-size:1rem;font-weight:500;color:var(--text);margin-bottom:.5rem}
 .pub-desc{font-size:.82rem;font-weight:300;color:var(--sub);line-height:1.75}
-.pub-link{
-  display:inline-block;margin-top:.8rem;
-  font-family:'JetBrains Mono',monospace;font-size:.6rem;
-  color:var(--teal);text-decoration:none;letter-spacing:.1em;
-  border-bottom:1px solid transparent;transition:border-color .2s;
-}
+.pub-link{display:inline-block;margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--teal);text-decoration:none;letter-spacing:.1em;border-bottom:1px solid transparent;transition:border-color .2s;}
 .pub-link:hover{border-color:var(--teal)}
 
 /* ACHIEVEMENTS */
 .ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr)}
-.ach-card{
-  background:var(--bg);padding:1.6rem;
-  transition:background .2s;
-}
+.ach-card{background:var(--bg);padding:1.6rem;transition:background .2s;}
 .ach-card:hover{background:var(--bg1)}
 .ach-icon{font-size:1.5rem;margin-bottom:.7rem}
 .ach-title{font-size:.88rem;font-weight:500;margin-bottom:.25rem;color:var(--text)}
 .ach-sub{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--sub);line-height:1.6}
-
-/* CERTS */
 .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr);margin-top:2rem}
-.cert-card{
-  background:var(--bg);padding:1.4rem 1.6rem;
-  display:flex;align-items:center;gap:.8rem;
-  transition:background .2s;
-}
+.cert-card{background:var(--bg);padding:1.4rem 1.6rem;display:flex;align-items:center;gap:.8rem;transition:background .2s;}
 .cert-card:hover{background:var(--bg1)}
 .cert-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0}
 .cert-name{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--sub);letter-spacing:.05em}
+
 /* COMMUNITY */
 .comm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr)}
 .comm-card{background:var(--bg);padding:1.6rem;transition:background .2s;display:flex;gap:1rem;align-items:flex-start}
@@ -365,47 +384,21 @@ section{padding:7rem 0}
 .comm-icon{font-size:1.3rem;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--bg2);flex-shrink:0}
 .comm-title{font-size:.88rem;font-weight:500;margin-bottom:.25rem;color:var(--text)}
 .comm-sub{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--sub);line-height:1.6}
+
 /* CONTACT */
 #contact{padding:7rem 0}
-.contact-inner{
-  border:1px solid var(--bdr2);padding:4rem;
-  background:var(--bg1);
-  display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;
-  position:relative;overflow:hidden;
-}
-.contact-inner::before{
-  content:'';position:absolute;top:-80px;right:-80px;
-  width:300px;height:300px;
-  background:radial-gradient(circle,rgba(0,212,200,.07) 0%,transparent 70%);
-  pointer-events:none;
-}
-.contact-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2rem,4vw,3.5rem);
-  letter-spacing:.05em;line-height:1.1;margin-bottom:.8rem;
-}
+.contact-inner{border:1px solid var(--bdr2);padding:4rem;background:var(--bg1);display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.contact-inner::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,212,200,.07) 0%,transparent 70%);pointer-events:none;}
+.contact-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.05em;line-height:1.1;margin-bottom:.8rem;}
 .contact-sub{font-size:.9rem;font-weight:300;color:var(--sub);line-height:1.75}
 .contact-sub a{color:var(--teal);text-decoration:none}
 .contact-links{display:flex;flex-direction:column;gap:.8rem;min-width:220px}
-.clink{
-  font-family:'JetBrains Mono',monospace;font-size:.68rem;
-  letter-spacing:.1em;padding:.7rem 1.2rem;
-  text-decoration:none;border:1px solid var(--bdr2);
-  color:var(--sub);text-transform:uppercase;
-  transition:all .2s;display:flex;align-items:center;gap:.6rem;
-}
+.clink{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;padding:.7rem 1.2rem;text-decoration:none;border:1px solid var(--bdr2);color:var(--sub);text-transform:uppercase;transition:all .2s;display:flex;align-items:center;gap:.6rem;}
 .clink:hover{border-color:var(--teal);color:var(--teal)}
 .clink-icon{font-size:.9rem}
 
 /* FOOTER */
-footer{
-  position:relative;z-index:1;
-  border-top:1px solid var(--bdr);
-  padding:2rem 3rem;
-  max-width:1240px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;
-}
+footer{position:relative;z-index:1;border-top:1px solid var(--bdr);padding:2rem 3rem;max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 .footer-left{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:.08em}
 .footer-left span{color:var(--teal)}
 .footer-right{display:flex;gap:1.5rem}
@@ -417,22 +410,8 @@ footer{
 .fi.in{opacity:1;transform:none}
 
 /* RESPONSIVE */
-@media(max-width:1024px){
-  .about-grid{grid-template-columns:1fr}
-  .proj-grid{grid-template-columns:repeat(2,1fr)}
-  .ach-grid{grid-template-columns:repeat(2,1fr)}
-  .cert-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  nav{padding:0 1.5rem}
-  .nav-links{display:none}
-  #hero,.wrap{padding-left:1.5rem;padding-right:1.5rem}
-  .exp-item{grid-template-columns:1fr;gap:1rem}
-  .proj-grid{grid-template-columns:1fr}
-  .contact-inner{grid-template-columns:1fr;padding:2rem}
-  .ach-grid{grid-template-columns:1fr 1fr}
-  footer{padding:1.5rem}
-}
+@media(max-width:1024px){.about-grid{grid-template-columns:1fr}.proj-grid{grid-template-columns:repeat(2,1fr)}.ach-grid{grid-template-columns:repeat(2,1fr)}.cert-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){nav{padding:0 1.5rem}.nav-links{display:none}#hero,.wrap{padding-left:1.5rem;padding-right:1.5rem}.exp-item{grid-template-columns:1fr;gap:1rem}.proj-grid{grid-template-columns:1fr}.contact-inner{grid-template-columns:1fr;padding:2rem}.ach-grid{grid-template-columns:1fr 1fr}footer{padding:1.5rem}}
 </style>
 </head>
 <body>
@@ -494,10 +473,7 @@ footer{
 <section id="about" class="fi">
   <div class="sec-label">
     <div class="sec-num">01</div>
-    <div class="sec-info">
-      <div class="sec-tag">About</div>
-      <div class="sec-title">WHO I AM</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">About</div><div class="sec-title">WHO I AM</div></div>
   </div>
   <div class="about-grid">
     <div class="about-text">
@@ -514,26 +490,11 @@ footer{
     </div>
     <div class="about-right">
       <div class="stat-stack">
-        <div class="stat-item">
-          <div class="stat-val">800+</div>
-          <div class="stat-desc">Competitive programming problems solved</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val">3+</div>
-          <div class="stat-desc">Years of active ML/NLP research</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val">3</div>
-          <div class="stat-desc">Peer-reviewed publications (EMNLP, IEEE)</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val">5×</div>
-          <div class="stat-desc">Academic scholarships awarded at IUB</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val">40%</div>
-          <div class="stat-desc">API response time reduction at BRAC IT</div>
-        </div>
+        <div class="stat-item"><div class="stat-val">800+</div><div class="stat-desc">Competitive programming problems solved</div></div>
+        <div class="stat-item"><div class="stat-val">3+</div><div class="stat-desc">Years of active ML/NLP research</div></div>
+        <div class="stat-item"><div class="stat-val">3</div><div class="stat-desc">Peer-reviewed publications (EMNLP, IEEE)</div></div>
+        <div class="stat-item"><div class="stat-val">5×</div><div class="stat-desc">Academic scholarships awarded at IUB</div></div>
+        <div class="stat-item"><div class="stat-val">40%</div><div class="stat-desc">API response time reduction at BRAC IT</div></div>
       </div>
     </div>
   </div>
@@ -543,52 +504,13 @@ footer{
 <section id="skills" class="fi">
   <div class="sec-label">
     <div class="sec-num">02</div>
-    <div class="sec-info">
-      <div class="sec-tag">Skills</div>
-      <div class="sec-title">WHAT I KNOW</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">Skills</div><div class="sec-title">WHAT I KNOW</div></div>
   </div>
   <div class="skills-grid">
-    <div class="skill-block">
-      <div class="sb-icon">⚛️</div>
-      <div class="sb-name">Quantum Computing</div>
-      <div class="sb-tags">
-        <span class="sk t">Qiskit</span><span class="sk t">PennyLane</span>
-        <span class="sk t">VQC</span><span class="sk t">Quantum Kernel</span>
-        <span class="sk t">Hybrid QC</span><span class="sk t">Variational Algorithms</span>
-        <span class="sk t">Quantum Simulators</span>
-      </div>
-    </div>
-    <div class="skill-block">
-      <div class="sb-icon">🧠</div>
-      <div class="sb-name">AI / ML / NLP</div>
-      <div class="sb-tags">
-        <span class="sk l">PyTorch</span><span class="sk l">Vision Transformers</span>
-        <span class="sk l">BanglaBERT</span><span class="sk l">BanglaT5</span>
-        <span class="sk l">RAG</span><span class="sk l">LLMs</span>
-        <span class="sk l">Ollama</span><span class="sk l">Chroma DB</span><span class="sk l">HuggingFace</span>
-      </div>
-    </div>
-    <div class="skill-block">
-      <div class="sb-icon">🔧</div>
-      <div class="sb-name">Backend Engineering</div>
-      <div class="sb-tags">
-        <span class="sk a">Python</span><span class="sk a">Django</span>
-        <span class="sk a">BlackSheep ASGI</span><span class="sk a">Groovy/Grails</span>
-        <span class="sk a">.NET Core</span><span class="sk a">Spring Boot</span>
-        <span class="sk a">REST APIs</span><span class="sk a">PostgreSQL</span><span class="sk a">MySQL</span>
-      </div>
-    </div>
-    <div class="skill-block">
-      <div class="sb-icon">⚡</div>
-      <div class="sb-name">DevOps &amp; Frontend</div>
-      <div class="sb-tags">
-        <span class="sk r">CI/CD</span><span class="sk r">JWT Auth</span>
-        <span class="sk r">RBAC</span><span class="sk r">Microservices</span>
-        <span class="sk r">JavaScript</span><span class="sk r">Bootstrap</span>
-        <span class="sk r">Leaflet.js</span><span class="sk r">Plotly</span><span class="sk r">JavaFX</span>
-      </div>
-    </div>
+    <div class="skill-block"><div class="sb-icon">⚛️</div><div class="sb-name">Quantum Computing</div><div class="sb-tags"><span class="sk t">Qiskit</span><span class="sk t">PennyLane</span><span class="sk t">VQC</span><span class="sk t">Quantum Kernel</span><span class="sk t">Hybrid QC</span><span class="sk t">Variational Algorithms</span><span class="sk t">Quantum Simulators</span></div></div>
+    <div class="skill-block"><div class="sb-icon">🧠</div><div class="sb-name">AI / ML / NLP</div><div class="sb-tags"><span class="sk l">PyTorch</span><span class="sk l">Vision Transformers</span><span class="sk l">BanglaBERT</span><span class="sk l">BanglaT5</span><span class="sk l">RAG</span><span class="sk l">LLMs</span><span class="sk l">Ollama</span><span class="sk l">Chroma DB</span><span class="sk l">HuggingFace</span></div></div>
+    <div class="skill-block"><div class="sb-icon">🔧</div><div class="sb-name">Backend Engineering</div><div class="sb-tags"><span class="sk a">Python</span><span class="sk a">Django</span><span class="sk a">BlackSheep ASGI</span><span class="sk a">Groovy/Grails</span><span class="sk a">.NET Core</span><span class="sk a">Spring Boot</span><span class="sk a">REST APIs</span><span class="sk a">PostgreSQL</span><span class="sk a">MySQL</span></div></div>
+    <div class="skill-block"><div class="sb-icon">⚡</div><div class="sb-name">DevOps &amp; Frontend</div><div class="sb-tags"><span class="sk r">CI/CD</span><span class="sk r">JWT Auth</span><span class="sk r">RBAC</span><span class="sk r">Microservices</span><span class="sk r">JavaScript</span><span class="sk r">Bootstrap</span><span class="sk r">Leaflet.js</span><span class="sk r">Plotly</span><span class="sk r">JavaFX</span></div></div>
   </div>
 </section>
 
@@ -596,103 +518,31 @@ footer{
 <section id="experience" class="fi">
   <div class="sec-label">
     <div class="sec-num">03</div>
-    <div class="sec-info">
-      <div class="sec-tag">Experience</div>
-      <div class="sec-title">WHERE I'VE WORKED</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">Experience</div><div class="sec-title">WHERE I'VE WORKED</div></div>
   </div>
-   <div class="exp-item">
-      <div class="exp-meta">
-        <div class="exp-badge">● ACTIVE</div>
-        <div class="exp-date">SEPT 2025 — PRESENT</div>
-        <div class="exp-type">Research · Remote</div>
-      </div>
-      <div class="exp-main">
-        <div class="exp-co">Quantum Africa</div>
-        <div class="exp-role">Quantum Computing Researcher</div>
-        <ul class="exp-li">
-          <li>Authoring papers on Quantum Hybrid Models and advanced variational methods</li>
-          <li>Investigating Quantum Graph Neural Networks (QGNNs) for Drug-Target Interaction (DTI) prediction</li>
-          <li>Researching and implementing Quantum Key Distribution protocols (BB84) with security and performance analysis</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-meta">
-        <div class="exp-badge">● ACTIVE</div>
-        <div class="exp-date">OCT 2024 — PRESENT</div>
-        <div class="exp-type">Research · On-site</div>
-      </div>
-      <div class="exp-main">
-        <div class="exp-co">Center for Computation &amp; Data Sciences (CCDS), IUB</div>
-        <div class="exp-role">Research Assistant — Quantum Computing</div>
-        <ul class="exp-li">
-          <li>Research on quantum algorithms: design, benchmarking, and complexity analysis</li>
-          <li>Implemented Variational Quantum Classifiers, Quantum Kernel Methods, and hybrid models using Qiskit &amp; PennyLane</li>
-          <li>Developed prototype quantum circuits for optimization and classification tasks</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-meta">
-        <div class="exp-date">MAR — AUG 2025</div>
-        <div class="exp-type">Engineering · Full-time</div>
-      </div>
-      <div class="exp-main">
-        <div class="exp-co">Onnorokom Projukti Limited</div>
-        <div class="exp-role">Assistant Software Engineer</div>
-        <ul class="exp-li">
-          <li>Built scalable async web services with BlackSheep (Python), PostgreSQL &amp; JWT-authenticated microservices in a CI/CD pipeline</li>
-          <li>Designed middleware-driven Role-Based Access Control (RBAC) for secure multi-user access</li>
-          <li>Integrated Vision Transformers (ViT) for advanced visual data processing within ASGI-compliant architecture</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-meta">
-        <div class="exp-date">JUN — SEP 2024</div>
-        <div class="exp-type">Engineering · Internship</div>
-      </div>
-      <div class="exp-main">
-        <div class="exp-co">BRAC IT</div>
-        <div class="exp-role">Intern Software Engineer</div>
-        <ul class="exp-li">
-          <li>Developed and optimized 10+ RESTful APIs with Groovy on Grails — reducing response time by 40%</li>
-          <li>Implemented complex business logic &amp; CRUD with PostgreSQL, focusing on query optimization &amp; schema efficiency</li>
-          <li>Built responsive UI features with Bootstrap aligned to backend services</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-meta">
-        <div class="exp-date">AUG 2022 — NOW</div>
-        <div class="exp-type">Research · Part-time</div>
-      </div>
-      <div class="exp-main">
-        <div class="exp-co">Center for Computation &amp; Data Sciences, IUB</div>
-        <div class="exp-role">Student Researcher — NLP &amp; ML</div>
-        <ul class="exp-li">
-          <li>Studying NLP methods across 3 active research projects with senior research assistants</li>
-          <li>Co-authored EMNLP BLP 2023 paper on Bangla text error classification &amp; correction</li>
-          <li>Developed ML/NLP models from specification through training to evaluation</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-meta">
-        <div class="exp-date">JUL — SEP 2022</div>
-        <div class="exp-type">Education · Part-time</div>
-      </div>
-      <div class="exp-main">
-        <div class="exp-co">Independent University Bangladesh</div>
-        <div class="exp-role">Student-On-Duty (Teaching)</div>
-        <ul class="exp-li">
-          <li>Taught Python programming fundamentals, Combinatorics, and Number Theory to 45 students</li>
-          <li>Hosted problem-solving sessions focused on competitive programming techniques</li>
-        </ul>
-      </div>
-    </div>
+  <div class="exp-item">
+    <div class="exp-meta"><div class="exp-badge">● ACTIVE</div><div class="exp-date">SEPT 2025 — PRESENT</div><div class="exp-type">Research · Remote</div></div>
+    <div class="exp-main"><div class="exp-co">Quantum Africa</div><div class="exp-role">Quantum Computing Researcher</div><ul class="exp-li"><li>Authoring papers on Quantum Hybrid Models and advanced variational methods</li><li>Investigating Quantum Graph Neural Networks (QGNNs) for Drug-Target Interaction (DTI) prediction</li><li>Researching and implementing Quantum Key Distribution protocols (BB84) with security and performance analysis</li></ul></div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-meta"><div class="exp-badge">● ACTIVE</div><div class="exp-date">OCT 2024 — PRESENT</div><div class="exp-type">Research · On-site</div></div>
+    <div class="exp-main"><div class="exp-co">Center for Computation &amp; Data Sciences (CCDS), IUB</div><div class="exp-role">Research Assistant — Quantum Computing</div><ul class="exp-li"><li>Research on quantum algorithms: design, benchmarking, and complexity analysis</li><li>Implemented Variational Quantum Classifiers, Quantum Kernel Methods, and hybrid models using Qiskit &amp; PennyLane</li><li>Developed prototype quantum circuits for optimization and classification tasks</li></ul></div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-meta"><div class="exp-date">MAR — AUG 2025</div><div class="exp-type">Engineering · Full-time</div></div>
+    <div class="exp-main"><div class="exp-co">Onnorokom Projukti Limited</div><div class="exp-role">Assistant Software Engineer</div><ul class="exp-li"><li>Built scalable async web services with BlackSheep (Python), PostgreSQL &amp; JWT-authenticated microservices in a CI/CD pipeline</li><li>Designed middleware-driven Role-Based Access Control (RBAC) for secure multi-user access</li><li>Integrated Vision Transformers (ViT) for advanced visual data processing within ASGI-compliant architecture</li></ul></div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-meta"><div class="exp-date">JUN — SEP 2024</div><div class="exp-type">Engineering · Internship</div></div>
+    <div class="exp-main"><div class="exp-co">BRAC IT</div><div class="exp-role">Intern Software Engineer</div><ul class="exp-li"><li>Developed and optimized 10+ RESTful APIs with Groovy on Grails — reducing response time by 40%</li><li>Implemented complex business logic &amp; CRUD with PostgreSQL, focusing on query optimization &amp; schema efficiency</li><li>Built responsive UI features with Bootstrap aligned to backend services</li></ul></div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-meta"><div class="exp-date">AUG 2022 — NOW</div><div class="exp-type">Research · Part-time</div></div>
+    <div class="exp-main"><div class="exp-co">Center for Computation &amp; Data Sciences, IUB</div><div class="exp-role">Student Researcher — NLP &amp; ML</div><ul class="exp-li"><li>Studying NLP methods across 3 active research projects with senior research assistants</li><li>Co-authored EMNLP BLP 2023 paper on Bangla text error classification &amp; correction</li><li>Developed ML/NLP models from specification through training to evaluation</li></ul></div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-meta"><div class="exp-date">JUL — SEP 2022</div><div class="exp-type">Education · Part-time</div></div>
+    <div class="exp-main"><div class="exp-co">Independent University Bangladesh</div><div class="exp-role">Student-On-Duty (Teaching)</div><ul class="exp-li"><li>Taught Python programming fundamentals, Combinatorics, and Number Theory to 45 students</li><li>Hosted problem-solving sessions focused on competitive programming techniques</li></ul></div>
   </div>
 </section>
 
@@ -700,146 +550,49 @@ footer{
 <section id="projects" class="fi">
   <div class="sec-label">
     <div class="sec-num">04</div>
-    <div class="sec-info">
-      <div class="sec-tag">Projects</div>
-      <div class="sec-title">THINGS I'VE BUILT</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">Projects</div><div class="sec-title">THINGS I'VE BUILT</div></div>
   </div>
   <div class="proj-grid">
-    <div class="proj-card">
-      <div class="proj-idx">01</div>
-      <div class="proj-name">RAG Application with Ollama</div>
-      <div class="proj-desc">Django-based chatbot using Chroma DB for vector semantic search. Leverages Ollama API for text embeddings and Stanza for NLP preprocessing. Full frontend and backend.</div>
-      <div class="proj-stack">
-        <span class="ptag">Python</span><span class="ptag">Django</span><span class="ptag">PyTorch</span>
-        <span class="ptag">Chroma DB</span><span class="ptag">Ollama</span><span class="ptag">Stanza</span><span class="ptag">MySQL</span>
-      </div>
-      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
-    </div>
-    <div class="proj-card">
-      <div class="proj-idx">02</div>
-      <div class="proj-name">CrimeChitro</div>
-      <div class="proj-desc">Anonymous crime reporting platform with interactive map-based location pinning. Citizens report incidents without visiting police stations — built for freedom of expression and accessibility.</div>
-      <div class="proj-stack">
-        <span class="ptag">PHP</span><span class="ptag">Laravel</span><span class="ptag">jQuery</span>
-        <span class="ptag">Leaflet.js</span><span class="ptag">JavaScript</span><span class="ptag">MySQL</span>
-      </div>
-      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
-    </div>
-    <div class="proj-card">
-      <div class="proj-idx">03</div>
-      <div class="proj-name">Air Quality Monitor — Dhaka</div>
-      <div class="proj-desc">Year-wise visualisation of air quality across different regions of Dhaka. Interactive Plotly dashboards served by a Django backend with data filtering by region and year.</div>
-      <div class="proj-stack">
-        <span class="ptag">Python</span><span class="ptag">Django</span><span class="ptag">Plotly</span>
-        <span class="ptag">HTML</span><span class="ptag">CSS</span>
-      </div>
-      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
-    </div>
-    <div class="proj-card">
-      <div class="proj-idx">04</div>
-      <div class="proj-name">EVISA Management System</div>
-      <div class="proj-desc">Full-stack Java desktop application for remote visa applications. Users apply and get help without visiting offices. Built with JavaFX and SceneBuilder; uses object, byte, and data stream file handling.</div>
-      <div class="proj-stack">
-        <span class="ptag">Java</span><span class="ptag">JavaFX</span><span class="ptag">SceneBuilder</span>
-      </div>
-      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
-    </div>
-    <div class="proj-card">
-      <div class="proj-idx">05</div>
-      <div class="proj-name">BaTEClaCor Dataset &amp; Models</div>
-      <div class="proj-desc">10,000-sample Bangla social media error corpus with fine-tuned BanglaBERT classifier (79.1% accuracy) and BanglaT5 text correction model achieving Rouge-L of 0.8459. Published at EMNLP.</div>
-      <div class="proj-stack">
-        <span class="ptag">Python</span><span class="ptag">BanglaBERT</span><span class="ptag">BanglaT5</span>
-        <span class="ptag">HuggingFace</span><span class="ptag">PyTorch</span>
-      </div>
-      <a class="proj-link" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">View on GitHub ↗</a>
-    </div>
-    <div class="proj-card">
-      <div class="proj-idx">06</div>
-      <div class="proj-name">Smart Floor Cleaning Robot</div>
-      <div class="proj-desc">Autonomous cleaning robot with Wi-Fi remote control, integrated mini vacuum cleaner, and motor-based mop system. Features embedded systems programming with wireless control. Published at IEEE TENSYMP.</div>
-      <div class="proj-stack">
-        <span class="ptag">Embedded C</span><span class="ptag">Wi-Fi</span><span class="ptag">Robotics</span><span class="ptag">IEEE</span>
-      </div>
-      <a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a>
-    </div>
+    <div class="proj-card"><div class="proj-idx">01</div><div class="proj-name">RAG Application with Ollama</div><div class="proj-desc">Django-based chatbot using Chroma DB for vector semantic search. Leverages Ollama API for text embeddings and Stanza for NLP preprocessing. Full frontend and backend.</div><div class="proj-stack"><span class="ptag">Python</span><span class="ptag">Django</span><span class="ptag">PyTorch</span><span class="ptag">Chroma DB</span><span class="ptag">Ollama</span><span class="ptag">Stanza</span><span class="ptag">MySQL</span></div><a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a></div>
+    <div class="proj-card"><div class="proj-idx">02</div><div class="proj-name">CrimeChitro</div><div class="proj-desc">Anonymous crime reporting platform with interactive map-based location pinning. Citizens report incidents without visiting police stations — built for freedom of expression and accessibility.</div><div class="proj-stack"><span class="ptag">PHP</span><span class="ptag">Laravel</span><span class="ptag">jQuery</span><span class="ptag">Leaflet.js</span><span class="ptag">JavaScript</span><span class="ptag">MySQL</span></div><a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a></div>
+    <div class="proj-card"><div class="proj-idx">03</div><div class="proj-name">Air Quality Monitor — Dhaka</div><div class="proj-desc">Year-wise visualisation of air quality across different regions of Dhaka. Interactive Plotly dashboards served by a Django backend with data filtering by region and year.</div><div class="proj-stack"><span class="ptag">Python</span><span class="ptag">Django</span><span class="ptag">Plotly</span><span class="ptag">HTML</span><span class="ptag">CSS</span></div><a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a></div>
+    <div class="proj-card"><div class="proj-idx">04</div><div class="proj-name">EVISA Management System</div><div class="proj-desc">Full-stack Java desktop application for remote visa applications. Users apply and get help without visiting offices. Built with JavaFX and SceneBuilder; uses object, byte, and data stream file handling.</div><div class="proj-stack"><span class="ptag">Java</span><span class="ptag">JavaFX</span><span class="ptag">SceneBuilder</span></div><a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a></div>
+    <div class="proj-card"><div class="proj-idx">05</div><div class="proj-name">BaTEClaCor Dataset &amp; Models</div><div class="proj-desc">10,000-sample Bangla social media error corpus with fine-tuned BanglaBERT classifier (79.1% accuracy) and BanglaT5 text correction model achieving Rouge-L of 0.8459. Published at EMNLP.</div><div class="proj-stack"><span class="ptag">Python</span><span class="ptag">BanglaBERT</span><span class="ptag">BanglaT5</span><span class="ptag">HuggingFace</span><span class="ptag">PyTorch</span></div><a class="proj-link" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">View on GitHub ↗</a></div>
+    <div class="proj-card"><div class="proj-idx">06</div><div class="proj-name">Smart Floor Cleaning Robot</div><div class="proj-desc">Autonomous cleaning robot with Wi-Fi remote control, integrated mini vacuum cleaner, and motor-based mop system. Features embedded systems programming with wireless control. Published at IEEE TENSYMP.</div><div class="proj-stack"><span class="ptag">Embedded C</span><span class="ptag">Wi-Fi</span><span class="ptag">Robotics</span><span class="ptag">IEEE</span></div><a class="proj-link" href="https://github.com/SyedT1" target="_blank">View on GitHub ↗</a></div>
   </div>
 </section>
+
 <section id="qprojects" class="fi">
   <div class="sec-label">
     <div class="sec-num">05</div>
     <div class="sec-info"><div class="sec-tag">Quantum Computing Projects</div><div class="sec-title">SELECTED QUANTUM COMPUTING WORK</div></div>
   </div>
   <div class="qproj-grid">
-
-    <div class="qproj-card">
-      <div class="qp-award">🥉 3rd Place — FLIQ 2025 Science Track, Individual</div>
-      <div class="qp-idx">Q1</div>
-      <div class="qp-name">MaxCut Optimization via varQITE — IonQ VQI FLIQ 2025</div>
-      <div class="qp-desc">Designed optimal ansätze and Hamiltonians for the NP-hard MaxCut problem using Variational Quantum Imaginary Time Evolution (varQITE) running on real IonQ hardware. Competed individually in the FLIQ 2025 Science Track, placing 3rd.</div>
-      <div class="qp-tags"><span class="qtag">varQITE</span><span class="qtag">IonQ Hardware</span><span class="qtag">MaxCut</span><span class="qtag">Hamiltonian Design</span><span class="qtag">Qiskit</span></div>
-      <a class="qp-link" href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025" target="_blank">github.com/SyedT1/IonQ-VQI-FLIQ-2025 ↗</a>
-    </div>
-
-    <div class="qproj-card">
-      <div class="qp-idx">Q2</div>
-      <div class="qp-name">Quantum Neighborhood Preserving Embedding (qNPE)</div>
-      <div class="qp-desc">Quantum dimensionality reduction that preserves local manifold structure. Uses swap-test K-NN for neighborhood estimation, a variational eigensolver for spectral decomposition, and QSVD for the final embedding projection.</div>
-      <div class="qp-tags"><span class="qtag">qNPE</span><span class="qtag">QSVD</span><span class="qtag">Swap-Test K-NN</span><span class="qtag">Variational Eigensolver</span><span class="qtag">Dimensionality Reduction</span></div>
-      <a class="qp-link" href="https://github.com/SyedT1/implementing-dimensional-reductionality-for-qnpe" target="_blank">github.com/SyedT1/…qnpe ↗</a>
-    </div>
-
-    <div class="qproj-card">
-      <div class="qp-idx">Q3</div>
-      <div class="qp-name">Custom Quantum Feature Maps for QSVM</div>
-      <div class="qp-desc">Designed two novel feature maps — Alternating Entanglement (AEFM) and Strongly Entangling with Hadamard (SEFM-H) — to enhance QSVM kernel-based classification, benchmarked on the Iris dataset with improved separability in quantum feature space.</div>
-      <div class="qp-tags"><span class="qtag">QSVM</span><span class="qtag">AEFM</span><span class="qtag">SEFM-H</span><span class="qtag">Feature Maps</span><span class="qtag">Quantum Classification</span></div>
-      <a class="qp-link" href="https://github.com/SyedT1/QSVM_T4" target="_blank">github.com/SyedT1/QSVM_T4 ↗</a>
-    </div>
-
-    <div class="qproj-card">
-      <div class="qp-idx">Q4</div>
-      <div class="qp-name">Quantum Galton Box — Multi-layer Random Walk Simulator</div>
-      <div class="qp-desc">Generalized quantum circuit generating Gaussian distributions via superposition of quantum trajectories, implementing the Carney &amp; Varcoe (2022) quantum walk model. Demonstrates how quantum superposition naturally recovers classical statistical distributions.</div>
-      <div class="qp-tags"><span class="qtag">Quantum Walks</span><span class="qtag">Monte Carlo</span><span class="qtag">Superposition</span><span class="qtag">Gaussian Distribution</span><span class="qtag">PennyLane</span></div>
-      <a class="qp-link" href="https://github.com/SyedT1/Quantum-Walks-and-Monte-Carlo-WISERv1" target="_blank">github.com/SyedT1/…WISERv1 ↗</a>
-    </div>
-
+    <div class="qproj-card"><div class="qp-award">🥉 3rd Place — FLIQ 2025 Science Track, Individual</div><div class="qp-idx">Q1</div><div class="qp-name">MaxCut Optimization via varQITE — IonQ VQI FLIQ 2025</div><div class="qp-desc">Designed optimal ansätze and Hamiltonians for the NP-hard MaxCut problem using Variational Quantum Imaginary Time Evolution (varQITE) running on real IonQ hardware. Competed individually in the FLIQ 2025 Science Track, placing 3rd.</div><div class="qp-tags"><span class="qtag">varQITE</span><span class="qtag">IonQ Hardware</span><span class="qtag">MaxCut</span><span class="qtag">Hamiltonian Design</span><span class="qtag">Qiskit</span></div><a class="qp-link" href="https://github.com/SyedT1/IonQ-VQI-FLIQ-2025" target="_blank">github.com/SyedT1/IonQ-VQI-FLIQ-2025 ↗</a></div>
+    <div class="qproj-card"><div class="qp-idx">Q2</div><div class="qp-name">Quantum Neighborhood Preserving Embedding (qNPE)</div><div class="qp-desc">Quantum dimensionality reduction that preserves local manifold structure. Uses swap-test K-NN for neighborhood estimation, a variational eigensolver for spectral decomposition, and QSVD for the final embedding projection.</div><div class="qp-tags"><span class="qtag">qNPE</span><span class="qtag">QSVD</span><span class="qtag">Swap-Test K-NN</span><span class="qtag">Variational Eigensolver</span><span class="qtag">Dimensionality Reduction</span></div><a class="qp-link" href="https://github.com/SyedT1/implementing-dimensional-reductionality-for-qnpe" target="_blank">github.com/SyedT1/…qnpe ↗</a></div>
+    <div class="qproj-card"><div class="qp-idx">Q3</div><div class="qp-name">Custom Quantum Feature Maps for QSVM</div><div class="qp-desc">Designed two novel feature maps — Alternating Entanglement (AEFM) and Strongly Entangling with Hadamard (SEFM-H) — to enhance QSVM kernel-based classification, benchmarked on the Iris dataset with improved separability in quantum feature space.</div><div class="qp-tags"><span class="qtag">QSVM</span><span class="qtag">AEFM</span><span class="qtag">SEFM-H</span><span class="qtag">Feature Maps</span><span class="qtag">Quantum Classification</span></div><a class="qp-link" href="https://github.com/SyedT1/QSVM_T4" target="_blank">github.com/SyedT1/QSVM_T4 ↗</a></div>
+    <div class="qproj-card"><div class="qp-idx">Q4</div><div class="qp-name">Quantum Galton Box — Multi-layer Random Walk Simulator</div><div class="qp-desc">Generalized quantum circuit generating Gaussian distributions via superposition of quantum trajectories, implementing the Carney &amp; Varcoe (2022) quantum walk model. Demonstrates how quantum superposition naturally recovers classical statistical distributions.</div><div class="qp-tags"><span class="qtag">Quantum Walks</span><span class="qtag">Monte Carlo</span><span class="qtag">Superposition</span><span class="qtag">Gaussian Distribution</span><span class="qtag">PennyLane</span></div><a class="qp-link" href="https://github.com/SyedT1/Quantum-Walks-and-Monte-Carlo-WISERv1" target="_blank">github.com/SyedT1/…WISERv1 ↗</a></div>
   </div>
 </section>
+
 <!-- RESEARCH -->
 <section id="research" class="fi">
   <div class="sec-label">
     <div class="sec-num">06</div>
-    <div class="sec-info">
-      <div class="sec-tag">Research</div>
-      <div class="sec-title">PUBLICATIONS</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">Research</div><div class="sec-title">PUBLICATIONS</div></div>
   </div>
   <div class="pub-list">
     <div class="pub-card">
       <div class="pub-side">AACL-IJCNLP BLP '25</div>
-      <div class="pub-body">
-        <div class="pub-badge">★ NEWEST — 2025</div>
-        <div class="pub-title">Gradient Masters at BLP-2025 Task 1: Advancing Low-Resource NLP for Bengali using Ensemble-Based Adversarial Training for Hate Speech Detection</div>
-        <div class="pub-desc">Developed an ensemble-based adversarial training approach for Bengali hate speech detection in the BLP-2025 AACL-IJCNLP shared task. Leveraged BanglaBERT ensemble architectures with adversarial robustness techniques for low-resource NLP. The team placed 3rd and 6th across two submission tracks in the shared task.</div>
-      </div>
+      <div class="pub-body"><div class="pub-badge">★ NEWEST — 2025</div><div class="pub-title">Gradient Masters at BLP-2025 Task 1: Advancing Low-Resource NLP for Bengali using Ensemble-Based Adversarial Training for Hate Speech Detection</div><div class="pub-desc">Developed an ensemble-based adversarial training approach for Bengali hate speech detection in the BLP-2025 AACL-IJCNLP shared task. Leveraged BanglaBERT ensemble architectures with adversarial robustness techniques for low-resource NLP. The team placed 3rd and 6th across two submission tracks in the shared task.</div></div>
     </div>
     <div class="pub-card">
       <div class="pub-side">EMNLP BLP '23</div>
-      <div class="pub-body">
-        <div class="pub-title">BaTEClaCor: A Novel Dataset for Bangla Text Error Classification and Correction</div>
-        <div class="pub-desc">Introduced a curated dataset of 10,000 authentic Bangla comments from social media for error classification and correction. Benchmarked BanglaBERT achieving 79.1% binary and 74.1% multiclass accuracy. BanglaT5 achieved the best text correction performance with a Rouge-L score of 0.8459. The work contributes to preserving Bangla language authenticity in digital discourse and advances NLP for low-resource languages.</div>
-        <a class="pub-link" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">Dataset &amp; Code ↗</a>
-      </div>
+      <div class="pub-body"><div class="pub-title">BaTEClaCor: A Novel Dataset for Bangla Text Error Classification and Correction</div><div class="pub-desc">Introduced a curated dataset of 10,000 authentic Bangla comments from social media for error classification and correction. Benchmarked BanglaBERT achieving 79.1% binary and 74.1% multiclass accuracy. BanglaT5 achieved the best text correction performance with a Rouge-L score of 0.8459. The work contributes to preserving Bangla language authenticity in digital discourse and advances NLP for low-resource languages.</div><a class="pub-link" href="https://github.com/SyedT1/BaTEClaCor" target="_blank">Dataset &amp; Code ↗</a></div>
     </div>
     <div class="pub-card">
       <div class="pub-side">IEEE TENSYMP</div>
-      <div class="pub-body">
-        <div class="pub-title">Smart Floor Cleaning Robot</div>
-        <div class="pub-desc">Developed and implemented an autonomous Smart Floor Cleaning Robot utilising modern embedded systems and wireless technology. Features Wi-Fi based remote control, a mini vacuum cleaner unit, and a motor-driven mop for efficient automated floor maintenance. Demonstrates real-world integration of embedded C programming with IoT-style wireless control architecture.</div>
-      </div>
+      <div class="pub-body"><div class="pub-title">Smart Floor Cleaning Robot</div><div class="pub-desc">Developed and implemented an autonomous Smart Floor Cleaning Robot utilising modern embedded systems and wireless technology. Features Wi-Fi based remote control, a mini vacuum cleaner unit, and a motor-driven mop for efficient automated floor maintenance. Demonstrates real-world integration of embedded C programming with IoT-style wireless control architecture.</div></div>
     </div>
   </div>
 </section>
@@ -848,10 +601,7 @@ footer{
 <section id="achievements" class="fi">
   <div class="sec-label">
     <div class="sec-num">07</div>
-    <div class="sec-info">
-      <div class="sec-tag">Achievements</div>
-      <div class="sec-title">WINS &amp; AWARDS</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">Achievements</div><div class="sec-title">WINS &amp; AWARDS</div></div>
   </div>
   <div class="ach-grid">
     <div class="ach-card"><div class="ach-icon">🥉</div><div class="ach-title">3rd — BlueQubit Hackathon 2025</div><div class="ach-sub">Quantum computing hackathon, team entry</div></div>
@@ -872,52 +622,30 @@ footer{
     <div class="cert-card"><div class="cert-dot"></div><div class="cert-name">QClass 24/25 — Quantum Program</div></div>
   </div>
 </section>
-<!-- 08 COMMUNITY -->
+
+<!-- COMMUNITY -->
 <section id="community" class="fi">
   <div class="sec-label">
     <div class="sec-num">08</div>
     <div class="sec-info"><div class="sec-tag">Teaching &amp; Community</div><div class="sec-title">GIVING BACK</div></div>
   </div>
   <div class="comm-grid">
-    <div class="comm-card">
-      <div class="comm-icon">🏫</div>
-      <div>
-        <div class="comm-title">Quantum High School Organization</div>
-        <div class="comm-sub">Advisor since May 2024. Coordinating quantum computing workshops, curriculum, and content management for high school students in Bangladesh.</div>
-      </div>
-    </div>
-    <div class="comm-card">
-      <div class="comm-icon">🎓</div>
-      <div>
-        <div class="comm-title">Neumentora</div>
-        <div class="comm-sub">Quantum Computing Instructor since June 2024. Teaching quantum fundamentals and practical circuit design to aspiring researchers.</div>
-      </div>
-    </div>
-    <div class="comm-card">
-      <div class="comm-icon">🌍</div>
-      <div>
-        <div class="comm-title">Quantum Africa</div>
-        <div class="comm-sub">Active researcher contributing to quantum education and research infrastructure across Africa. Working on hybrid models, QGNNs, and QKD protocols.</div>
-      </div>
-    </div>
+    <div class="comm-card"><div class="comm-icon">🏫</div><div><div class="comm-title">Quantum High School Organization</div><div class="comm-sub">Advisor since May 2024. Coordinating quantum computing workshops, curriculum, and content management for high school students in Bangladesh.</div></div></div>
+    <div class="comm-card"><div class="comm-icon">🎓</div><div><div class="comm-title">Neumentora</div><div class="comm-sub">Quantum Computing Instructor since June 2024. Teaching quantum fundamentals and practical circuit design to aspiring researchers.</div></div></div>
+    <div class="comm-card"><div class="comm-icon">🌍</div><div><div class="comm-title">Quantum Africa</div><div class="comm-sub">Active researcher contributing to quantum education and research infrastructure across Africa. Working on hybrid models, QGNNs, and QKD protocols.</div></div></div>
   </div>
 </section>
+
 <!-- CONTACT -->
 <section id="contact" class="fi">
   <div class="sec-label">
     <div class="sec-num">09</div>
-    <div class="sec-info">
-      <div class="sec-tag">Contact</div>
-      <div class="sec-title">LET'S TALK</div>
-    </div>
+    <div class="sec-info"><div class="sec-tag">Contact</div><div class="sec-title">LET'S TALK</div></div>
   </div>
   <div class="contact-inner">
     <div>
       <div class="contact-title">Open to research collabs,<br>engineering roles &amp; hackathons.</div>
-      <p class="contact-sub">
-        Whether you're looking for a quantum ML researcher, a full-stack engineer, or someone who thrives at the edge of both — reach out.<br><br>
-        Email: <a href="mailto:syedmuhaimintahsin@gmail.com">syedmuhaimintahsin@gmail.com</a>
-      </p>
+      <p class="contact-sub">Whether you're looking for a quantum ML researcher, a full-stack engineer, or someone who thrives at the edge of both — reach out.<br><br>Email: <a href="mailto:syedmuhaimintahsin@gmail.com">syedmuhaimintahsin@gmail.com</a></p>
     </div>
     <div class="contact-links">
       <a class="clink" href="mailto:syedmuhaimintahsin@gmail.com"><span class="clink-icon">✉️</span> Email me</a>
@@ -928,7 +656,7 @@ footer{
     </div>
   </div>
 </section>
-</div>
+</div><!-- end .wrap -->
 
 <footer>
   <div class="footer-left">© 2026 <span>Syed Mohaiminul Hoque</span> — Dhaka, Bangladesh</div>
@@ -940,16 +668,128 @@ footer{
   </div>
 </footer>
 
+<!-- ── GAME BUTTON ─────────────────────────────────────────────────────── -->
+<button id="game-btn" title="Play ACE VECTOR — 3D Air Combat">✈️</button>
+
+<!-- ── GAME MODAL (ACE VECTOR 3D) ─────────────────────────────────────── -->
+<div id="game-modal" class="game-modal hidden">
+  <div class="game-modal-content">
+
+    <!-- Title bar -->
+    <div class="game-modal-bar">
+      <h2>ACE VECTOR — 3D Air Combat</h2>
+      <div class="game-modal-bar-right">
+        <button id="game-toggle">PAUSE</button>
+        <button class="game-close" id="game-close" aria-label="Close">✕</button>
+      </div>
+    </div>
+
+    <!-- Canvas + HUD wrapper -->
+    <div class="game-canvas-wrap">
+      <canvas id="game-canvas"></canvas>
+
+      <!-- HUD overlay -->
+      <div id="av-hud">
+        <!-- Top-left: score + wave -->
+        <div id="av-tl">
+          <div class="av-lbl">Score</div>
+          <div class="av-val" id="av-score">000000</div>
+          <div style="margin-top:6px"><div class="av-lbl">Wave</div><div class="av-val" style="font-size:13px;color:rgba(0,245,255,.7)" id="av-wave">01</div></div>
+        </div>
+
+        <!-- Top-right: time + kills -->
+        <div id="av-tr">
+          <div class="av-lbl">Time</div>
+          <div class="av-val orange" id="av-time">05:00</div>
+          <div style="margin-top:6px"><div class="av-lbl">Kills</div><div class="av-val orange" style="font-size:13px" id="av-kills">000</div></div>
+        </div>
+
+        <!-- Crosshair -->
+        <div id="av-crosshair"><div class="av-ch-h"></div><div class="av-ch-v"></div><div class="av-ch-dot"></div></div>
+
+        <!-- Speed gauge left -->
+        <div id="av-spd-wrap">
+          <div class="av-gauge-lbl">SPD</div>
+          <div class="av-gauge-num" id="av-spd">0</div>
+          <div class="av-gauge-bar"><div class="av-gauge-fill" id="av-spdfill" style="height:50%"></div></div>
+        </div>
+
+        <!-- Altitude gauge right -->
+        <div id="av-alt-wrap">
+          <div class="av-gauge-lbl">ALT</div>
+          <div class="av-gauge-num" id="av-alt">0</div>
+          <div class="av-gauge-bar"><div class="av-gauge-fill" id="av-altfill" style="height:50%"></div></div>
+        </div>
+
+        <!-- Kill feed -->
+        <div id="av-killfeed"></div>
+
+        <!-- Hull / shield bars bottom-left -->
+        <div id="av-bars">
+          <div class="av-bar-row">
+            <div class="av-bar-lbl"><span>HULL</span><span id="av-hpct">100%</span></div>
+            <div class="av-bar-outer"><div class="av-bar-inner" id="av-hfill" style="width:100%"></div></div>
+          </div>
+          <div class="av-bar-row">
+            <div class="av-bar-lbl"><span>SHIELD</span><span id="av-spct">100%</span></div>
+            <div class="av-bar-outer"><div class="av-bar-inner" id="av-sfill" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Radar bottom-centre -->
+        <div id="av-radar-wrap">
+          <canvas id="av-radar" width="80" height="80"></canvas>
+          <div class="av-radar-lbl">RADAR</div>
+        </div>
+
+        <!-- Controls hint bottom-right -->
+        <div id="av-hint">
+          W/S · PITCH &nbsp;|&nbsp; A/D · YAW &nbsp;|&nbsp; Q/E · ROLL<br>
+          SPACE · FIRE &nbsp;|&nbsp; SHIFT · BOOST
+        </div>
+
+        <!-- Damage flash -->
+        <div id="av-flash"></div>
+      </div><!-- end #av-hud -->
+
+      <!-- Start / Game-over overlay (inside canvas wrap) -->
+      <div id="av-overlay">
+        <!-- Start screen -->
+        <div id="av-start-screen" class="av-screen">
+          <div class="av-screen-title"><span class="av-t1">ACE </span><span class="av-t2">VECTOR</span></div>
+          <div class="av-screen-sub">3D AIR COMBAT · SURVIVE 5 MINUTES</div>
+          <div class="av-ctrl-grid">
+            <div class="av-ctrl-row"><span class="av-ctrl-key">W/S</span><span class="av-ctrl-desc">Pitch</span></div>
+            <div class="av-ctrl-row"><span class="av-ctrl-key">A/D</span><span class="av-ctrl-desc">Yaw</span></div>
+            <div class="av-ctrl-row"><span class="av-ctrl-key">Q/E</span><span class="av-ctrl-desc">Roll</span></div>
+            <div class="av-ctrl-row"><span class="av-ctrl-key">SPACE</span><span class="av-ctrl-desc">Fire</span></div>
+            <div class="av-ctrl-row"><span class="av-ctrl-key">↑/↓</span><span class="av-ctrl-desc">Throttle</span></div>
+            <div class="av-ctrl-row"><span class="av-ctrl-key">SHIFT</span><span class="av-ctrl-desc">Boost</span></div>
+          </div>
+          <button class="av-start-btn" id="av-start-btn">LAUNCH</button>
+        </div>
+
+        <!-- Game-over screen -->
+        <div id="av-gameover-screen" class="av-screen" style="display:none">
+          <div class="av-screen-title"><span class="av-t1">GAME </span><span class="av-t2">OVER</span></div>
+          <div class="av-go-score" id="av-go-score">0</div>
+          <div class="av-go-kills" id="av-go-kills">0 ENEMIES DESTROYED</div>
+          <button class="av-start-btn" id="av-restart-btn">RETRY</button>
+        </div>
+      </div><!-- end #av-overlay -->
+
+    </div><!-- end .game-canvas-wrap -->
+  </div><!-- end .game-modal-content -->
+</div><!-- end #game-modal -->
+
+<!-- Load Three.js before game scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="./space-music.js"></script>
+<script src="./game.js"></script>
+<script src="./aircraft-game.js"></script>
 <script>
-// Wait for THREE to load
 (function waitForTHREE() {
-  if (typeof THREE === 'undefined') {
-    setTimeout(waitForTHREE, 50);
-    return;
-  }
-  // THREE is loaded, safe to load rocket animation
+  if (typeof THREE === 'undefined') { setTimeout(waitForTHREE, 50); return; }
   const script = document.createElement('script');
   script.src = './rocket-animation.js';
   document.body.appendChild(script);
@@ -957,69 +797,54 @@ footer{
 </script>
 
 <script>
-
 /* ── SCROLL FADE IN ── */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');}});
-},{threshold:0.1});
-document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
 /* ── STAGGER CHILDREN ── */
-document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.skill-block').forEach((el,i)=>{
-  el.style.transitionDelay=(i%4)*.07+'s';
+document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.skill-block').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 0.07 + 's';
 });
 
 /* ── MELODIOUS SOUND EFFECTS ── */
-(function(){
-  const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  
-  function playMelody(notes){
-    notes.forEach((freq,i)=>{
-      const osc=audioCtx.createOscillator();
-      const gain=audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.frequency.value=freq;
-      osc.type='sine';
-      const startTime=audioCtx.currentTime+i*60/1000;
-      const duration=120/1000;
-      gain.gain.setValueAtTime(0,startTime);
-      gain.gain.linearRampToValueAtTime(.12,startTime+10/1000);
-      gain.gain.exponentialRampToValueAtTime(.01,startTime+duration);
-      osc.start(startTime);
-      osc.stop(startTime+duration);
+(function () {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function playMelody(notes) {
+    notes.forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      const t = audioCtx.currentTime + i * 60 / 1000;
+      const d = 120 / 1000;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.12, t + 10 / 1000);
+      gain.gain.exponentialRampToValueAtTime(0.01, t + d);
+      osc.start(t); osc.stop(t + d);
     });
   }
-  
-  const melodies={
-    ascending:()=>playMelody([523,659,784]),
-    arpeggio:()=>playMelody([523,659,523,784]),
-    sparkle:()=>playMelody([784,659,523]),
-    chime:()=>playMelody([523,523,659]),
-    uplifting:()=>playMelody([392,523,659]),
+  const melodies = {
+    ascending: () => playMelody([523, 659, 784]),
+    arpeggio:  () => playMelody([523, 659, 523, 784]),
+    sparkle:   () => playMelody([784, 659, 523]),
+    chime:     () => playMelody([523, 523, 659]),
+    uplifting: () => playMelody([392, 523, 659]),
   };
-  
-  function playRandomMelody(){
-    const keys=Object.keys(melodies);
-    const choice=keys[Math.floor(Math.random()*keys.length)];
-    melodies[choice]();
+  function playRandom() {
+    const keys = Object.keys(melodies);
+    melodies[keys[Math.floor(Math.random() * keys.length)]]();
   }
-  
-  // Add sound to all buttons
-  const btnSelectors=['.btn','.alink','.clink','.sug-chip','.nav-links a','#solar-system-btn','#chat-fab','#chat-close','#chat-send'];
-  btnSelectors.forEach(sel=>{
-    document.querySelectorAll(sel).forEach(el=>{
-      el.addEventListener('click',playRandomMelody);
-    });
+  ['.btn', '.alink', '.clink', '.nav-links a', '#solar-system-btn', '#chat-fab', '#chat-close', '#chat-send'].forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => el.addEventListener('click', playRandom));
   });
-
-  // Music toggle button
   const musicBtn = document.getElementById('music-toggle');
   if (musicBtn) {
     musicBtn.addEventListener('click', () => {
-      window.toggleSpaceMusic();
+      if (window.toggleSpaceMusic) window.toggleSpaceMusic();
       musicBtn.classList.toggle('playing');
-      playRandomMelody();
+      playRandom();
     });
   }
 })();
@@ -1044,27 +869,8 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
 #chat-messages::-webkit-scrollbar{width:4px;}
 #chat-messages::-webkit-scrollbar-track{background:transparent;}
 #chat-messages::-webkit-scrollbar-thumb{background:#152b42;}
-.chat-msg {
-  max-width: 88%;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .8rem;
-  line-height: 1.55;
-  padding: .55rem .75rem;
-  border: 1px solid transparent;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  overflow: visible;      
-  max-height: none;      
-}
-
-.chat-msg.bot {
-  align-self: flex-start;
-  background: #091624;
-  border-color: #152b42;
-  color: #c8dff0;
-  max-width: 95%;
-  overflow-x: visible;   
-}
+.chat-msg{max-width:88%;font-family:'DM Sans',sans-serif;font-size:.8rem;line-height:1.55;padding:.55rem .75rem;border:1px solid transparent;word-break:break-word;overflow-wrap:break-word;}
+.chat-msg.bot{align-self:flex-start;background:#091624;border-color:#152b42;color:#c8dff0;max-width:95%;}
 .chat-msg.user{align-self:flex-end;background:#0f2035;border-color:#1f3f5e;color:#e2eef7;}
 .chat-msg.bot.typing{color:#7a9ab8;font-style:italic;}
 #chat-footer{padding:.65rem .75rem;border-top:1px solid #152b42;display:flex;gap:.5rem;background:#0b1826;}
@@ -1081,12 +887,7 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
 .chat-msg.bot strong{color:#00d4c8;font-weight:600;}
 .chat-msg.bot ul,.chat-msg.bot ol{margin:.35rem 0;padding-left:1.1rem;}
 .chat-msg.bot li{margin-bottom:.2rem;}
-.chat-msg.bot table{width:100%;border-collapse:collapse;margin:.4rem 0;font-size:.68rem;display:block;overflow-x:auto;}
-.chat-msg.bot th,.chat-msg.bot td{border:1px solid #152b42;padding:.25rem .35rem;text-align:left;white-space:nowrap;}
-.chat-msg.bot th{background:#0f2035;color:#00d4c8;font-weight:600;}
 .chat-msg.bot code{background:#0f2035;padding:.1rem .3rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;}
-.chat-msg.bot p{margin:.3rem 0;}
-.chat-msg.bot br{display:block;margin:.15rem 0;}
 @media(max-width:480px){#chat-panel{width:calc(100vw - 2rem);right:1rem;}#chat-fab{right:1rem;bottom:1.5rem;}}
 </style>
 
@@ -1100,10 +901,7 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
   <div id="chat-header">
     <div id="chat-header-left">
       <div class="chat-dot"></div>
-      <div>
-        <div class="chat-header-title">Syed's AI Agent</div>
-        <div class="chat-header-sub">Ask me anything about Syed</div>
-      </div>
+      <div><div class="chat-header-title">Syed's AI Agent</div><div class="chat-header-sub">Ask me anything about Syed</div></div>
     </div>
     <button id="chat-close" aria-label="Close chat">&#x2715;</button>
   </div>
@@ -1125,114 +923,83 @@ document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.
 </div>
 
 <script>
-(function(){
-  const fab=document.getElementById('chat-fab');
-  const panel=document.getElementById('chat-panel');
-  const closeBtn=document.getElementById('chat-close');
-  const input=document.getElementById('chat-input');
-  const sendBtn=document.getElementById('chat-send');
-  const msgs=document.getElementById('chat-messages');
-  const chips=document.querySelectorAll('.sug-chip');
-  const history=[];
+(function () {
+  const fab      = document.getElementById('chat-fab');
+  const panel    = document.getElementById('chat-panel');
+  const closeBtn = document.getElementById('chat-close');
+  const input    = document.getElementById('chat-input');
+  const sendBtn  = document.getElementById('chat-send');
+  const msgs     = document.getElementById('chat-messages');
+  const chips    = document.querySelectorAll('.sug-chip');
+  const history  = [];
 
-  function togglePanel(){panel.classList.toggle('open');}
-  fab.addEventListener('click',togglePanel);
-  closeBtn.addEventListener('click',()=>panel.classList.remove('open'));
+  function togglePanel() { panel.classList.toggle('open'); }
+  fab.addEventListener('click', togglePanel);
+  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
 
-  function renderMd(t){
-    // tables
-    t=t.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm,function(_,hdr,body){
-      var ths=hdr.split('|').map(c=>'<th>'+c.trim()+'</th>').join('');
-      var rows=body.trim().split('\n').map(r=>{
-        var tds=r.replace(/^\||\|$/g,'').split('|').map(c=>'<td>'+c.trim()+'</td>').join('');
-        return '<tr>'+tds+'</tr>';
-      }).join('');
-      return '<table><tr>'+ths+'</tr>'+rows+'</table>';
+  function renderMd(t) {
+    t = t.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm, function (_, hdr, body) {
+      const ths  = hdr.split('|').map(c => '<th>' + c.trim() + '</th>').join('');
+      const rows = body.trim().split('\n').map(r => '<tr>' + r.replace(/^\||\|$/g,'').split('|').map(c=>'<td>'+c.trim()+'</td>').join('') + '</tr>').join('');
+      return '<table><tr>' + ths + '</tr>' + rows + '</table>';
     });
-    // bold
-    t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-    // italic
-    t=t.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g,'<em>$1</em>');
-    // inline code
-    t=t.replace(/`([^`]+)`/g,'<code>$1</code>');
-    // unordered lists
-    t=t.replace(/((?:^[\t ]*[-•][\t ].+\n?)+)/gm,function(_,block){
-      var items=block.trim().split('\n').map(l=>'<li>'+l.replace(/^[\t ]*[-•][\t ]/,'')+'</li>').join('');
-      return '<ul>'+items+'</ul>';
+    t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    t = t.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+    t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+    t = t.replace(/((?:^[\t ]*[-•][\t ].+\n?)+)/gm, function (_, block) {
+      return '<ul>' + block.trim().split('\n').map(l => '<li>' + l.replace(/^[\t ]*[-•][\t ]/, '') + '</li>').join('') + '</ul>';
     });
-    // ordered lists
-    t=t.replace(/((?:^\d+\.\s.+\n?)+)/gm,function(_,block){
-      var items=block.trim().split('\n').map(l=>'<li>'+l.replace(/^\d+\.\s/,'')+'</li>').join('');
-      return '<ol>'+items+'</ol>';
+    t = t.replace(/((?:^\d+\.\s.+\n?)+)/gm, function (_, block) {
+      return '<ol>' + block.trim().split('\n').map(l => '<li>' + l.replace(/^\d+\.\s/, '') + '</li>').join('') + '</ol>';
     });
-    // line breaks (but not inside tags)
-    t=t.replace(/\n/g,'<br>');
-    // clean up excessive breaks around block elements
-    t=t.replace(/<br>\s*(<\/?(?:ul|ol|li|table|tr|th|td|p))/g,'$1');
-    t=t.replace(/(<\/(?:ul|ol|table|p)>)\s*<br>/g,'$1');
+    t = t.replace(/\n/g, '<br>');
+    t = t.replace(/<br>\s*(<\/?(?:ul|ol|li|table|tr|th|td|p))/g, '$1');
+    t = t.replace(/(<\/(?:ul|ol|table|p)>)\s*<br>/g, '$1');
     return t;
   }
 
-  function addMsg(text,role){
-    const d=document.createElement('div');
-    d.className='chat-msg '+role;
-    if(role.indexOf('bot')!==-1 && role.indexOf('typing')===-1){
-      d.innerHTML=renderMd(text);
-    }else{
-      d.textContent=text;
-    }
+  function addMsg(text, role) {
+    const d = document.createElement('div');
+    d.className = 'chat-msg ' + role;
+    if (role.includes('bot') && !role.includes('typing')) d.innerHTML = renderMd(text);
+    else d.textContent = text;
     msgs.appendChild(d);
-    msgs.scrollTop=msgs.scrollHeight;
+    msgs.scrollTop = msgs.scrollHeight;
     return d;
   }
 
-  async function send(text){
-    if(!text.trim())return;
-    const sugBox=document.getElementById('chat-suggested');
-    if(sugBox)sugBox.remove();
-    addMsg(text,'user');
-    history.push({role:'user',content:text});
-    input.value='';
-    input.style.height='36px';
-    sendBtn.disabled=true;
-
-    const typing=addMsg('Thinking…','bot typing');
-
-    try{
-      const res=await fetch('/api/chat',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({messages:history})
-      });
-      const data=await res.json();
-      if(data.error){
-        typing.remove();
-        addMsg('Error: '+(data.detail||data.error),'bot');
-        return;
-      }
-      const reply=data.reply||'Sorry, I could not get a response.';
+  async function send(text) {
+    if (!text.trim()) return;
+    const sugBox = document.getElementById('chat-suggested');
+    if (sugBox) sugBox.remove();
+    addMsg(text, 'user');
+    history.push({ role: 'user', content: text });
+    input.value = ''; input.style.height = '36px';
+    sendBtn.disabled = true;
+    const typing = addMsg('Thinking…', 'bot typing');
+    try {
+      const res  = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
+      const data = await res.json();
       typing.remove();
-      addMsg(reply,'bot');
-      history.push({role:'assistant',content:reply});
-    }catch(e){
+      if (data.error) { addMsg('Error: ' + (data.detail || data.error), 'bot'); return; }
+      const reply = data.reply || 'Sorry, I could not get a response.';
+      addMsg(reply, 'bot');
+      history.push({ role: 'assistant', content: reply });
+    } catch (e) {
       typing.remove();
-      addMsg('Connection error. Please try again.','bot');
-    }finally{
-      sendBtn.disabled=false;
+      addMsg('Connection error. Please try again.', 'bot');
+    } finally {
+      sendBtn.disabled = false;
       input.focus();
     }
   }
 
-  sendBtn.addEventListener('click',()=>send(input.value));
-  input.addEventListener('keydown',e=>{
-    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(input.value);}
-  });
-  input.addEventListener('input',function(){
-    this.style.height='36px';
-    this.style.height=Math.min(this.scrollHeight,80)+'px';
-  });
-  chips.forEach(c=>c.addEventListener('click',()=>send(c.dataset.q)));
+  sendBtn.addEventListener('click', () => send(input.value));
+  input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(input.value); } });
+  input.addEventListener('input', function () { this.style.height = '36px'; this.style.height = Math.min(this.scrollHeight, 80) + 'px'; });
+  chips.forEach(c => c.addEventListener('click', () => send(c.dataset.q)));
 })();
 </script>
+
 </body>
 </html>
