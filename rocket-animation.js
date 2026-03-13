@@ -49,7 +49,7 @@ function initSolarSystem() {
 
   // Sun
   const sunGeometry = new THREE.SphereGeometry(5, 32, 32);
-  const sunMaterial = new THREE.MeshBasicMaterial({color: 0xfdb813, emissive: 0xfdb813});
+  const sunMaterial = new THREE.MeshStandardMaterial({color: 0xfdb813, emissive: 0xfdb813, emissiveIntensity: 0.8});
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
   solarSystemScene.add(sun);
 
@@ -108,7 +108,7 @@ function initSolarSystem() {
     const orbitVertices = [];
     for (let i = 0; i <= 64; i++) {
       const angle = (i / 64) * Math.PI * 2;
-      orbitVertices.push(Math.cos(angle) * p.userData.distance, 0, Math.sin(angle) * p.userData.distance);
+      orbitVertices.push(Math.cos(angle) * p.mesh.userData.distance, 0, Math.sin(angle) * p.mesh.userData.distance);
     }
     orbitGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(orbitVertices), 3));
     const orbitMaterial = new THREE.LineBasicMaterial({color: 0x444444, transparent: true, opacity: 0.3});
