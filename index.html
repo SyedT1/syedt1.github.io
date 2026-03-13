@@ -954,6 +954,51 @@ document.querySelectorAll('.fi').forEach(el=>io.observe(el));
 document.querySelectorAll('.exp-item,.proj-card,.ach-card,.pub-card,.cert-card,.skill-block').forEach((el,i)=>{
   el.style.transitionDelay=(i%4)*.07+'s';
 });
+
+/* ── MELODIOUS SOUND EFFECTS ── */
+(function(){
+  const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  
+  function playMelody(notes){
+    notes.forEach((freq,i)=>{
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value=freq;
+      osc.type='sine';
+      const startTime=audioCtx.currentTime+i*60/1000;
+      const duration=120/1000;
+      gain.gain.setValueAtTime(0,startTime);
+      gain.gain.linearRampToValueAtTime(.12,startTime+10/1000);
+      gain.gain.exponentialRampToValueAtTime(.01,startTime+duration);
+      osc.start(startTime);
+      osc.stop(startTime+duration);
+    });
+  }
+  
+  const melodies={
+    ascending:()=>playMelody([523,659,784]),
+    arpeggio:()=>playMelody([523,659,523,784]),
+    sparkle:()=>playMelody([784,659,523]),
+    chime:()=>playMelody([523,523,659]),
+    uplifting:()=>playMelody([392,523,659]),
+  };
+  
+  function playRandomMelody(){
+    const keys=Object.keys(melodies);
+    const choice=keys[Math.floor(Math.random()*keys.length)];
+    melodies[choice]();
+  }
+  
+  // Add sound to all buttons
+  const btnSelectors=['.btn','.alink','.clink','.sug-chip','.nav-links a','#chat-fab','#chat-close','#chat-send'];
+  btnSelectors.forEach(sel=>{
+    document.querySelectorAll(sel).forEach(el=>{
+      el.addEventListener('click',playRandomMelody);
+    });
+  });
+})();
 </script>
 
 <!-- ── CHAT WIDGET ── -->
