@@ -5,12 +5,18 @@ let solarSystemCamera = null;
 let solarSystemAnimating = false;
 let animationId = null;
 let planets = [];
+let sunGlow = null;
 
 function initSolarSystem() {
   if (solarSystemScene) return;
 
   const canvas = document.getElementById('cv');
-  if (!canvas) return;
+  if (!canvas) {
+    console.error('Canvas not found');
+    return;
+  }
+
+  console.log('Initializing solar system...');
 
   solarSystemScene = new THREE.Scene();
   solarSystemCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
@@ -50,7 +56,7 @@ function initSolarSystem() {
   // Sun glow
   const glowGeometry = new THREE.SphereGeometry(5.5, 32, 32);
   const glowMaterial = new THREE.MeshBasicMaterial({color: 0xfdb813, transparent: true, opacity: 0.2});
-  const sunGlow = new THREE.Mesh(glowGeometry, glowMaterial);
+  sunGlow = new THREE.Mesh(glowGeometry, glowMaterial);
   solarSystemScene.add(sunGlow);
 
   // Planets data
@@ -109,6 +115,8 @@ function initSolarSystem() {
     const orbit = new THREE.Line(orbitGeometry, orbitMaterial);
     solarSystemScene.add(orbit);
   });
+
+  console.log('Solar system scene initialized successfully');
 }
 
 function animateSolarSystem() {
@@ -136,27 +144,31 @@ function animateSolarSystem() {
   });
 
   // Sun glow pulse
-  const sunGlow = solarSystemScene.children.find(c => c.userData?.sunGlow);
   if (sunGlow) sunGlow.material.opacity = 0.2 + Math.sin(Date.now() * 0.0005) * 0.1;
 
   solarSystemRenderer.render(solarSystemScene, solarSystemCamera);
 }
 
 function toggleSolarSystem() {
+  console.log('Toggle solar system clicked');
   if (typeof THREE === 'undefined') {
     console.warn('THREE.js not loaded');
     return;
   }
 
   if (!solarSystemAnimating) {
-    if (!solarSystemScene) initSolarSystem();
+    console.log('Starting solar system animation');
+    if (!solarSystemScene) {
+      console.log('Initializing scene...');
+      initSolarSystem();
+    }
     solarSystemAnimating = true;
     animateSolarSystem();
   } else {
+    console.log('Stopping solar system animation');
     solarSystemAnimating = false;
     if (animationId) cancelAnimationFrame(animationId);
     if (solarSystemRenderer) {
-      solarSystemRenderer.setClearColor(0x000000, 0);
       solarSystemRenderer.render(solarSystemScene, solarSystemCamera);
     }
   }
@@ -170,11 +182,18 @@ function toggleSolarSystem() {
 
 function waitForTHREE() {
   if (typeof THREE === 'undefined') {
+    console.log('Waiting for THREE.js...');
     setTimeout(waitForTHREE, 50);
     return;
   }
+  console.log('THREE.js loaded, setting up button listener');
   const btn = document.getElementById('solar-system-btn');
-  if (btn) btn.addEventListener('click', toggleSolarSystem);
+  if (btn) {
+    console.log('Button found, adding click listener');
+    btn.addEventListener('click', toggleSolarSystem);
+  } else {
+    console.error('Solar system button not found');
+  }
 }
 
 if (document.readyState === 'loading') {
