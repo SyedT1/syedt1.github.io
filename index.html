@@ -1028,42 +1028,22 @@ document.getElementById('game-close').addEventListener('click',()=>{
 //  MUSIC TOGGLE (web audio melody)
 // ═══════════════════════════════════════════════════════════════════
 (function(){
-  let ctx, playing=false, nodes=[], gainNode;
-  function init(){
-    if(ctx)return;
-    ctx=new(window.AudioContext||window.webkitAudioContext)();
-    gainNode=ctx.createGain();
-    gainNode.gain.value=0.04;
-    gainNode.connect(ctx.destination);
-  }
-  function playAmbient(){
-    if(!ctx)return;
-    nodes.forEach(n=>{try{n.stop();}catch(e){}});
-    nodes=[];
-    const freqs=[110,138.6,164.8,220,261.6,329.6];
-    freqs.forEach((f,i)=>{
-      const osc=ctx.createOscillator();
-      const g=ctx.createGain();
-      osc.type=i%2===0?'sine':'triangle';
-      osc.frequency.value=f;
-      const lfo=ctx.createOscillator();
-      const lfoG=ctx.createGain();
-      lfo.frequency.value=0.1+i*0.05;
-      lfoG.gain.value=f*0.003;
-      lfo.connect(lfoG);
-      lfoG.connect(osc.frequency);
-      lfo.start();
-      g.gain.value=0.12/(i+1);
-      osc.connect(g);
-      g.connect(gainNode);
-      osc.start();
-      nodes.push(osc,lfo);
-    });
-  }
-  document.getElementById('music-toggle').addEventListener('click',()=>{
-    init();
-    if(!playing){ playAmbient(); playing=true; document.getElementById('music-toggle').textContent='🔇 Music'; }
-    else{ nodes.forEach(n=>{try{n.stop();}catch(e){}});nodes=[];playing=false;document.getElementById('music-toggle').textContent='🎵 Music'; }
+  const btn = document.getElementById('music-toggle');
+  const audio = new Audio('./music/1.mp3');
+  audio.loop = true;
+  audio.volume = 0.4;
+
+  btn.addEventListener('click', function() {
+    if (audio.paused) {
+      audio.play().then(() => {
+        btn.textContent = '🔇 Music';
+      }).catch(() => {
+        btn.textContent = '🎵 Music'; // autoplay blocked
+      });
+    } else {
+      audio.pause();
+      btn.textContent = '🎵 Music';
+    }
   });
 })();
 </script>
